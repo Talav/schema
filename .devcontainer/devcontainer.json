@@ -1,0 +1,76 @@
+{
+    // See https://containers.dev/implementors/json_reference/
+    // User defined settings
+    "containerEnv": {
+        "TZ": "${localEnv:TZ}"
+    },
+    // Fixed settings
+    "name": "schema",
+    "dockerComposeFile": "docker-compose.yml",
+    "overrideCommand": true,
+    "service": "vscode",
+    "workspaceFolder": "/workspace",
+    "mounts": [
+        // Source code
+        {
+            "source": "../",
+            "target": "/workspace",
+            "type": "bind"
+        },
+        // Zsh commands history persistence
+        {
+            "source": "${localEnv:HOME}/.zsh_history",
+            "target": "/root/.zsh_history",
+            "type": "bind"
+        },
+        // Git configuration file
+        {
+            "source": "${localEnv:HOME}/.gitconfig",
+            "target": "/root/.gitconfig",
+            "type": "bind"
+        }
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "golang.go",
+                "redhat.vscode-yaml"
+            ],
+            "settings": {
+                "files.eol": "\n",
+                "editor.formatOnSave": true,
+                "go.buildTags": "",
+                "go.toolsEnvVars": {
+                    "CGO_ENABLED": "0"
+                },
+                "go.useLanguageServer": true,
+                "go.testEnvVars": {
+                    "CGO_ENABLED": "1"
+                },
+                "go.testFlags": [
+                    "-v",
+                    "-race"
+                ],
+                "go.testTimeout": "10s",
+                "go.coverOnSingleTest": true,
+                "go.coverOnSingleTestFile": true,
+                "go.coverOnTestPackage": true,
+                "go.lintTool": "golangci-lint-v2",
+                "go.lintOnSave": "package",
+                "[go]": {
+                    "editor.codeActionsOnSave": {
+                        "source.organizeImports": "always"
+                    }
+                },
+                "gopls": {
+                    "usePlaceholders": false,
+                    "staticcheck": true,
+                    "formatting.gofumpt": true
+                },
+                "remote.extensionKind": {
+                    "ms-azuretools.vscode-docker": "workspace"
+                }
+            }
+        }
+    }
+}

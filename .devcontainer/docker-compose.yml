@@ -1,0 +1,6 @@
+services:
+  vscode:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    command: sleep infinity
