@@ -34,6 +34,11 @@ func (d *defaultDecoder) decodeBody(request *http.Request, metadata *StructMetad
 		return d.decodeMultipartBody(request, bodyField)
 	}
 
+	// Check if target field is io.ReadCloser for streaming (file body only)
+	if bodyContentType.isFile() {
+		return d.decodeFileBodyStream(request, bodyField, bodyMeta)
+	}
+
 	// Read body for other content types
 	bodyBytes, err := io.ReadAll(request.Body)
 	if err != nil {
@@ -48,16 +53,33 @@ func (d *defaultDecoder) decodeBody(request *http.Request, metadata *StructMetad
 		return d.decodeURLEncodedForm(bodyBytes, bodyField)
 	}
 
-	if bodyContentType.isFile() {
-		return d.decodeFileBody(bodyBytes, bodyField)
-	}
-
 	if bodyContentType.isXML() {
 		return d.decodeXMLBody(bodyBytes, bodyField)
 	}
 
 	// try JSON as a fallback
 	return d.decodeJSONBody(bodyBytes, bodyField)
+}
+
+// decodeFileBodyStream handles file body streaming for io.ReadCloser fields.
+func (d *defaultDecoder) decodeFileBodyStream(request *http.Request, bodyField *FieldMetadata, bodyMeta *BodyMetadata) (map[string]any, error) {
+	// If target field is io.ReadCloser, return request body directly for streaming
+	if bodyField.Type.Implements(reflect.TypeOf((*io.ReadCloser)(nil)).Elem()) {
+		return map[string]any{bodyMeta.MapKey: request.Body}, nil
+	}
+
+	// Otherwise, read into memory as []byte
+	bodyBytes, err := io.ReadAll(request.Body)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read body: %w", err)
+	}
+
+	// Empty body returns empty map
+	if len(bodyBytes) == 0 {
+		return make(map[string]any), nil
+	}
+
+	return map[string]any{bodyMeta.MapKey: bodyBytes}, nil
 }
 
 // decodeMultipartBody decodes multipart form body content.
@@ -136,20 +158,6 @@ func (d *defaultDecoder) decodeURLEncodedForm(bodyBytes []byte, bodyField *Field
 	}
 
 	return map[string]any{bodyMeta.MapKey: filteredMap}, nil
-}
-
-// decodeFileBody decodes raw file body content.
-func (d *defaultDecoder) decodeFileBody(bodyBytes []byte, bodyField *FieldMetadata) (map[string]any, error) {
-	bodyMeta, ok := GetTagMetadata[*BodyMetadata](bodyField, "body")
-	if !ok {
-		return nil, fmt.Errorf("field is not a body field")
-	}
-
-	// For file upload, read the body and store as []byte in map
-	result := make(map[string]any)
-	result[bodyMeta.MapKey] = bodyBytes
-
-	return result, nil
 }
 
 // decodeXMLBody decodes XML body content.

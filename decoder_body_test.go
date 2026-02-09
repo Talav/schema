@@ -263,8 +263,15 @@ func TestDecoder_DecodeBody_FileWithReader(t *testing.T) {
 	data, ok := result["Body"]
 	require.True(t, ok, "expected Body key in result")
 
-	//nolint:forcetypeassert // Test code - safe to assert
-	assert.Equal(t, body, data.([]byte))
+	// Should be io.ReadCloser for streaming
+	reader, ok := data.(io.ReadCloser)
+	require.True(t, ok, "expected io.ReadCloser for streaming")
+	defer func() { _ = reader.Close() }()
+
+	// Read the content
+	actualBytes, err := io.ReadAll(reader)
+	require.NoError(t, err)
+	assert.Equal(t, body, actualBytes)
 }
 
 func TestDecoder_DecodeBody_NoBodyField(t *testing.T) {
