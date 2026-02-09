@@ -15,14 +15,12 @@ type SchemaMetadata struct {
 	Location  ParameterLocation
 	Style     Style
 	Explode   bool
-	Required  bool
 }
 
 const (
 	optKeyLocation = "location"
 	optKeyStyle    = "style"
 	optKeyExplode  = "explode"
-	optKeyRequired = "required"
 	optValueTrue   = "true"
 )
 
@@ -99,10 +97,6 @@ func ParseSchemaTag(field reflect.StructField, index int, tagValue string) (any,
 	}
 
 	explode := extractBoolean(tag.Options, optKeyExplode, defaultExplode(style))
-	required := extractBoolean(tag.Options, optKeyRequired, false)
-	if location == LocationPath {
-		required = true
-	}
 
 	return &SchemaMetadata{
 		ParamName: paramName,
@@ -110,7 +104,6 @@ func ParseSchemaTag(field reflect.StructField, index int, tagValue string) (any,
 		Location:  location,
 		Style:     style,
 		Explode:   explode,
-		Required:  required,
 	}, nil
 }
 
@@ -224,6 +217,5 @@ func DefaultSchemaMetadata(field reflect.StructField, index int) any {
 		Location:  location,
 		Style:     style,
 		Explode:   explode,
-		Required:  false,
 	}
 }

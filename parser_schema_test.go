@@ -28,7 +28,6 @@ func TestParseSchemaTag(t *testing.T) {
 				Location:  LocationQuery,
 				Style:     StyleForm,
 				Explode:   true,
-				Required:  false,
 			},
 		},
 		{
@@ -41,7 +40,6 @@ func TestParseSchemaTag(t *testing.T) {
 				Location:  LocationQuery,
 				Style:     StyleForm,
 				Explode:   true,
-				Required:  false,
 			},
 		},
 		{
@@ -54,7 +52,6 @@ func TestParseSchemaTag(t *testing.T) {
 				Location:  LocationQuery,
 				Style:     StyleForm,
 				Explode:   true,
-				Required:  false,
 			},
 		},
 		{
@@ -67,7 +64,6 @@ func TestParseSchemaTag(t *testing.T) {
 				Location:  LocationPath,
 				Style:     StyleSimple,
 				Explode:   false,
-				Required:  true, // Path is always required
 			},
 		},
 		{
@@ -80,7 +76,6 @@ func TestParseSchemaTag(t *testing.T) {
 				Location:  LocationHeader,
 				Style:     StyleSimple,
 				Explode:   false,
-				Required:  false,
 			},
 		},
 		{
@@ -93,7 +88,6 @@ func TestParseSchemaTag(t *testing.T) {
 				Location:  LocationCookie,
 				Style:     StyleForm,
 				Explode:   true,
-				Required:  false,
 			},
 		},
 		{
@@ -106,7 +100,6 @@ func TestParseSchemaTag(t *testing.T) {
 				Location:  LocationQuery,
 				Style:     StyleSpaceDelimited,
 				Explode:   false,
-				Required:  false,
 			},
 		},
 		{
@@ -119,7 +112,6 @@ func TestParseSchemaTag(t *testing.T) {
 				Location:  LocationQuery,
 				Style:     StyleForm,
 				Explode:   true,
-				Required:  false,
 			},
 		},
 		{
@@ -132,7 +124,6 @@ func TestParseSchemaTag(t *testing.T) {
 				Location:  LocationQuery,
 				Style:     StyleForm,
 				Explode:   false,
-				Required:  false,
 			},
 		},
 		{
@@ -145,7 +136,6 @@ func TestParseSchemaTag(t *testing.T) {
 				Location:  LocationQuery,
 				Style:     StyleForm,
 				Explode:   true,
-				Required:  false,
 			},
 		},
 		{
@@ -158,7 +148,6 @@ func TestParseSchemaTag(t *testing.T) {
 				Location:  LocationQuery,
 				Style:     StyleForm,
 				Explode:   true,
-				Required:  true,
 			},
 		},
 		{
@@ -171,7 +160,6 @@ func TestParseSchemaTag(t *testing.T) {
 				Location:  LocationQuery,
 				Style:     StyleForm,
 				Explode:   true,
-				Required:  true,
 			},
 		},
 		{
@@ -184,7 +172,6 @@ func TestParseSchemaTag(t *testing.T) {
 				Location:  LocationPath,
 				Style:     StyleSimple,
 				Explode:   false,
-				Required:  true, // Path is always required, overrides explicit false
 			},
 		},
 		{
@@ -197,7 +184,6 @@ func TestParseSchemaTag(t *testing.T) {
 				Location:  LocationQuery,
 				Style:     StyleDeepObject,
 				Explode:   true, // deepObject defaults to explode=true
-				Required:  false,
 			},
 		},
 		{
@@ -210,7 +196,6 @@ func TestParseSchemaTag(t *testing.T) {
 				Location:  LocationPath,
 				Style:     StyleLabel,
 				Explode:   false,
-				Required:  true,
 			},
 		},
 		{
@@ -223,7 +208,6 @@ func TestParseSchemaTag(t *testing.T) {
 				Location:  LocationPath,
 				Style:     StyleMatrix,
 				Explode:   false,
-				Required:  true,
 			},
 		},
 		{
@@ -236,7 +220,6 @@ func TestParseSchemaTag(t *testing.T) {
 				Location:  LocationQuery,
 				Style:     StylePipeDelimited,
 				Explode:   false,
-				Required:  false,
 			},
 		},
 		{
@@ -249,7 +232,6 @@ func TestParseSchemaTag(t *testing.T) {
 				Location:  LocationQuery,
 				Style:     StyleForm,
 				Explode:   true,
-				Required:  true,
 			},
 		},
 		{
@@ -318,7 +300,6 @@ func TestParseSchemaTag(t *testing.T) {
 			assert.Equal(t, tt.want.Location, meta.Location)
 			assert.Equal(t, tt.want.Style, meta.Style)
 			assert.Equal(t, tt.want.Explode, meta.Explode)
-			assert.Equal(t, tt.want.Required, meta.Required)
 		})
 	}
 }
@@ -340,7 +321,6 @@ func TestDefaultSchemaMetadata(t *testing.T) {
 				Location:  LocationQuery,
 				Style:     StyleForm,
 				Explode:   true,
-				Required:  false,
 			},
 		},
 		{
@@ -353,7 +333,6 @@ func TestDefaultSchemaMetadata(t *testing.T) {
 				Location:  LocationQuery,
 				Style:     StyleForm,
 				Explode:   true,
-				Required:  false,
 			},
 		},
 		{
@@ -366,7 +345,6 @@ func TestDefaultSchemaMetadata(t *testing.T) {
 				Location:  LocationQuery,
 				Style:     StyleForm,
 				Explode:   true,
-				Required:  false,
 			},
 		},
 		{
@@ -379,7 +357,6 @@ func TestDefaultSchemaMetadata(t *testing.T) {
 				Location:  LocationQuery,
 				Style:     StyleForm,
 				Explode:   true,
-				Required:  false,
 			},
 		},
 	}
@@ -403,7 +380,6 @@ func TestDefaultSchemaMetadata(t *testing.T) {
 			assert.Equal(t, tt.want.Location, meta.Location)
 			assert.Equal(t, tt.want.Style, meta.Style)
 			assert.Equal(t, tt.want.Explode, meta.Explode)
-			assert.Equal(t, tt.want.Required, meta.Required)
 		})
 	}
 }
@@ -541,7 +517,6 @@ func TestParseSchemaTag_EdgeCases(t *testing.T) {
 				Location:  LocationQuery,
 				Style:     StyleForm,
 				Explode:   true,
-				Required:  false,
 			},
 		},
 		{
@@ -554,7 +529,6 @@ func TestParseSchemaTag_EdgeCases(t *testing.T) {
 				Location:  LocationQuery,
 				Style:     StyleForm,
 				Explode:   true,
-				Required:  true,
 			},
 		},
 		{
@@ -567,7 +541,6 @@ func TestParseSchemaTag_EdgeCases(t *testing.T) {
 				Location:  LocationQuery,
 				Style:     StyleForm,
 				Explode:   true,
-				Required:  true,
 			},
 		},
 		{
@@ -580,7 +553,6 @@ func TestParseSchemaTag_EdgeCases(t *testing.T) {
 				Location:  LocationQuery,
 				Style:     StyleForm,
 				Explode:   false,
-				Required:  false,
 			},
 		},
 		{
@@ -593,7 +565,6 @@ func TestParseSchemaTag_EdgeCases(t *testing.T) {
 				Location:  LocationQuery,
 				Style:     StyleForm,
 				Explode:   true,
-				Required:  false,
 			},
 		},
 		{
@@ -606,7 +577,6 @@ func TestParseSchemaTag_EdgeCases(t *testing.T) {
 				Location:  LocationHeader,
 				Style:     StyleSimple,
 				Explode:   false,
-				Required:  false,
 			},
 		},
 	}
@@ -640,7 +610,6 @@ func TestParseSchemaTag_EdgeCases(t *testing.T) {
 			assert.Equal(t, tt.want.Location, meta.Location)
 			assert.Equal(t, tt.want.Style, meta.Style)
 			assert.Equal(t, tt.want.Explode, meta.Explode)
-			assert.Equal(t, tt.want.Required, meta.Required)
 		})
 	}
 }

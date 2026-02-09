@@ -11,7 +11,6 @@ import (
 type BodyMetadata struct {
 	MapKey   string
 	BodyType BodyType
-	Required bool
 }
 
 // BodyType represents the type of request body.
@@ -35,12 +34,9 @@ func ParseBodyTag(field reflect.StructField, index int, tagValue string) (any, e
 		return nil, fmt.Errorf("field %s: %w", field.Name, err)
 	}
 
-	required := extractBoolean(tag.Options, optKeyRequired, false)
-
 	return &BodyMetadata{
 		MapKey:   field.Name,
 		BodyType: bodyType,
-		Required: required,
 	}, nil
 }
 

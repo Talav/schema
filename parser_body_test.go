@@ -24,7 +24,6 @@ func TestParseBodyTag(t *testing.T) {
 			want: &BodyMetadata{
 				MapKey:   "Body",
 				BodyType: BodyTypeStructured,
-				Required: false,
 			},
 		},
 		{
@@ -34,7 +33,6 @@ func TestParseBodyTag(t *testing.T) {
 			want: &BodyMetadata{
 				MapKey:   "Body",
 				BodyType: BodyTypeStructured,
-				Required: false,
 			},
 		},
 		{
@@ -44,7 +42,6 @@ func TestParseBodyTag(t *testing.T) {
 			want: &BodyMetadata{
 				MapKey:   "File",
 				BodyType: BodyTypeFile,
-				Required: false,
 			},
 		},
 		{
@@ -54,7 +51,6 @@ func TestParseBodyTag(t *testing.T) {
 			want: &BodyMetadata{
 				MapKey:   "Form",
 				BodyType: BodyTypeMultipart,
-				Required: false,
 			},
 		},
 		{
@@ -64,7 +60,6 @@ func TestParseBodyTag(t *testing.T) {
 			want: &BodyMetadata{
 				MapKey:   "Body",
 				BodyType: BodyTypeStructured,
-				Required: true,
 			},
 		},
 		{
@@ -74,7 +69,6 @@ func TestParseBodyTag(t *testing.T) {
 			want: &BodyMetadata{
 				MapKey:   "Body",
 				BodyType: BodyTypeStructured,
-				Required: true,
 			},
 		},
 		{
@@ -84,7 +78,6 @@ func TestParseBodyTag(t *testing.T) {
 			want: &BodyMetadata{
 				MapKey:   "File",
 				BodyType: BodyTypeFile,
-				Required: true,
 			},
 		},
 		{
@@ -94,7 +87,6 @@ func TestParseBodyTag(t *testing.T) {
 			want: &BodyMetadata{
 				MapKey:   "Form",
 				BodyType: BodyTypeMultipart,
-				Required: true,
 			},
 		},
 		{
@@ -104,7 +96,6 @@ func TestParseBodyTag(t *testing.T) {
 			want: &BodyMetadata{
 				MapKey:   "Body",
 				BodyType: BodyTypeStructured,
-				Required: false,
 			},
 		},
 		{
@@ -134,7 +125,6 @@ func TestParseBodyTag(t *testing.T) {
 			want: &BodyMetadata{
 				MapKey:   "File",
 				BodyType: BodyTypeFile,
-				Required: true,
 			},
 		},
 		{
@@ -144,7 +134,6 @@ func TestParseBodyTag(t *testing.T) {
 			want: &BodyMetadata{
 				MapKey:   "Form",
 				BodyType: BodyTypeMultipart,
-				Required: true,
 			},
 		},
 		{
@@ -154,7 +143,6 @@ func TestParseBodyTag(t *testing.T) {
 			want: &BodyMetadata{
 				MapKey:   "VeryLongFieldNameForBody",
 				BodyType: BodyTypeStructured,
-				Required: false,
 			},
 		},
 	}
@@ -185,7 +173,6 @@ func TestParseBodyTag(t *testing.T) {
 
 			assert.Equal(t, tt.want.MapKey, meta.MapKey)
 			assert.Equal(t, tt.want.BodyType, meta.BodyType)
-			assert.Equal(t, tt.want.Required, meta.Required)
 		})
 	}
 }
@@ -206,7 +193,6 @@ func TestParseBodyTag_DifferentFieldTypes(t *testing.T) {
 			want: &BodyMetadata{
 				MapKey:   "Body",
 				BodyType: BodyTypeStructured,
-				Required: false,
 			},
 		},
 		{
@@ -217,7 +203,6 @@ func TestParseBodyTag_DifferentFieldTypes(t *testing.T) {
 			want: &BodyMetadata{
 				MapKey:   "File",
 				BodyType: BodyTypeFile,
-				Required: false,
 			},
 		},
 		{
@@ -228,7 +213,6 @@ func TestParseBodyTag_DifferentFieldTypes(t *testing.T) {
 			want: &BodyMetadata{
 				MapKey:   "Body",
 				BodyType: BodyTypeStructured,
-				Required: false,
 			},
 		},
 		{
@@ -239,7 +223,6 @@ func TestParseBodyTag_DifferentFieldTypes(t *testing.T) {
 			want: &BodyMetadata{
 				MapKey:   "Body",
 				BodyType: BodyTypeStructured,
-				Required: false,
 			},
 		},
 	}
@@ -260,7 +243,6 @@ func TestParseBodyTag_DifferentFieldTypes(t *testing.T) {
 
 			assert.Equal(t, tt.want.MapKey, meta.MapKey)
 			assert.Equal(t, tt.want.BodyType, meta.BodyType)
-			assert.Equal(t, tt.want.Required, meta.Required)
 		})
 	}
 }
@@ -281,7 +263,6 @@ func TestParseBodyTag_EdgeCases(t *testing.T) {
 			want: &BodyMetadata{
 				MapKey:   "Body",
 				BodyType: BodyTypeStructured,
-				Required: false,
 			},
 		},
 		{
@@ -291,7 +272,6 @@ func TestParseBodyTag_EdgeCases(t *testing.T) {
 			want: &BodyMetadata{
 				MapKey:   "Body",
 				BodyType: BodyTypeStructured,
-				Required: false,
 			},
 		},
 		{
@@ -301,7 +281,6 @@ func TestParseBodyTag_EdgeCases(t *testing.T) {
 			want: &BodyMetadata{
 				MapKey:   "Body",
 				BodyType: BodyTypeStructured,
-				Required: true,
 			},
 		},
 		{
@@ -311,7 +290,6 @@ func TestParseBodyTag_EdgeCases(t *testing.T) {
 			want: &BodyMetadata{
 				MapKey:   "Body",
 				BodyType: BodyTypeStructured,
-				Required: false,
 			},
 		},
 		{
@@ -328,7 +306,6 @@ func TestParseBodyTag_EdgeCases(t *testing.T) {
 			want: &BodyMetadata{
 				MapKey:   "Body",
 				BodyType: BodyTypeStructured,
-				Required: false,
 			},
 		},
 	}
@@ -359,7 +336,6 @@ func TestParseBodyTag_EdgeCases(t *testing.T) {
 
 			assert.Equal(t, tt.want.MapKey, meta.MapKey)
 			assert.Equal(t, tt.want.BodyType, meta.BodyType)
-			assert.Equal(t, tt.want.Required, meta.Required)
 		})
 	}
 }
