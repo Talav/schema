@@ -1,0 +1,122 @@
+site_name: Schema - HTTP Request Decoder
+site_description: Decode HTTP requests into Go structs with OpenAPI 3.0 compliance
+site_url: https://talav.github.io/schema
+repo_name: talav/schema
+repo_url: https://github.com/talav/schema
+
+theme:
+  name: material
+
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+      primary: indigo
+      accent: indigo
+
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+      primary: indigo
+      accent: indigo
+
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+      primary: indigo
+      accent: indigo
+
+  features:
+    - navigation.sections
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.tracking
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - search.share
+    - toc.follow
+    - toc.integrate
+    - content.code.copy
+    - content.code.annotate
+    - content.code.mermaid
+
+  icon:
+    repo: fontawesome/brands/github
+
+nav:
+  - Home: index.md
+  - Getting Started:
+      - Quick Start: getting-started/quick-start.md
+      - Core Concepts: getting-started/concepts.md
+  - Guides:
+      - Parameters: guides/parameters.md
+      - Request Bodies: guides/request-bodies.md
+      - Serialization Styles: guides/serialization.md
+      - Type Conversion: guides/type-conversion.md
+  - Advanced:
+      - Extensibility: advanced/extensibility.md
+      - Custom Tag Parsers: advanced/custom-tags.md
+  - Reference:
+      - API Docs ↗: https://pkg.go.dev/github.com/talav/schema
+
+plugins:
+  - search:
+      lang: en
+      separator: '[\s\-\.]+'
+  - git-revision-date-localized:
+      enable_creation_date: true
+      type: timeago
+
+markdown_extensions:
+  # Python Markdown extensions
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      permalink_title: Anchor link to this section
+
+  # PyMdown Extensions
+  - pymdownx.arithmatex
+  - pymdownx.betterem
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_div_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/talav/schema
+    - icon: fontawesome/brands/golang
+      link: https://pkg.go.dev/github.com/talav/schema
+
+extra_javascript:
+  - https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js
+
+copyright: Copyright &copy; 2024 Talav
