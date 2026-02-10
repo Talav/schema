@@ -1,9 +1,11 @@
 # Schema
 
+[![tag](https://img.shields.io/github/tag/talav/schema.svg)](https://github.com/talav/schema/tag)
 [![Go Reference](https://pkg.go.dev/badge/github.com/talav/schema.svg)](https://pkg.go.dev/github.com/talav/schema)
 [![Go Report Card](https://goreportcard.com/badge/github.com/talav/schema)](https://goreportcard.com/report/github.com/talav/schema)
 [![CI](https://github.com/talav/schema/actions/workflows/schema-ci.yml/badge.svg)](https://github.com/talav/schema/actions)
 [![codecov](https://codecov.io/gh/talav/schema/graph/badge.svg)](https://codecov.io/gh/talav/schema)
+[![License](https://img.shields.io/github/license/talav/tagparser)](./LICENSE)
 
 Decode HTTP requests into Go structs with OpenAPI 3.0/3.1 compliance. Define your request structure with struct tags, and Schema handles the rest.
 
@@ -333,5 +335,3 @@ MIT License - see [LICENSE](LICENSE) file for details.
 Built on top of:
 - [mapstructure](https://github.com/talav/mapstructure) - Flexible struct unmarshaling
 - [tagparser](https://github.com/talav/tagparser) - Struct tag parsing utilities
-
-Inspired by OpenAPI 3.0/3.1 specification and modern Go web frameworks.
