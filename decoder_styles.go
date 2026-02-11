@@ -6,7 +6,9 @@ import (
 	"strings"
 )
 
-// decodeFormStyle parses form-style data (query string or form data).
+// decodeFormStyle parses form-style parameters (the default for query and cookie parameters).
+// Handles both exploded (?ids=1&ids=2) and non-exploded (?ids=1,2,3) arrays.
+// Supports nested structures using dot notation (filter.type=car&filter.color=red).
 func (d *defaultDecoder) decodeFormStyle(data string) (map[string]any, error) {
 	result := make(map[string]any)
 
@@ -30,12 +32,23 @@ func (d *defaultDecoder) decodeFormStyle(data string) (map[string]any, error) {
 	return result, nil
 }
 
-// decodeSimpleStyle parses simple style (no prefix/suffix, comma-separated).
+// decodeSimpleStyle parses simple style parameters (default for path and header parameters).
+// Simple style has no prefix/suffix and treats comma-separated values as arrays.
+// Examples: "123" (scalar), "1,2,3" (array).
 func (d *defaultDecoder) decodeSimpleStyle(data string) (any, error) {
 	return data, nil
 }
 
-// decodeLabelStyle parses label style (period-prefixed).
+// decodeLabelStyle parses label style parameters (used in path parameters).
+// Label style is period-prefixed and handles both arrays and objects.
+//
+// When explode=true:
+//   - Arrays: .1.2.3 becomes ["1", "2", "3"]
+//   - Objects: .x.1024.y.768 becomes {"x": "1024", "y": "768"}
+//
+// When explode=false:
+//   - Arrays: .1,2,3 becomes ["1", "2", "3"]
+//   - Objects: .x,1024,y,768 becomes {"x": "1024", "y": "768"}
 func (d *defaultDecoder) decodeLabelStyle(data string, explode bool) (any, error) {
 	data = strings.TrimPrefix(data, ".")
 
@@ -80,7 +93,16 @@ func (d *defaultDecoder) decodeLabelStyle(data string, explode bool) (any, error
 	return splitToArray(data, ","), nil
 }
 
-// decodeMatrixStyle parses matrix style (semicolon-prefixed).
+// decodeMatrixStyle parses matrix style parameters (used in path parameters).
+// Matrix style is semicolon-prefixed with key=value pairs.
+//
+// When explode=true:
+//   Each value is a separate key=value pair: ;ids=1;ids=2;ids=3
+//
+// When explode=false:
+//   Values are comma-separated: ;ids=1,2,3
+//
+// Returns a map where duplicate keys accumulate values into arrays.
 func (d *defaultDecoder) decodeMatrixStyle(path string, explode bool) (map[string]any, error) {
 	result := make(map[string]any)
 
@@ -113,16 +135,25 @@ func (d *defaultDecoder) decodeMatrixStyle(path string, explode bool) (map[strin
 }
 
 // decodeSpaceDelimited parses space-delimited query parameters.
+// Example: ?ids=1%202%203 becomes {"ids": ["1", "2", "3"]}
+// Only valid for query parameters with primitive arrays.
 func (d *defaultDecoder) decodeSpaceDelimited(query string) (map[string]any, error) {
 	return d.decodeDelimited(query, " ")
 }
 
 // decodePipeDelimited parses pipe-delimited query parameters.
+// Example: ?ids=1|2|3 becomes {"ids": ["1", "2", "3"]}
+// Only valid for query parameters with primitive arrays.
 func (d *defaultDecoder) decodePipeDelimited(query string) (map[string]any, error) {
 	return d.decodeDelimited(query, "|")
 }
 
 // decodeDeepObject parses deepObject style query parameters.
+// Supports bracket notation for nested objects and arrays.
+// Example: ?filter[type]=car&filter[color]=red becomes {"filter": {"type": "car", "color": "red"}}
+//
+// Only valid for query parameters with object values.
+// Per OpenAPI spec, deepObject does not support arrays - use form style for array parameters.
 func (d *defaultDecoder) decodeDeepObject(query string) (map[string]any, error) {
 	result := make(map[string]any)
 
@@ -149,7 +180,10 @@ func (d *defaultDecoder) decodeDeepObject(query string) (map[string]any, error) 
 	return result, nil
 }
 
-// processFormValue processes a form value.
+// processFormValue determines how to handle form values based on their structure.
+// Multiple values (?ids=1&ids=2) are treated as arrays.
+// Single comma-separated values (?ids=1,2,3) are split into arrays.
+// Single non-comma values are returned as-is.
 func (d *defaultDecoder) processFormValue(valSlice []string) any {
 	if len(valSlice) == 0 {
 		return nil
@@ -175,7 +209,9 @@ func (d *defaultDecoder) processFormValue(valSlice []string) any {
 	return val
 }
 
-// decodeDelimited parses delimited query parameters (space or pipe).
+// decodeDelimited parses delimited query parameters with a custom separator.
+// Used by decodeSpaceDelimited and decodePipeDelimited.
+// Takes the last value if multiple values are present for the same key.
 func (d *defaultDecoder) decodeDelimited(query string, sep string) (map[string]any, error) {
 	result := make(map[string]any)
 

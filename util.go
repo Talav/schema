@@ -71,7 +71,9 @@ func splitAndTrim(s, sep string) []string {
 	return result
 }
 
-// splitToArray splits a string and returns as []any, or single value if only one part.
+// splitToArray splits a string by separator and returns it as []any if multiple parts exist,
+// or as a single string if only one part remains after trimming.
+// Returns nil if the input is empty after splitting and trimming.
 func splitToArray(s, sep string) any {
 	parts := splitAndTrim(s, sep)
 
@@ -86,7 +88,10 @@ func splitToArray(s, sep string) any {
 	return nil
 }
 
-// appendToArray appends a value to an array, creating one if needed.
+// appendToArray appends a value to an existing array, or creates a new array if needed.
+// If the existing value is already an array, the new value is appended.
+// If the existing value is nil, a new single-element array is created.
+// Otherwise, both the existing value and new value are combined into a two-element array.
 func appendToArray(existing any, val string) []any {
 	if arr, ok := existing.([]any); ok {
 		return append(arr, val)
@@ -100,6 +105,9 @@ func appendToArray(existing any, val string) []any {
 	return []any{existing, val}
 }
 
+// mergeMaps combines multiple maps into a single map.
+// Later maps override earlier ones when keys conflict.
+// Returns a new map without modifying the inputs.
 func mergeMaps(inputMaps ...map[string]any) map[string]any {
 	result := make(map[string]any)
 	for _, m := range inputMaps {
