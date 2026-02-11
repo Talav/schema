@@ -318,13 +318,34 @@ go tool cover -html=coverage.out
 
 ## Contributing
 
-Contributions are welcome! Please:
+Contributions are welcome! 
+
+### Development Setup
+
+**Option 1: Local Go**
+
+Requirements: Go 1.18+
+
+```bash
+git clone https://github.com/talav/schema
+cd schema
+go mod download
+go test ./...
+```
+
+**Option 2: Dev Container**
+
+If you use VS Code, open the repository and it will prompt to reopen in a dev container with all tools pre-installed.
+
+### Making Changes
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing`)
-5. Open a Pull Request
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes
+4. Run tests: `go test -race ./...`
+5. Run linter: `golangci-lint run` (or it runs in CI)
+6. Commit with clear messages
+7. Push and open a Pull Request
 
 ## License
 
