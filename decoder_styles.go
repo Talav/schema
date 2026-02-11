@@ -97,10 +97,12 @@ func (d *defaultDecoder) decodeLabelStyle(data string, explode bool) (any, error
 // Matrix style is semicolon-prefixed with key=value pairs.
 //
 // When explode=true:
-//   Each value is a separate key=value pair: ;ids=1;ids=2;ids=3
+//
+//	Each value is a separate key=value pair: ;ids=1;ids=2;ids=3
 //
 // When explode=false:
-//   Values are comma-separated: ;ids=1,2,3
+//
+//	Values are comma-separated: ;ids=1,2,3
 //
 // Returns a map where duplicate keys accumulate values into arrays.
 func (d *defaultDecoder) decodeMatrixStyle(path string, explode bool) (map[string]any, error) {
