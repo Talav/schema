@@ -1,9 +1,11 @@
 # Schema
 
+[![tag](https://img.shields.io/github/tag/talav/schema.svg)](https://github.com/talav/schema/tags)
 [![Go Reference](https://pkg.go.dev/badge/github.com/talav/schema.svg)](https://pkg.go.dev/github.com/talav/schema)
 [![Go Report Card](https://goreportcard.com/badge/github.com/talav/schema)](https://goreportcard.com/report/github.com/talav/schema)
 [![CI](https://github.com/talav/schema/actions/workflows/schema-ci.yml/badge.svg)](https://github.com/talav/schema/actions)
 [![codecov](https://codecov.io/gh/talav/schema/graph/badge.svg)](https://codecov.io/gh/talav/schema)
+[![License](https://img.shields.io/github/license/talav/tagparser)](./LICENSE)
 
 **Decode HTTP requests into Go structs with OpenAPI 3.0 compliance**
 
