@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
     
     
       
@@ -861,23 +861,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Understanding Tag Parsers">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#tag-parser-flow" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Tag Parser Flow
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -1270,13 +1253,6 @@
 <p>This guide covers how to create custom struct tag parsers to extend Schema's metadata system.</p>
 <h2 id="understanding-tag-parsers">Understanding Tag Parsers<a class="headerlink" href="#understanding-tag-parsers" title="Anchor link to this section">&para;</a></h2>
 <p>Tag parsers convert struct tags into typed metadata that can be used during request decoding.</p>
-<h3 id="tag-parser-flow">Tag Parser Flow<a class="headerlink" href="#tag-parser-flow" title="Anchor link to this section">&para;</a></h3>
-<div class="mermaid">graph LR
-    StructTag["Struct Tag"] --&gt; Parser["Tag Parser Function"]
-    Parser --&gt; Metadata["Typed Metadata"]
-    Metadata --&gt; Registry["Tag Parser Registry"]
-    Registry --&gt; MetadataComponent["Metadata Component"]
-    MetadataComponent --&gt; Cache["Metadata Cache"]</div>
 <h2 id="tag-parser-function">Tag Parser Function<a class="headerlink" href="#tag-parser-function" title="Anchor link to this section">&para;</a></h2>
 <h3 id="function-signature">Function Signature<a class="headerlink" href="#function-signature" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">TagParserFunc</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">field</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">StructField</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">tagValue</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">any</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
@@ -1878,7 +1854,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="February 10, 2026 05:12:47 UTC"><span class="timeago" datetime="2026-02-10T05:12:47+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="February 10, 2026 05:12:47 UTC">2026-02-10</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="February 28, 2026 04:03:16 UTC"><span class="timeago" datetime="2026-02-28T04:03:16+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="February 28, 2026 04:03:16 UTC">2026-02-28</span>
   </span>
 
     
