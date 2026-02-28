@@ -185,12 +185,32 @@ func (d *defaultDecoder) decodeXMLBody(bodyBytes []byte, bodyField *FieldMetadat
 }
 
 // decodeJSONBody decodes JSON body content.
+// For struct types, unmarshals into the concrete type so json tags are respected.
+// For non-struct types (slices, scalars), falls back to generic unmarshal into any.
 func (d *defaultDecoder) decodeJSONBody(bodyBytes []byte, bodyField *FieldMetadata) (map[string]any, error) {
 	bodyMeta, ok := GetTagMetadata[*BodyMetadata](bodyField, d.bodyTag)
 	if !ok {
 		return nil, fmt.Errorf("field is not a body field")
 	}
 
+	targetType := bodyField.Type
+	if targetType.Kind() == reflect.Ptr {
+		targetType = targetType.Elem()
+	}
+
+	// For struct types, unmarshal into the concrete type (respects json tags)
+	if targetType.Kind() == reflect.Struct {
+		target := reflect.New(targetType).Interface()
+		if err := json.Unmarshal(bodyBytes, target); err != nil {
+			return nil, fmt.Errorf("failed to unmarshal JSON: %w", err)
+		}
+
+		parsed := reflect.ValueOf(target).Elem().Interface()
+
+		return map[string]any{bodyMeta.MapKey: parsed}, nil
+	}
+
+	// For non-struct types (arrays, scalars), fall back to generic unmarshal
 	var parsed any
 	if err := json.Unmarshal(bodyBytes, &parsed); err != nil {
 		return nil, fmt.Errorf("failed to unmarshal JSON: %w", err)

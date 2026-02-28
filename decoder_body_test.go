@@ -16,8 +16,31 @@ import (
 
 // testBodyStruct is a simple struct for JSON body tests.
 type testBodyStruct struct {
-	Name  string `schema:"name"`
-	Count int    `schema:"count"`
+	Name  string `schema:"name" json:"name"`
+	Count int    `schema:"count" json:"count"`
+}
+
+// jsonNestedBodyStruct is for nested JSON object tests.
+type jsonNestedBodyStruct struct {
+	User    map[string]any `json:"user"`
+	Address map[string]any `json:"address"`
+}
+
+// jsonDeepNestedBodyStruct is for deeply nested JSON tests.
+type jsonDeepNestedBodyStruct struct {
+	Level1 struct {
+		Level2 struct {
+			Level3 struct {
+				Value string `json:"value"`
+			} `json:"level3"`
+		} `json:"level2"`
+	} `json:"level1"`
+}
+
+// jsonArrayFieldBodyStruct is for JSON with array fields.
+type jsonArrayFieldBodyStruct struct {
+	Items []float64 `json:"items"`
+	Tags  []string  `json:"tags"`
 }
 
 func createBodyMetadata(bodyType BodyType, fieldType reflect.Type) *StructMetadata {
@@ -57,11 +80,18 @@ func createBodyRequest(contentType string, body []byte) *http.Request {
 	return req
 }
 
+var deepNestedWant jsonDeepNestedBodyStruct
+
+func init() {
+	deepNestedWant.Level1.Level2.Level3.Value = "deep"
+}
+
 func TestDecoder_DecodeBody_JSON(t *testing.T) {
 	tests := []struct {
 		name        string
 		body        string
 		contentType string
+		bodyType    reflect.Type
 		want        map[string]any
 		wantErr     bool
 	}{
@@ -69,11 +99,9 @@ func TestDecoder_DecodeBody_JSON(t *testing.T) {
 			name:        "valid JSON object",
 			body:        `{"name": "test", "count": 42}`,
 			contentType: "application/json",
+			bodyType:    reflect.TypeFor[testBodyStruct](),
 			want: map[string]any{
-				"Body": map[string]any{
-					"name":  "test",
-					"count": float64(42), // JSON numbers are float64
-				},
+				"Body": testBodyStruct{Name: "test", Count: 42},
 			},
 			wantErr: false,
 		},
@@ -81,16 +109,11 @@ func TestDecoder_DecodeBody_JSON(t *testing.T) {
 			name:        "nested objects",
 			body:        `{"user": {"name": "john", "age": 30}, "address": {"city": "NYC", "country": "USA"}}`,
 			contentType: "application/json",
+			bodyType:    reflect.TypeFor[jsonNestedBodyStruct](),
 			want: map[string]any{
-				"Body": map[string]any{
-					"user": map[string]any{
-						"name": "john",
-						"age":  float64(30),
-					},
-					"address": map[string]any{
-						"city":    "NYC",
-						"country": "USA",
-					},
+				"Body": jsonNestedBodyStruct{
+					User:    map[string]any{"name": "john", "age": float64(30)},
+					Address: map[string]any{"city": "NYC", "country": "USA"},
 				},
 			},
 			wantErr: false,
@@ -99,16 +122,9 @@ func TestDecoder_DecodeBody_JSON(t *testing.T) {
 			name:        "deeply nested objects",
 			body:        `{"level1": {"level2": {"level3": {"value": "deep"}}}}`,
 			contentType: "application/json",
+			bodyType:    reflect.TypeFor[jsonDeepNestedBodyStruct](),
 			want: map[string]any{
-				"Body": map[string]any{
-					"level1": map[string]any{
-						"level2": map[string]any{
-							"level3": map[string]any{
-								"value": "deep",
-							},
-						},
-					},
-				},
+				"Body": deepNestedWant,
 			},
 			wantErr: false,
 		},
@@ -116,10 +132,11 @@ func TestDecoder_DecodeBody_JSON(t *testing.T) {
 			name:        "JSON with array field",
 			body:        `{"items": [1, 2, 3], "tags": ["a", "b"]}`,
 			contentType: "application/json",
+			bodyType:    reflect.TypeFor[jsonArrayFieldBodyStruct](),
 			want: map[string]any{
-				"Body": map[string]any{
-					"items": []any{float64(1), float64(2), float64(3)},
-					"tags":  []any{"a", "b"},
+				"Body": jsonArrayFieldBodyStruct{
+					Items: []float64{1, 2, 3},
+					Tags:  []string{"a", "b"},
 				},
 			},
 			wantErr: false,
@@ -128,6 +145,7 @@ func TestDecoder_DecodeBody_JSON(t *testing.T) {
 			name:        "JSON array as body",
 			body:        `[1, 2, 3]`,
 			contentType: "application/json",
+			bodyType:    reflect.TypeFor[[]any](),
 			want: map[string]any{
 				"Body": []any{float64(1), float64(2), float64(3)},
 			},
@@ -137,6 +155,7 @@ func TestDecoder_DecodeBody_JSON(t *testing.T) {
 			name:        "JSON string as body",
 			body:        `"hello"`,
 			contentType: "application/json",
+			bodyType:    reflect.TypeFor[string](),
 			want: map[string]any{
 				"Body": "hello",
 			},
@@ -146,6 +165,7 @@ func TestDecoder_DecodeBody_JSON(t *testing.T) {
 			name:        "JSON number as body",
 			body:        `42`,
 			contentType: "application/json",
+			bodyType:    reflect.TypeFor[float64](),
 			want: map[string]any{
 				"Body": float64(42),
 			},
@@ -155,6 +175,7 @@ func TestDecoder_DecodeBody_JSON(t *testing.T) {
 			name:        "empty body returns empty map",
 			body:        "",
 			contentType: "application/json",
+			bodyType:    reflect.TypeFor[testBodyStruct](),
 			want:        map[string]any{},
 			wantErr:     false,
 		},
@@ -162,16 +183,17 @@ func TestDecoder_DecodeBody_JSON(t *testing.T) {
 			name:        "invalid JSON",
 			body:        `{"name": "test"`,
 			contentType: "application/json",
+			bodyType:    reflect.TypeFor[testBodyStruct](),
 			want:        nil,
 			wantErr:     true,
 		},
 	}
 
 	decoder := newTestDecoder()
-	metadata := createBodyMetadata(BodyTypeStructured, reflect.TypeFor[testBodyStruct]())
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			metadata := createBodyMetadata(BodyTypeStructured, tt.bodyType)
 			req := createBodyRequest(tt.contentType, []byte(tt.body))
 
 			result, err := decoder.Decode(req, nil, metadata)
@@ -186,6 +208,83 @@ func TestDecoder_DecodeBody_JSON(t *testing.T) {
 			assert.Equal(t, tt.want, result)
 		})
 	}
+}
+
+// jsonSnakeCaseStruct has json tags but no schema tags - tests the main bug fix.
+type jsonSnakeCaseStruct struct {
+	FullName string `json:"full_name"`
+	UserAge  int    `json:"user_age"`
+}
+
+// jsonAndSchemaStruct has both json and schema tags.
+type jsonAndSchemaStruct struct {
+	Name  string `json:"name" schema:"name"`
+	Email string `json:"email" schema:"email"`
+}
+
+// jsonOmitStruct has a json:"-" field that should be omitted.
+type jsonOmitStruct struct {
+	Visible   string `json:"visible"`
+	Hidden    string `json:"-"`
+	AlsoShown string `json:"also_shown"`
+}
+
+func TestDecoder_DecodeBody_JSON_JsonTags(t *testing.T) {
+	decoder := newTestDecoder()
+
+	t.Run("json snake_case tags without schema tags", func(t *testing.T) {
+		metadata := createBodyMetadata(BodyTypeStructured, reflect.TypeFor[jsonSnakeCaseStruct]())
+		req := createBodyRequest("application/json", []byte(`{"full_name": "Alice", "user_age": 30}`))
+
+		result, err := decoder.Decode(req, nil, metadata)
+
+		require.NoError(t, err)
+		body, ok := result["Body"].(jsonSnakeCaseStruct)
+		require.True(t, ok)
+		assert.Equal(t, "Alice", body.FullName)
+		assert.Equal(t, 30, body.UserAge)
+	})
+
+	t.Run("both json and schema tags", func(t *testing.T) {
+		metadata := createBodyMetadata(BodyTypeStructured, reflect.TypeFor[jsonAndSchemaStruct]())
+		req := createBodyRequest("application/json", []byte(`{"name": "Bob", "email": "bob@example.com"}`))
+
+		result, err := decoder.Decode(req, nil, metadata)
+
+		require.NoError(t, err)
+		body, ok := result["Body"].(jsonAndSchemaStruct)
+		require.True(t, ok)
+		assert.Equal(t, "Bob", body.Name)
+		assert.Equal(t, "bob@example.com", body.Email)
+	})
+
+	t.Run("json omit field", func(t *testing.T) {
+		metadata := createBodyMetadata(BodyTypeStructured, reflect.TypeFor[jsonOmitStruct]())
+		req := createBodyRequest("application/json", []byte(`{"visible": "a", "hidden": "secret", "also_shown": "b"}`))
+
+		result, err := decoder.Decode(req, nil, metadata)
+
+		require.NoError(t, err)
+		body, ok := result["Body"].(jsonOmitStruct)
+		require.True(t, ok)
+		assert.Equal(t, "a", body.Visible)
+		assert.Equal(t, "", body.Hidden) // json:"-" means it won't be unmarshaled
+		assert.Equal(t, "b", body.AlsoShown)
+	})
+}
+
+func TestDecoder_DecodeBody_JSON_PointerToStruct(t *testing.T) {
+	decoder := newTestDecoder()
+	metadata := createBodyMetadata(BodyTypeStructured, reflect.TypeFor[*testBodyStruct]())
+	req := createBodyRequest("application/json", []byte(`{"name": "Alice", "count": 42}`))
+
+	result, err := decoder.Decode(req, nil, metadata)
+
+	require.NoError(t, err)
+	body, ok := result["Body"].(testBodyStruct)
+	require.True(t, ok, "Body should be dereferenced struct")
+	assert.Equal(t, "Alice", body.Name)
+	assert.Equal(t, 42, body.Count)
 }
 
 func TestDecoder_DecodeBody_File(t *testing.T) {
