@@ -6,16 +6,6 @@ This guide covers how to create custom struct tag parsers to extend Schema's met
 
 Tag parsers convert struct tags into typed metadata that can be used during request decoding.
 
-### Tag Parser Flow
-
-```mermaid
-graph LR
-    StructTag["Struct Tag"] --> Parser["Tag Parser Function"]
-    Parser --> Metadata["Typed Metadata"]
-    Metadata --> Registry["Tag Parser Registry"]
-    Registry --> MetadataComponent["Metadata Component"]
-    MetadataComponent --> Cache["Metadata Cache"]
-```
 
 ## Tag Parser Function
 
