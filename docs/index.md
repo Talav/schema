@@ -5,7 +5,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/talav/schema)](https://goreportcard.com/report/github.com/talav/schema)
 [![CI](https://github.com/talav/schema/actions/workflows/schema-ci.yml/badge.svg)](https://github.com/talav/schema/actions)
 [![codecov](https://codecov.io/gh/talav/schema/graph/badge.svg)](https://codecov.io/gh/talav/schema)
-[![License](https://img.shields.io/github/license/talav/tagparser)](./LICENSE)
+[![License](https://img.shields.io/github/license/talav/schema)](./LICENSE)
 
 **Decode HTTP requests into Go structs with OpenAPI 3.0 compliance**
 
