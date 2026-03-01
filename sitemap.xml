@@ -2,38 +2,38 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://talav.github.io/schema/</loc>
-         <lastmod>2026-02-28</lastmod>
+         <lastmod>2026-03-01</lastmod>
     </url>
     <url>
          <loc>https://talav.github.io/schema/advanced/custom-tags/</loc>
-         <lastmod>2026-02-28</lastmod>
+         <lastmod>2026-03-01</lastmod>
     </url>
     <url>
          <loc>https://talav.github.io/schema/advanced/extensibility/</loc>
-         <lastmod>2026-02-28</lastmod>
+         <lastmod>2026-03-01</lastmod>
     </url>
     <url>
          <loc>https://talav.github.io/schema/getting-started/concepts/</loc>
-         <lastmod>2026-02-28</lastmod>
+         <lastmod>2026-03-01</lastmod>
     </url>
     <url>
          <loc>https://talav.github.io/schema/getting-started/quick-start/</loc>
-         <lastmod>2026-02-28</lastmod>
+         <lastmod>2026-03-01</lastmod>
     </url>
     <url>
          <loc>https://talav.github.io/schema/guides/parameters/</loc>
-         <lastmod>2026-02-28</lastmod>
+         <lastmod>2026-03-01</lastmod>
     </url>
     <url>
          <loc>https://talav.github.io/schema/guides/request-bodies/</loc>
-         <lastmod>2026-02-28</lastmod>
+         <lastmod>2026-03-01</lastmod>
     </url>
     <url>
          <loc>https://talav.github.io/schema/guides/serialization/</loc>
-         <lastmod>2026-02-28</lastmod>
+         <lastmod>2026-03-01</lastmod>
     </url>
     <url>
          <loc>https://talav.github.io/schema/guides/type-conversion/</loc>
-         <lastmod>2026-02-28</lastmod>
+         <lastmod>2026-03-01</lastmod>
     </url>
 </urlset>
