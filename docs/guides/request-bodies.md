@@ -336,6 +336,77 @@ func handler(w http.ResponseWriter, r *http.Request) {
 ```
 
 
+### File Metadata with FileHeader
+
+Use `*multipart.FileHeader` when you need access to the file's metadata (filename, size, content-type headers) before reading the file content. This is useful for validating file size or type before consuming any bytes:
+
+```go
+type DocumentUploadRequest struct {
+    Body struct {
+        Title string                `schema:"title"`
+        File  *multipart.FileHeader `schema:"file"`
+    } `body:"multipart"`
+}
+
+func handler(w http.ResponseWriter, r *http.Request) {
+    var req DocumentUploadRequest
+    codec.DecodeRequest(r, nil, &req)
+    
+    // Validate before reading
+    if req.Body.File.Size > 50<<20 { // 50MB limit
+        http.Error(w, "file too large", http.StatusRequestEntityTooLarge)
+        return
+    }
+    
+    contentType := req.Body.File.Header.Get("Content-Type")
+    if contentType != "application/pdf" {
+        http.Error(w, "only PDF files accepted", http.StatusBadRequest)
+        return
+    }
+    
+    fmt.Printf("File: %s (%d bytes, %s)\n",
+        req.Body.File.Filename, req.Body.File.Size, contentType)
+    
+    // Open when ready to read
+    f, _ := req.Body.File.Open()
+    defer f.Close()
+    io.Copy(os.Stdout, f)
+}
+```
+
+For multiple files, use `[]*multipart.FileHeader`:
+
+```go
+type BatchUploadRequest struct {
+    Body struct {
+        Files []*multipart.FileHeader `schema:"files"`
+    } `body:"multipart"`
+}
+
+func handler(w http.ResponseWriter, r *http.Request) {
+    var req BatchUploadRequest
+    codec.DecodeRequest(r, nil, &req)
+    
+    for _, fh := range req.Body.Files {
+        fmt.Printf("File: %s (%d bytes)\n", fh.Filename, fh.Size)
+        f, _ := fh.Open()
+        // process file...
+        f.Close()
+    }
+}
+```
+
+**When to use which file type:**
+
+| Field Type | Use When |
+|------------|----------|
+| `io.ReadCloser` | You just need to stream the file content |
+| `[]io.ReadCloser` | Multiple files, stream-only |
+| `*multipart.FileHeader` | You need filename, size, or content-type before reading |
+| `[]*multipart.FileHeader` | Multiple files with metadata access |
+| `[]byte` | Small files loaded entirely into memory |
+
+
 ### Optional Files
 
 Use pointers for optional file uploads:
@@ -379,6 +450,8 @@ Choose the right body type for your use case:
 | Video upload | `file` | `io.ReadCloser` | Large media files (streaming) |
 | Document with metadata | `multipart` | `struct` with mixed fields | PDF with title/description |
 | Photo gallery upload | `multipart` | `struct` with `[]io.ReadCloser` | Multiple images + album info |
+| Upload with size/type validation | `multipart` | `struct` with `*multipart.FileHeader` | Reject oversized or wrong-type files before reading |
+| Batch upload with metadata | `multipart` | `struct` with `[]*multipart.FileHeader` | Multiple files with filename/size inspection |
 
 ## Next Steps
 

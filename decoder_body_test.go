@@ -423,6 +423,15 @@ type multipartMixedStruct struct {
 	File  io.ReadCloser `schema:"attachment"`
 }
 
+type multipartFileHeaderStruct struct {
+	Name string                `schema:"name"`
+	File *multipart.FileHeader `schema:"file"`
+}
+
+type multipartMultiFileHeaderStruct struct {
+	Files []*multipart.FileHeader `schema:"files"`
+}
+
 type multipartFormData struct {
 	fields map[string][]string
 	files  map[string][]fileData
@@ -460,15 +469,18 @@ func createMultipartRequest(data multipartFormData) *http.Request {
 	return req
 }
 
-func TestDecoder_DecodeBody_Multipart(t *testing.T) {
-	tests := []struct {
-		name      string
-		formData  multipartFormData
-		bodyType  reflect.Type
-		want      map[string]any
-		wantErr   bool
-		checkFunc func(t *testing.T, result map[string]any) // for file content checks
-	}{
+type multipartTestCase struct {
+	name      string
+	formData  multipartFormData
+	bodyType  reflect.Type
+	want      map[string]any
+	wantErr   bool
+	checkFunc func(t *testing.T, result map[string]any)
+}
+
+//nolint:maintidx // Large table-driven test data
+func multipartTestCases() []multipartTestCase {
+	return []multipartTestCase{
 		{
 			name: "single text field",
 			formData: multipartFormData{
@@ -674,32 +686,149 @@ func TestDecoder_DecodeBody_Multipart(t *testing.T) {
 				},
 			},
 		},
+		{
+			name: "single file as *multipart.FileHeader",
+			formData: multipartFormData{
+				fields: map[string][]string{
+					"name": {"document"},
+				},
+				files: map[string][]fileData{
+					"file": {{filename: "test.txt", content: []byte("file content")}},
+				},
+			},
+			bodyType: reflect.TypeFor[multipartFileHeaderStruct](),
+			//nolint:thelper // inline test validation
+			checkFunc: func(t *testing.T, result map[string]any) {
+				body, ok := result["Body"].(map[string]any)
+				require.True(t, ok)
+				assert.Equal(t, "document", body["name"])
+
+				fh, ok := body["file"].(*multipart.FileHeader)
+				require.True(t, ok, "expected *multipart.FileHeader")
+				assert.Equal(t, "test.txt", fh.Filename)
+				assert.Equal(t, int64(12), fh.Size)
+
+				f, err := fh.Open()
+				require.NoError(t, err)
+				defer f.Close() //nolint:errcheck // test cleanup
+
+				content, err := io.ReadAll(f)
+				require.NoError(t, err)
+				assert.Equal(t, []byte("file content"), content)
+			},
+		},
+		{
+			name: "multiple files as []*multipart.FileHeader",
+			formData: multipartFormData{
+				files: map[string][]fileData{
+					"files": {
+						{filename: "a.txt", content: []byte("aaa")},
+						{filename: "b.txt", content: []byte("bbb")},
+					},
+				},
+			},
+			bodyType: reflect.TypeFor[multipartMultiFileHeaderStruct](),
+			//nolint:thelper // inline test validation
+			checkFunc: func(t *testing.T, result map[string]any) {
+				body, ok := result["Body"].(map[string]any)
+				require.True(t, ok)
+
+				headers, ok := body["files"].([]*multipart.FileHeader)
+				require.True(t, ok, "expected []*multipart.FileHeader")
+				require.Len(t, headers, 2)
+
+				assert.Equal(t, "a.txt", headers[0].Filename)
+				assert.Equal(t, "b.txt", headers[1].Filename)
+
+				expected := [][]byte{[]byte("aaa"), []byte("bbb")}
+				for i, fh := range headers {
+					f, err := fh.Open()
+					require.NoError(t, err)
+					defer f.Close() //nolint:errcheck // test cleanup
+
+					content, err := io.ReadAll(f)
+					require.NoError(t, err)
+					assert.Equal(t, expected[i], content)
+				}
+			},
+		},
+		{
+			name: "missing file with *multipart.FileHeader",
+			formData: multipartFormData{
+				fields: map[string][]string{
+					"name": {"no-file"},
+				},
+			},
+			bodyType: reflect.TypeFor[multipartFileHeaderStruct](),
+			want: map[string]any{
+				"Body": map[string]any{
+					"name": "no-file",
+				},
+			},
+		},
+		{
+			name: "multiple files uploaded to singular *multipart.FileHeader takes first",
+			formData: multipartFormData{
+				files: map[string][]fileData{
+					"file": {
+						{filename: "first.txt", content: []byte("first")},
+						{filename: "second.txt", content: []byte("second")},
+					},
+				},
+			},
+			bodyType: reflect.TypeFor[multipartFileHeaderStruct](),
+			//nolint:thelper // inline test validation
+			checkFunc: func(t *testing.T, result map[string]any) {
+				body, ok := result["Body"].(map[string]any)
+				require.True(t, ok)
+
+				fh, ok := body["file"].(*multipart.FileHeader)
+				require.True(t, ok, "expected *multipart.FileHeader")
+				assert.Equal(t, "first.txt", fh.Filename)
+
+				f, err := fh.Open()
+				require.NoError(t, err)
+				defer f.Close() //nolint:errcheck // test cleanup
+
+				content, err := io.ReadAll(f)
+				require.NoError(t, err)
+				assert.Equal(t, []byte("first"), content)
+			},
+		},
+	}
+}
+
+func runMultipartTest(t *testing.T, tt multipartTestCase, decoder Decoder) {
+	t.Helper()
+
+	metadata := createBodyMetadata(BodyTypeMultipart, tt.bodyType)
+	req := createMultipartRequest(tt.formData)
+
+	result, err := decoder.Decode(req, nil, metadata)
+
+	if tt.wantErr {
+		require.Error(t, err)
+
+		return
 	}
 
+	require.NoError(t, err)
+
+	if tt.checkFunc != nil {
+		tt.checkFunc(t, result)
+
+		return
+	}
+
+	assert.Equal(t, tt.want, result)
+}
+
+func TestDecoder_DecodeBody_Multipart(t *testing.T) {
 	decoder := newTestDecoder()
 
-	for _, tt := range tests {
+	for _, tt := range multipartTestCases() {
 		t.Run(tt.name, func(t *testing.T) {
-			metadata := createBodyMetadata(BodyTypeMultipart, tt.bodyType)
-			req := createMultipartRequest(tt.formData)
-
-			result, err := decoder.Decode(req, nil, metadata)
-
-			if tt.wantErr {
-				require.Error(t, err)
-
-				return
-			}
-
-			require.NoError(t, err)
-
-			if tt.checkFunc != nil {
-				tt.checkFunc(t, result)
-
-				return
-			}
-
-			assert.Equal(t, tt.want, result)
+			runMultipartTest(t, tt, decoder)
 		})
 	}
 }

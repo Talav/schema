@@ -221,28 +221,38 @@ func (d *defaultDecoder) decodeJSONBody(bodyBytes []byte, bodyField *FieldMetada
 
 // processMultipartField processes a single multipart form field (file or regular).
 func (d *defaultDecoder) processMultipartField(form *multipart.Form, fieldMeta FieldMetadata, result map[string]any) error {
-	// Get schema metadata (or default for untagged fields)
 	var paramName string
 	if schemaMeta, ok := GetTagMetadata[*SchemaMetadata](&fieldMeta, "schema"); ok {
 		paramName = schemaMeta.ParamName
-	} else if defaultMeta, ok := GetTagMetadata[*SchemaMetadata](&fieldMeta, "schema"); ok {
-		paramName = defaultMeta.ParamName
 	} else {
-		// No metadata, skip
 		return nil
 	}
 
-	// Detect file fields by type
 	if d.isFileField(fieldMeta.Type) {
-		// File field: open files and return as io.ReadCloser (standard format)
 		fileHeaders := form.File[paramName]
-		if len(fileHeaders) > 0 {
-			fileReaders, err := d.openMultipartFiles(fileHeaders, fieldMeta.Type)
-			if err != nil {
-				return fmt.Errorf("failed to open file field %s: %w", paramName, err)
-			}
-			result[paramName] = fileReaders
+		if len(fileHeaders) == 0 {
+			return nil
 		}
+
+		fileHeaderType := reflect.TypeOf((*multipart.FileHeader)(nil))
+
+		if fieldMeta.Type == fileHeaderType {
+			result[paramName] = fileHeaders[0]
+
+			return nil
+		}
+
+		if fieldMeta.Type.Kind() == reflect.Slice && fieldMeta.Type.Elem() == fileHeaderType {
+			result[paramName] = fileHeaders
+
+			return nil
+		}
+
+		fileReaders, err := d.openMultipartFiles(fileHeaders, fieldMeta.Type)
+		if err != nil {
+			return fmt.Errorf("failed to open file field %s: %w", paramName, err)
+		}
+		result[paramName] = fileReaders
 
 		return nil
 	}
@@ -262,17 +272,24 @@ func (d *defaultDecoder) processMultipartField(form *multipart.Form, fieldMeta F
 
 // isFileField checks if a type represents a file field.
 func (d *defaultDecoder) isFileField(typ reflect.Type) bool {
-	// Check for io.ReadCloser
+	fileHeaderType := reflect.TypeOf((*multipart.FileHeader)(nil))
+
+	if typ == fileHeaderType {
+		return true
+	}
+
+	if typ.Kind() == reflect.Slice && typ.Elem() == fileHeaderType {
+		return true
+	}
+
 	if typ.Implements(reflect.TypeOf((*io.ReadCloser)(nil)).Elem()) {
 		return true
 	}
 
-	// Check for []byte
 	if typ.Kind() == reflect.Slice && typ.Elem().Kind() == reflect.Uint8 {
 		return true
 	}
 
-	// Check for []io.ReadCloser (slice of files)
 	if typ.Kind() == reflect.Slice {
 		elemType := typ.Elem()
 		if elemType.Implements(reflect.TypeOf((*io.ReadCloser)(nil)).Elem()) {

@@ -236,6 +236,47 @@ func TestCodec_DecodeRequest_MultipartWithFile(t *testing.T) {
 	assert.Equal(t, []byte("document content"), content)
 }
 
+func TestCodec_DecodeRequest_MultipartWithFileHeader(t *testing.T) {
+	type uploadBody struct {
+		Title string                `schema:"title"`
+		File  *multipart.FileHeader `schema:"document"`
+	}
+
+	type uploadRequest struct {
+		Body uploadBody `body:"multipart"`
+	}
+
+	codec := NewDefaultCodec()
+
+	body := &bytes.Buffer{}
+	writer := multipart.NewWriter(body)
+	_ = writer.WriteField("title", "My Document")
+
+	filePart, _ := writer.CreateFormFile("document", "report.pdf")
+	_, _ = filePart.Write([]byte("PDF content"))
+	_ = writer.Close()
+
+	req := httptest.NewRequest(http.MethodPost, "/upload", body)
+	req.Header.Set("Content-Type", writer.FormDataContentType())
+
+	var result uploadRequest
+	err := codec.DecodeRequest(req, nil, &result)
+
+	require.NoError(t, err)
+	assert.Equal(t, "My Document", result.Body.Title)
+	require.NotNil(t, result.Body.File)
+	assert.Equal(t, "report.pdf", result.Body.File.Filename)
+	assert.Equal(t, int64(11), result.Body.File.Size)
+
+	f, err := result.Body.File.Open()
+	require.NoError(t, err)
+	defer f.Close() //nolint:errcheck // test cleanup
+
+	content, err := io.ReadAll(f)
+	require.NoError(t, err)
+	assert.Equal(t, []byte("PDF content"), content)
+}
+
 func TestCodec_DecodeRequest_QueryWithFileUpload(t *testing.T) {
 	type mixedRequest struct {
 		Version string `schema:"version,location=query"`

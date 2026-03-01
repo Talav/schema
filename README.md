@@ -150,6 +150,14 @@ type FormUpload struct {
         Document io.ReadCloser `schema:"document"`
     } `body:"multipart"`
 }
+
+// Multipart with file metadata (filename, size, content-type)
+type MetadataUpload struct {
+    Body struct {
+        Title    string                `schema:"title"`
+        Document *multipart.FileHeader `schema:"document"`
+    } `body:"multipart"`
+}
 ```
 
 [Learn more about request bodies →](https://talav.github.io/schema/guides/request-bodies/)
@@ -262,6 +270,37 @@ func handler(w http.ResponseWriter, r *http.Request) {
     defer req.Body.Document.Close()
     
     // Process form + file
+}
+```
+
+### Multipart with File Metadata
+
+Use `*multipart.FileHeader` when you need access to filename, size, or content-type before reading:
+
+```go
+type UploadRequest struct {
+    Body struct {
+        Title string                `schema:"title"`
+        File  *multipart.FileHeader `schema:"file"`
+    } `body:"multipart"`
+}
+
+func handler(w http.ResponseWriter, r *http.Request) {
+    var req UploadRequest
+    if err := codec.DecodeRequest(r, nil, &req); err != nil {
+        http.Error(w, err.Error(), http.StatusBadRequest)
+        return
+    }
+    
+    // Check metadata before reading
+    if req.Body.File.Size > 10<<20 {
+        http.Error(w, "file too large", http.StatusRequestEntityTooLarge)
+        return
+    }
+    
+    f, _ := req.Body.File.Open()
+    defer f.Close()
+    io.Copy(os.Stdout, f)
 }
 ```
 
