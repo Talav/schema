@@ -34,7 +34,8 @@
         "vscode": {
             "extensions": [
                 "golang.go",
-                "redhat.vscode-yaml"
+                "redhat.vscode-yaml",
+                "eamodio.gitlens"
             ],
             "settings": {
                 "files.eol": "\n",
