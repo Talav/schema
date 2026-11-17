@@ -1,5 +1,5 @@
 # Start from the same base image
-FROM qmcgaw/godevcontainer:debian
+FROM qmcgaw/godevcontainer:v0.22.0-debian
 
 # Install Python 3 + pip (Debian way – very small footprint)
 RUN apt-get update && \
