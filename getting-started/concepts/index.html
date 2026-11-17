@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -31,10 +31,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -1139,9 +1139,9 @@
 </ol>
 <div class="highlight"><pre><span></span><code><span class="c1">// 1. Define your request structure</span>
 <span class="kd">type</span><span class="w"> </span><span class="nx">CreateUserRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;name&quot;`</span><span class="w">           </span><span class="c1">// from query param</span>
-<span class="w">    </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;email&quot;`</span><span class="w">          </span><span class="c1">// from query param</span>
-<span class="w">    </span><span class="nx">Body</span><span class="w">  </span><span class="nx">User</span><span class="w">   </span><span class="s">`body:&quot;structured&quot;`</span><span class="w">       </span><span class="c1">// from request body</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"name"`</span><span class="w">           </span><span class="c1">// from query param</span>
+<span class="w">    </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"email"`</span><span class="w">          </span><span class="c1">// from query param</span>
+<span class="w">    </span><span class="nx">Body</span><span class="w">  </span><span class="nx">User</span><span class="w">   </span><span class="s">`body:"structured"`</span><span class="w">       </span><span class="c1">// from request body</span>
 <span class="p">}</span>
 
 <span class="c1">// 2. Decode the request</span>
@@ -1156,19 +1156,19 @@
 <p>Use the <code>schema</code> tag to specify where data comes from:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Request</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Query parameters (default location)</span>
-<span class="w">    </span><span class="nx">Search</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;q&quot;`</span>
+<span class="w">    </span><span class="nx">Search</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"q"`</span>
 
 <span class="w">    </span><span class="c1">// Path parameters (from router)</span>
-<span class="w">    </span><span class="nx">UserID</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;user_id,location=path&quot;`</span>
+<span class="w">    </span><span class="nx">UserID</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"user_id,location=path"`</span>
 
 <span class="w">    </span><span class="c1">// Headers</span>
-<span class="w">    </span><span class="nx">Token</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;Authorization,location=header&quot;`</span>
+<span class="w">    </span><span class="nx">Token</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"Authorization,location=header"`</span>
 
 <span class="w">    </span><span class="c1">// Cookies</span>
-<span class="w">    </span><span class="nx">SessionID</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;session_id,location=cookie&quot;`</span>
+<span class="w">    </span><span class="nx">SessionID</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"session_id,location=cookie"`</span>
 
 <span class="w">    </span><span class="c1">// Skip this field</span>
-<span class="w">    </span><span class="nx">Internal</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;-&quot;`</span>
+<span class="w">    </span><span class="nx">Internal</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"-"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <p><strong>Common Options:</strong></p>
@@ -1180,20 +1180,20 @@
 <p>Use the <code>body</code> tag for request body content:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Request</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// JSON/XML/Form data - automatically detected by Content-Type</span>
-<span class="w">    </span><span class="nx">User</span><span class="w"> </span><span class="nx">UserData</span><span class="w"> </span><span class="s">`body:&quot;structured&quot;`</span>
+<span class="w">    </span><span class="nx">User</span><span class="w"> </span><span class="nx">UserData</span><span class="w"> </span><span class="s">`body:"structured"`</span>
 <span class="p">}</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">FileUploadRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Small files (loaded into memory)</span>
-<span class="w">    </span><span class="nx">Avatar</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="w"> </span><span class="s">`body:&quot;file&quot;`</span>
+<span class="w">    </span><span class="nx">Avatar</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="w"> </span><span class="s">`body:"file"`</span>
 
 <span class="w">    </span><span class="c1">// Large files (streaming)</span>
-<span class="w">    </span><span class="nx">Video</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">ReadCloser</span><span class="w"> </span><span class="s">`body:&quot;file&quot;`</span>
+<span class="w">    </span><span class="nx">Video</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">ReadCloser</span><span class="w"> </span><span class="s">`body:"file"`</span>
 <span class="p">}</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">FormRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Multipart forms with files</span>
-<span class="w">    </span><span class="nx">Form</span><span class="w"> </span><span class="nx">SubmissionData</span><span class="w"> </span><span class="s">`body:&quot;multipart&quot;`</span>
+<span class="w">    </span><span class="nx">Form</span><span class="w"> </span><span class="nx">SubmissionData</span><span class="w"> </span><span class="s">`body:"multipart"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <p><strong>When to use each type:</strong></p>
@@ -1227,7 +1227,7 @@
 <h2 id="codec-setup-and-performance">Codec Setup and Performance<a class="headerlink" href="#codec-setup-and-performance" title="Anchor link to this section">&para;</a></h2>
 <p><strong>Create the codec once</strong> at application startup and reuse it:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// ✅ GOOD: Create once, reuse everywhere</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">codec</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">NewDefaultCodec</span><span class="p">()</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">codec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">NewDefaultCodec</span><span class="p">()</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="nx">handler1</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">req</span><span class="w"> </span><span class="nx">Request1</span>
@@ -1253,7 +1253,7 @@
 <h2 id="common-patterns">Common Patterns<a class="headerlink" href="#common-patterns" title="Anchor link to this section">&para;</a></h2>
 <h3 id="rest-api-with-path-parameters">REST API with Path Parameters<a class="headerlink" href="#rest-api-with-path-parameters" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">GetUserRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">UserID</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;id,location=path&quot;`</span>
+<span class="w">    </span><span class="nx">UserID</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"id,location=path"`</span>
 <span class="p">}</span>
 
 <span class="c1">// GET /users/:id</span>
@@ -1262,7 +1262,7 @@
 </code></pre></div>
 <h3 id="json-request-body">JSON Request Body<a class="headerlink" href="#json-request-body" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">CreateUserRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">User</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="s">`body:&quot;structured&quot;`</span>
+<span class="w">    </span><span class="nx">User</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="s">`body:"structured"`</span>
 <span class="p">}</span>
 
 <span class="c1">// POST /users with JSON body</span>
@@ -1271,16 +1271,16 @@
 </code></pre></div>
 <h3 id="query-filters-with-arrays">Query Filters with Arrays<a class="headerlink" href="#query-filters-with-arrays" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">SearchRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Query</span><span class="w">  </span><span class="kt">string</span><span class="w">   </span><span class="s">`schema:&quot;q&quot;`</span>
-<span class="w">    </span><span class="nx">Tags</span><span class="w">   </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;tags&quot;`</span><span class="w">  </span><span class="c1">// ?tags=go&amp;tags=http</span>
-<span class="w">    </span><span class="nx">Status</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;status,style=form,explode=false&quot;`</span><span class="w"> </span><span class="c1">// ?status=active,pending</span>
+<span class="w">    </span><span class="nx">Query</span><span class="w">  </span><span class="kt">string</span><span class="w">   </span><span class="s">`schema:"q"`</span>
+<span class="w">    </span><span class="nx">Tags</span><span class="w">   </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"tags"`</span><span class="w">  </span><span class="c1">// ?tags=go&amp;tags=http</span>
+<span class="w">    </span><span class="nx">Status</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"status,style=form,explode=false"`</span><span class="w"> </span><span class="c1">// ?status=active,pending</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="mixed-parameters">Mixed Parameters<a class="headerlink" href="#mixed-parameters" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">UpdateUserRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">UserID</span><span class="w"> </span><span class="kt">string</span><span class="w">   </span><span class="s">`schema:&quot;id,location=path&quot;`</span>
-<span class="w">    </span><span class="nx">Token</span><span class="w">  </span><span class="kt">string</span><span class="w">   </span><span class="s">`schema:&quot;Authorization,location=header&quot;`</span>
-<span class="w">    </span><span class="nx">Body</span><span class="w">   </span><span class="nx">UserData</span><span class="w"> </span><span class="s">`body:&quot;structured&quot;`</span>
+<span class="w">    </span><span class="nx">UserID</span><span class="w"> </span><span class="kt">string</span><span class="w">   </span><span class="s">`schema:"id,location=path"`</span>
+<span class="w">    </span><span class="nx">Token</span><span class="w">  </span><span class="kt">string</span><span class="w">   </span><span class="s">`schema:"Authorization,location=header"`</span>
+<span class="w">    </span><span class="nx">Body</span><span class="w">   </span><span class="nx">UserData</span><span class="w"> </span><span class="s">`body:"structured"`</span>
 <span class="p">}</span>
 
 <span class="c1">// PUT /users/:id with Authorization header and JSON body</span>
@@ -1288,7 +1288,7 @@
 <h2 id="thread-safety">Thread Safety<a class="headerlink" href="#thread-safety" title="Anchor link to this section">&para;</a></h2>
 <p><strong>The codec is safe to use concurrently</strong> across multiple goroutines and HTTP handlers. Create it once and share it:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Create once at application startup</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">codec</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">NewDefaultCodec</span><span class="p">()</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">codec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">NewDefaultCodec</span><span class="p">()</span>
 
 <span class="c1">// Use in multiple handlers concurrently - completely safe</span>
 <span class="kd">func</span><span class="w"> </span><span class="nx">handler1</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -1304,19 +1304,19 @@
 <h2 id="type-conversion">Type Conversion<a class="headerlink" href="#type-conversion" title="Anchor link to this section">&para;</a></h2>
 <p>Schema automatically converts HTTP parameter strings to Go types:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Request</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Count</span><span class="w">    </span><span class="kt">int</span><span class="w">       </span><span class="s">`schema:&quot;count&quot;`</span><span class="w">        </span><span class="c1">// &quot;42&quot; → 42</span>
-<span class="w">    </span><span class="nx">Price</span><span class="w">    </span><span class="kt">float64</span><span class="w">   </span><span class="s">`schema:&quot;price&quot;`</span><span class="w">        </span><span class="c1">// &quot;19.99&quot; → 19.99</span>
-<span class="w">    </span><span class="nx">Active</span><span class="w">   </span><span class="kt">bool</span><span class="w">      </span><span class="s">`schema:&quot;active&quot;`</span><span class="w">       </span><span class="c1">// &quot;true&quot; → true</span>
-<span class="w">    </span><span class="nx">Tags</span><span class="w">     </span><span class="p">[]</span><span class="kt">string</span><span class="w">  </span><span class="s">`schema:&quot;tags&quot;`</span><span class="w">         </span><span class="c1">// Multiple values → slice</span>
-<span class="w">    </span><span class="nx">Created</span><span class="w">  </span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="w"> </span><span class="s">`schema:&quot;created&quot;`</span><span class="w">      </span><span class="c1">// ISO 8601 → time.Time</span>
-<span class="w">    </span><span class="nx">UserID</span><span class="w">   </span><span class="o">*</span><span class="kt">string</span><span class="w">   </span><span class="s">`schema:&quot;user_id&quot;`</span><span class="w">      </span><span class="c1">// Optional with pointer</span>
+<span class="w">    </span><span class="nx">Count</span><span class="w">    </span><span class="kt">int</span><span class="w">       </span><span class="s">`schema:"count"`</span><span class="w">        </span><span class="c1">// "42" → 42</span>
+<span class="w">    </span><span class="nx">Price</span><span class="w">    </span><span class="kt">float64</span><span class="w">   </span><span class="s">`schema:"price"`</span><span class="w">        </span><span class="c1">// "19.99" → 19.99</span>
+<span class="w">    </span><span class="nx">Active</span><span class="w">   </span><span class="kt">bool</span><span class="w">      </span><span class="s">`schema:"active"`</span><span class="w">       </span><span class="c1">// "true" → true</span>
+<span class="w">    </span><span class="nx">Tags</span><span class="w">     </span><span class="p">[]</span><span class="kt">string</span><span class="w">  </span><span class="s">`schema:"tags"`</span><span class="w">         </span><span class="c1">// Multiple values → slice</span>
+<span class="w">    </span><span class="nx">Created</span><span class="w">  </span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="w"> </span><span class="s">`schema:"created"`</span><span class="w">      </span><span class="c1">// ISO 8601 → time.Time</span>
+<span class="w">    </span><span class="nx">UserID</span><span class="w">   </span><span class="o">*</span><span class="kt">string</span><span class="w">   </span><span class="s">`schema:"user_id"`</span><span class="w">      </span><span class="c1">// Optional with pointer</span>
 <span class="p">}</span>
 </code></pre></div>
 <p><strong>Default values</strong> for missing parameters:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Request</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Page</span><span class="w">  </span><span class="kt">int</span><span class="w">    </span><span class="s">`schema:&quot;page&quot; default:&quot;1&quot;`</span>
-<span class="w">    </span><span class="nx">Limit</span><span class="w"> </span><span class="kt">int</span><span class="w">    </span><span class="s">`schema:&quot;limit&quot; default:&quot;20&quot;`</span>
-<span class="w">    </span><span class="nx">Sort</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;sort&quot; default:&quot;created_at&quot;`</span>
+<span class="w">    </span><span class="nx">Page</span><span class="w">  </span><span class="kt">int</span><span class="w">    </span><span class="s">`schema:"page" default:"1"`</span>
+<span class="w">    </span><span class="nx">Limit</span><span class="w"> </span><span class="kt">int</span><span class="w">    </span><span class="s">`schema:"limit" default:"20"`</span>
+<span class="w">    </span><span class="nx">Sort</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"sort" default:"created_at"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>See <a href="../../guides/type-conversion/">Type Conversion Guide</a> for all supported types.</p>
@@ -1325,7 +1325,7 @@
 <div class="highlight"><pre><span></span><code><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">codec</span><span class="p">.</span><span class="nx">DecodeRequest</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="nx">routerParams</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">req</span><span class="p">)</span>
 <span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Could be:</span>
-<span class="w">    </span><span class="c1">// - Invalid type conversion (e.g., &quot;abc&quot; → int)</span>
+<span class="w">    </span><span class="c1">// - Invalid type conversion (e.g., "abc" → int)</span>
 <span class="w">    </span><span class="c1">// - Invalid request body</span>
 <span class="w">    </span><span class="c1">// - Body too large</span>
 
@@ -1457,10 +1457,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.code.annotate", "content.code.mermaid"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.code.annotate", "content.code.mermaid"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
         <script src="../../js/timeago.min.js"></script>
       

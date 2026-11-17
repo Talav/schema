@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -31,10 +31,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -1263,20 +1263,20 @@
 <p>The most common use case - REST APIs with JSON:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">CreateUserRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">Body</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">Name</span><span class="w">     </span><span class="kt">string</span><span class="w">   </span><span class="s">`schema:&quot;name&quot;`</span>
-<span class="w">        </span><span class="nx">Email</span><span class="w">    </span><span class="kt">string</span><span class="w">   </span><span class="s">`schema:&quot;email&quot;`</span>
-<span class="w">        </span><span class="nx">Age</span><span class="w">      </span><span class="kt">int</span><span class="w">      </span><span class="s">`schema:&quot;age&quot;`</span>
-<span class="w">        </span><span class="nx">Tags</span><span class="w">     </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;tags&quot;`</span>
-<span class="w">        </span><span class="nx">Settings</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="w"> </span><span class="s">`schema:&quot;settings&quot;`</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="s">`body:&quot;structured&quot;`</span>
+<span class="w">        </span><span class="nx">Name</span><span class="w">     </span><span class="kt">string</span><span class="w">   </span><span class="s">`schema:"name"`</span>
+<span class="w">        </span><span class="nx">Email</span><span class="w">    </span><span class="kt">string</span><span class="w">   </span><span class="s">`schema:"email"`</span>
+<span class="w">        </span><span class="nx">Age</span><span class="w">      </span><span class="kt">int</span><span class="w">      </span><span class="s">`schema:"age"`</span>
+<span class="w">        </span><span class="nx">Tags</span><span class="w">     </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"tags"`</span>
+<span class="w">        </span><span class="nx">Settings</span><span class="w"> </span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="w"> </span><span class="s">`schema:"settings"`</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="s">`body:"structured"`</span>
 <span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="nx">handler</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">req</span><span class="w"> </span><span class="nx">CreateUserRequest</span>
 <span class="w">    </span><span class="nx">codec</span><span class="p">.</span><span class="nx">DecodeRequest</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">req</span><span class="p">)</span>
 
-<span class="w">    </span><span class="c1">// req.Body.Name = &quot;Alice&quot;</span>
-<span class="w">    </span><span class="c1">// req.Body.Email = &quot;alice@example.com&quot;</span>
+<span class="w">    </span><span class="c1">// req.Body.Name = "Alice"</span>
+<span class="w">    </span><span class="c1">// req.Body.Email = "alice@example.com"</span>
 <span class="w">    </span><span class="c1">// req.Body.Age = 30</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -1285,43 +1285,43 @@
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">CreateOrderRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">Body</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">Customer</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;name&quot;`</span>
-<span class="w">            </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;email&quot;`</span>
+<span class="w">            </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"name"`</span>
+<span class="w">            </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"email"`</span>
 <span class="w">            </span><span class="nx">Address</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nx">Street</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;street&quot;`</span>
-<span class="w">                </span><span class="nx">City</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;city&quot;`</span>
-<span class="w">                </span><span class="nx">Country</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;country&quot;`</span>
-<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="s">`schema:&quot;address&quot;`</span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="s">`schema:&quot;customer&quot;`</span>
+<span class="w">                </span><span class="nx">Street</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"street"`</span>
+<span class="w">                </span><span class="nx">City</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"city"`</span>
+<span class="w">                </span><span class="nx">Country</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"country"`</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="s">`schema:"address"`</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="s">`schema:"customer"`</span>
 
 <span class="w">        </span><span class="nx">Items</span><span class="w"> </span><span class="p">[]</span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">ProductID</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;product_id&quot;`</span>
-<span class="w">            </span><span class="nx">Quantity</span><span class="w">  </span><span class="kt">int</span><span class="w">    </span><span class="s">`schema:&quot;quantity&quot;`</span>
-<span class="w">            </span><span class="nx">Price</span><span class="w">     </span><span class="kt">float64</span><span class="w"> </span><span class="s">`schema:&quot;price&quot;`</span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="s">`schema:&quot;items&quot;`</span>
+<span class="w">            </span><span class="nx">ProductID</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"product_id"`</span>
+<span class="w">            </span><span class="nx">Quantity</span><span class="w">  </span><span class="kt">int</span><span class="w">    </span><span class="s">`schema:"quantity"`</span>
+<span class="w">            </span><span class="nx">Price</span><span class="w">     </span><span class="kt">float64</span><span class="w"> </span><span class="s">`schema:"price"`</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="s">`schema:"items"`</span>
 
-<span class="w">        </span><span class="nx">Total</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="s">`schema:&quot;total&quot;`</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="s">`body:&quot;structured&quot;`</span>
+<span class="w">        </span><span class="nx">Total</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="s">`schema:"total"`</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="s">`body:"structured"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="xml-bodies">XML Bodies<a class="headerlink" href="#xml-bodies" title="Anchor link to this section">&para;</a></h3>
 <p>Full support for XML with struct tags:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">ImportDataRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">Body</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`xml:&quot;name&quot;`</span>
-<span class="w">        </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`xml:&quot;email&quot;`</span>
+<span class="w">        </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`xml:"name"`</span>
+<span class="w">        </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`xml:"email"`</span>
 <span class="w">        </span><span class="nx">Items</span><span class="w"> </span><span class="p">[]</span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">ID</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`xml:&quot;id,attr&quot;`</span><span class="w">  </span><span class="c1">// Attribute</span>
-<span class="w">            </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`xml:&quot;name&quot;`</span><span class="w">     </span><span class="c1">// Element</span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="s">`xml:&quot;item&quot;`</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="s">`body:&quot;structured&quot;`</span>
+<span class="w">            </span><span class="nx">ID</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`xml:"id,attr"`</span><span class="w">  </span><span class="c1">// Attribute</span>
+<span class="w">            </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`xml:"name"`</span><span class="w">     </span><span class="c1">// Element</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="s">`xml:"item"`</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="s">`body:"structured"`</span>
 <span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="nx">handler</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">req</span><span class="w"> </span><span class="nx">ImportDataRequest</span>
 <span class="w">    </span><span class="nx">codec</span><span class="p">.</span><span class="nx">DecodeRequest</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">req</span><span class="p">)</span>
 
-<span class="w">    </span><span class="c1">// XML is unmarshaled using Go&#39;s encoding/xml</span>
+<span class="w">    </span><span class="c1">// XML is unmarshaled using Go's encoding/xml</span>
 <span class="p">}</span>
 </code></pre></div>
 <p><strong>XML Notes:</strong></p>
@@ -1335,25 +1335,25 @@
 <p>Handle traditional HTML form submissions:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">LoginRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">Body</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">Username</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;username&quot;`</span>
-<span class="w">        </span><span class="nx">Password</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;password&quot;`</span>
-<span class="w">        </span><span class="nx">Remember</span><span class="w"> </span><span class="kt">bool</span><span class="w">   </span><span class="s">`schema:&quot;remember&quot;`</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="s">`body:&quot;structured&quot;`</span>
+<span class="w">        </span><span class="nx">Username</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"username"`</span>
+<span class="w">        </span><span class="nx">Password</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"password"`</span>
+<span class="w">        </span><span class="nx">Remember</span><span class="w"> </span><span class="kt">bool</span><span class="w">   </span><span class="s">`schema:"remember"`</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="s">`body:"structured"`</span>
 <span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="nx">handler</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">req</span><span class="w"> </span><span class="nx">LoginRequest</span>
 <span class="w">    </span><span class="nx">codec</span><span class="p">.</span><span class="nx">DecodeRequest</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">req</span><span class="p">)</span>
 
-<span class="w">    </span><span class="c1">// req.Body.Username = &quot;alice&quot;</span>
-<span class="w">    </span><span class="c1">// req.Body.Password = &quot;secret&quot;</span>
+<span class="w">    </span><span class="c1">// req.Body.Username = "alice"</span>
+<span class="w">    </span><span class="c1">// req.Body.Password = "secret"</span>
 <span class="w">    </span><span class="c1">// req.Body.Remember = true</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="content-type-auto-detection">Content-Type Auto-Detection<a class="headerlink" href="#content-type-auto-detection" title="Anchor link to this section">&para;</a></h3>
 <p>Schema automatically detects the content type:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">FlexibleRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Body</span><span class="w"> </span><span class="nx">UserData</span><span class="w"> </span><span class="s">`body:&quot;structured&quot;`</span>
+<span class="w">    </span><span class="nx">Body</span><span class="w"> </span><span class="nx">UserData</span><span class="w"> </span><span class="s">`body:"structured"`</span>
 <span class="p">}</span>
 
 <span class="c1">// Works with:</span>
@@ -1368,10 +1368,10 @@
 <p>Load entire file into memory as bytes:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">UploadAvatarRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Query parameter for metadata</span>
-<span class="w">    </span><span class="nx">Filename</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;filename,location=query&quot;`</span>
+<span class="w">    </span><span class="nx">Filename</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"filename,location=query"`</span>
 
 <span class="w">    </span><span class="c1">// File content as bytes</span>
-<span class="w">    </span><span class="nx">Body</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="w"> </span><span class="s">`body:&quot;file&quot;`</span>
+<span class="w">    </span><span class="nx">Body</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="w"> </span><span class="s">`body:"file"`</span>
 <span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="nx">handler</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -1379,18 +1379,18 @@
 <span class="w">    </span><span class="nx">codec</span><span class="p">.</span><span class="nx">DecodeRequest</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">req</span><span class="p">)</span>
 
 <span class="w">    </span><span class="c1">// req.Body contains entire file</span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Uploaded %s (%d bytes)\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Filename</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Body</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">"Uploaded %s (%d bytes)\n"</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Filename</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Body</span><span class="p">))</span>
 
 <span class="w">    </span><span class="c1">// Save to disk</span>
-<span class="w">    </span><span class="nx">os</span><span class="p">.</span><span class="nx">WriteFile</span><span class="p">(</span><span class="s">&quot;/uploads/&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Filename</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Body</span><span class="p">,</span><span class="w"> </span><span class="mo">0644</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">os</span><span class="p">.</span><span class="nx">WriteFile</span><span class="p">(</span><span class="s">"/uploads/"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Filename</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Body</span><span class="p">,</span><span class="w"> </span><span class="mo">0644</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
 <p><strong>⚠️ Warning:</strong> Only use <code>[]byte</code> for small files (&lt; 10MB). Large files will consume excessive memory.</p>
 <h3 id="large-files-memory-loaded">Large Files (Memory Loaded)<a class="headerlink" href="#large-files-memory-loaded" title="Anchor link to this section">&para;</a></h3>
 <p>For <code>[]byte</code> fields, files are read entirely into memory:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">UploadImageRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Filename</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;filename,location=query&quot;`</span>
-<span class="w">    </span><span class="nx">Body</span><span class="w">     </span><span class="p">[]</span><span class="kt">byte</span><span class="w"> </span><span class="s">`body:&quot;file&quot;`</span>
+<span class="w">    </span><span class="nx">Filename</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"filename,location=query"`</span>
+<span class="w">    </span><span class="nx">Body</span><span class="w">     </span><span class="p">[]</span><span class="kt">byte</span><span class="w"> </span><span class="s">`body:"file"`</span>
 <span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="nx">handler</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -1398,20 +1398,20 @@
 <span class="w">    </span><span class="nx">codec</span><span class="p">.</span><span class="nx">DecodeRequest</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">req</span><span class="p">)</span>
 
 <span class="w">    </span><span class="c1">// Write to disk</span>
-<span class="w">    </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">WriteFile</span><span class="p">(</span><span class="s">&quot;/uploads/&quot;</span><span class="o">+</span><span class="nx">req</span><span class="p">.</span><span class="nx">Filename</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Body</span><span class="p">,</span><span class="w"> </span><span class="mo">0644</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">WriteFile</span><span class="p">(</span><span class="s">"/uploads/"</span><span class="o">+</span><span class="nx">req</span><span class="p">.</span><span class="nx">Filename</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Body</span><span class="p">,</span><span class="w"> </span><span class="mo">0644</span><span class="p">)</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">http</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">Error</span><span class="p">(),</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusInternalServerError</span><span class="p">)</span>
 <span class="w">        </span><span class="k">return</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Fprintf</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Uploaded %d bytes\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Body</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Fprintf</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="s">"Uploaded %d bytes\n"</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Body</span><span class="p">))</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="large-files-streaming">Large Files (Streaming)<a class="headerlink" href="#large-files-streaming" title="Anchor link to this section">&para;</a></h3>
 <p>For <code>io.ReadCloser</code> fields, the request body is streamed without loading into memory:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">UploadVideoRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Filename</span><span class="w"> </span><span class="kt">string</span><span class="w">        </span><span class="s">`schema:&quot;filename,location=query&quot;`</span>
-<span class="w">    </span><span class="nx">Body</span><span class="w">     </span><span class="nx">io</span><span class="p">.</span><span class="nx">ReadCloser</span><span class="w"> </span><span class="s">`body:&quot;file&quot;`</span>
+<span class="w">    </span><span class="nx">Filename</span><span class="w"> </span><span class="kt">string</span><span class="w">        </span><span class="s">`schema:"filename,location=query"`</span>
+<span class="w">    </span><span class="nx">Body</span><span class="w">     </span><span class="nx">io</span><span class="p">.</span><span class="nx">ReadCloser</span><span class="w"> </span><span class="s">`body:"file"`</span>
 <span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="nx">handler</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -1420,7 +1420,7 @@
 <span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Body</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span>
 
 <span class="w">    </span><span class="c1">// Stream to disk</span>
-<span class="w">    </span><span class="nx">file</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">Create</span><span class="p">(</span><span class="s">&quot;/uploads/&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Filename</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">file</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">Create</span><span class="p">(</span><span class="s">"/uploads/"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Filename</span><span class="p">)</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">http</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">Error</span><span class="p">(),</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusInternalServerError</span><span class="p">)</span>
 <span class="w">        </span><span class="k">return</span>
@@ -1434,28 +1434,28 @@
 <span class="w">        </span><span class="k">return</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Fprintf</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Uploaded %d bytes\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">written</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Fprintf</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="s">"Uploaded %d bytes\n"</span><span class="p">,</span><span class="w"> </span><span class="nx">written</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="file-upload-with-metadata">File Upload with Metadata<a class="headerlink" href="#file-upload-with-metadata" title="Anchor link to this section">&para;</a></h3>
 <p>Combine file upload with other parameters:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">DocumentUploadRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Path parameter</span>
-<span class="w">    </span><span class="nx">ProjectID</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;project_id,location=path&quot;`</span>
+<span class="w">    </span><span class="nx">ProjectID</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"project_id,location=path"`</span>
 
 <span class="w">    </span><span class="c1">// Query parameters</span>
-<span class="w">    </span><span class="nx">Title</span><span class="w">       </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;title,location=query&quot;`</span>
-<span class="w">    </span><span class="nx">Description</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;description,location=query&quot;`</span>
+<span class="w">    </span><span class="nx">Title</span><span class="w">       </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"title,location=query"`</span>
+<span class="w">    </span><span class="nx">Description</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"description,location=query"`</span>
 
 <span class="w">    </span><span class="c1">// Header</span>
-<span class="w">    </span><span class="nx">APIKey</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;X-API-Key,location=header&quot;`</span>
+<span class="w">    </span><span class="nx">APIKey</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"X-API-Key,location=header"`</span>
 
 <span class="w">    </span><span class="c1">// File content</span>
-<span class="w">    </span><span class="nx">Body</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="w"> </span><span class="s">`body:&quot;file&quot;`</span>
+<span class="w">    </span><span class="nx">Body</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="w"> </span><span class="s">`body:"file"`</span>
 <span class="p">}</span>
 
 <span class="c1">// Route: /projects/{project_id}/documents</span>
-<span class="nx">r</span><span class="p">.</span><span class="nx">Post</span><span class="p">(</span><span class="s">&quot;/projects/{project_id}/documents&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">)</span>
+<span class="nx">r</span><span class="p">.</span><span class="nx">Post</span><span class="p">(</span><span class="s">"/projects/{project_id}/documents"</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="multipart-forms">Multipart Forms<a class="headerlink" href="#multipart-forms" title="Anchor link to this section">&para;</a></h2>
 <p>Use <code>body:"multipart"</code> for forms with both text fields and file uploads.</p>
@@ -1463,13 +1463,13 @@
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">UploadFormRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">Body</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1">// Text fields</span>
-<span class="w">        </span><span class="nx">Title</span><span class="w">       </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;title&quot;`</span>
-<span class="w">        </span><span class="nx">Description</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;description&quot;`</span>
-<span class="w">        </span><span class="nx">Category</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;category&quot;`</span>
+<span class="w">        </span><span class="nx">Title</span><span class="w">       </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"title"`</span>
+<span class="w">        </span><span class="nx">Description</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"description"`</span>
+<span class="w">        </span><span class="nx">Category</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"category"`</span>
 
 <span class="w">        </span><span class="c1">// Single file</span>
-<span class="w">        </span><span class="nx">Document</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">ReadCloser</span><span class="w"> </span><span class="s">`schema:&quot;document&quot;`</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="s">`body:&quot;multipart&quot;`</span>
+<span class="w">        </span><span class="nx">Document</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">ReadCloser</span><span class="w"> </span><span class="s">`schema:"document"`</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="s">`body:"multipart"`</span>
 <span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="nx">handler</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -1477,12 +1477,12 @@
 <span class="w">    </span><span class="nx">codec</span><span class="p">.</span><span class="nx">DecodeRequest</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">req</span><span class="p">)</span>
 <span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Body</span><span class="p">.</span><span class="nx">Document</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span>
 
-<span class="w">    </span><span class="c1">// req.Body.Title = &quot;My Document&quot;</span>
-<span class="w">    </span><span class="c1">// req.Body.Description = &quot;Important file&quot;</span>
+<span class="w">    </span><span class="c1">// req.Body.Title = "My Document"</span>
+<span class="w">    </span><span class="c1">// req.Body.Description = "Important file"</span>
 <span class="w">    </span><span class="c1">// req.Body.Document = (file content stream)</span>
 
 <span class="w">    </span><span class="c1">// Save file</span>
-<span class="w">    </span><span class="nx">file</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">Create</span><span class="p">(</span><span class="s">&quot;/uploads/&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Body</span><span class="p">.</span><span class="nx">Title</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">file</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">Create</span><span class="p">(</span><span class="s">"/uploads/"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Body</span><span class="p">.</span><span class="nx">Title</span><span class="p">)</span>
 <span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">file</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span>
 <span class="w">    </span><span class="nx">io</span><span class="p">.</span><span class="nx">Copy</span><span class="p">(</span><span class="nx">file</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Body</span><span class="p">.</span><span class="nx">Document</span><span class="p">)</span>
 <span class="p">}</span>
@@ -1492,12 +1492,12 @@
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">GalleryUploadRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">Body</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1">// Text fields</span>
-<span class="w">        </span><span class="nx">AlbumName</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;album_name&quot;`</span>
-<span class="w">        </span><span class="nx">Description</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;description&quot;`</span>
+<span class="w">        </span><span class="nx">AlbumName</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"album_name"`</span>
+<span class="w">        </span><span class="nx">Description</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"description"`</span>
 
 <span class="w">        </span><span class="c1">// Multiple files</span>
-<span class="w">        </span><span class="nx">Images</span><span class="w"> </span><span class="p">[]</span><span class="nx">io</span><span class="p">.</span><span class="nx">ReadCloser</span><span class="w"> </span><span class="s">`schema:&quot;images&quot;`</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="s">`body:&quot;multipart&quot;`</span>
+<span class="w">        </span><span class="nx">Images</span><span class="w"> </span><span class="p">[]</span><span class="nx">io</span><span class="p">.</span><span class="nx">ReadCloser</span><span class="w"> </span><span class="s">`schema:"images"`</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="s">`body:"multipart"`</span>
 <span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="nx">handler</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -1511,12 +1511,12 @@
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}()</span>
 
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Album: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Body</span><span class="p">.</span><span class="nx">AlbumName</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Received %d images\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Body</span><span class="p">.</span><span class="nx">Images</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">"Album: %s\n"</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Body</span><span class="p">.</span><span class="nx">AlbumName</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">"Received %d images\n"</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Body</span><span class="p">.</span><span class="nx">Images</span><span class="p">))</span>
 
 <span class="w">    </span><span class="c1">// Process each file</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="nx">img</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Body</span><span class="p">.</span><span class="nx">Images</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">filename</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;/uploads/%s_%d.jpg&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Body</span><span class="p">.</span><span class="nx">AlbumName</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">filename</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">"/uploads/%s_%d.jpg"</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Body</span><span class="p">.</span><span class="nx">AlbumName</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span>
 <span class="w">        </span><span class="nx">file</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">Create</span><span class="p">(</span><span class="nx">filename</span><span class="p">)</span>
 <span class="w">        </span><span class="nx">io</span><span class="p">.</span><span class="nx">Copy</span><span class="p">(</span><span class="nx">file</span><span class="p">,</span><span class="w"> </span><span class="nx">img</span><span class="p">)</span>
 <span class="w">        </span><span class="nx">file</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span>
@@ -1527,9 +1527,9 @@
 <p>Use <code>*multipart.FileHeader</code> when you need access to the file's metadata (filename, size, content-type headers) before reading the file content. This is useful for validating file size or type before consuming any bytes:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">DocumentUploadRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">Body</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">Title</span><span class="w"> </span><span class="kt">string</span><span class="w">                </span><span class="s">`schema:&quot;title&quot;`</span>
-<span class="w">        </span><span class="nx">File</span><span class="w">  </span><span class="o">*</span><span class="nx">multipart</span><span class="p">.</span><span class="nx">FileHeader</span><span class="w"> </span><span class="s">`schema:&quot;file&quot;`</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="s">`body:&quot;multipart&quot;`</span>
+<span class="w">        </span><span class="nx">Title</span><span class="w"> </span><span class="kt">string</span><span class="w">                </span><span class="s">`schema:"title"`</span>
+<span class="w">        </span><span class="nx">File</span><span class="w">  </span><span class="o">*</span><span class="nx">multipart</span><span class="p">.</span><span class="nx">FileHeader</span><span class="w"> </span><span class="s">`schema:"file"`</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="s">`body:"multipart"`</span>
 <span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="nx">handler</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -1537,18 +1537,18 @@
 <span class="w">    </span><span class="nx">codec</span><span class="p">.</span><span class="nx">DecodeRequest</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">req</span><span class="p">)</span>
 
 <span class="w">    </span><span class="c1">// Validate before reading</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Body</span><span class="p">.</span><span class="nx">File</span><span class="p">.</span><span class="nx">Size</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="mi">50</span><span class="o">&lt;&lt;</span><span class="mi">20</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// 50MB limit</span>
-<span class="w">        </span><span class="nx">http</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;file too large&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusRequestEntityTooLarge</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Body</span><span class="p">.</span><span class="nx">File</span><span class="p">.</span><span class="nx">Size</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">50</span><span class="o">&lt;&lt;</span><span class="mi">20</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// 50MB limit</span>
+<span class="w">        </span><span class="nx">http</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="s">"file too large"</span><span class="p">,</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusRequestEntityTooLarge</span><span class="p">)</span>
 <span class="w">        </span><span class="k">return</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="nx">contentType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Body</span><span class="p">.</span><span class="nx">File</span><span class="p">.</span><span class="nx">Header</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="s">&quot;Content-Type&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">contentType</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">&quot;application/pdf&quot;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">http</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;only PDF files accepted&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">contentType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Body</span><span class="p">.</span><span class="nx">File</span><span class="p">.</span><span class="nx">Header</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="s">"Content-Type"</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">contentType</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">"application/pdf"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">http</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="s">"only PDF files accepted"</span><span class="p">,</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">)</span>
 <span class="w">        </span><span class="k">return</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;File: %s (%d bytes, %s)\n&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">"File: %s (%d bytes, %s)\n"</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">req</span><span class="p">.</span><span class="nx">Body</span><span class="p">.</span><span class="nx">File</span><span class="p">.</span><span class="nx">Filename</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Body</span><span class="p">.</span><span class="nx">File</span><span class="p">.</span><span class="nx">Size</span><span class="p">,</span><span class="w"> </span><span class="nx">contentType</span><span class="p">)</span>
 
 <span class="w">    </span><span class="c1">// Open when ready to read</span>
@@ -1560,8 +1560,8 @@
 <p>For multiple files, use <code>[]*multipart.FileHeader</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">BatchUploadRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">Body</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">Files</span><span class="w"> </span><span class="p">[]</span><span class="o">*</span><span class="nx">multipart</span><span class="p">.</span><span class="nx">FileHeader</span><span class="w"> </span><span class="s">`schema:&quot;files&quot;`</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="s">`body:&quot;multipart&quot;`</span>
+<span class="w">        </span><span class="nx">Files</span><span class="w"> </span><span class="p">[]</span><span class="o">*</span><span class="nx">multipart</span><span class="p">.</span><span class="nx">FileHeader</span><span class="w"> </span><span class="s">`schema:"files"`</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="s">`body:"multipart"`</span>
 <span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="nx">handler</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -1569,7 +1569,7 @@
 <span class="w">    </span><span class="nx">codec</span><span class="p">.</span><span class="nx">DecodeRequest</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">req</span><span class="p">)</span>
 
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">fh</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Body</span><span class="p">.</span><span class="nx">Files</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;File: %s (%d bytes)\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">fh</span><span class="p">.</span><span class="nx">Filename</span><span class="p">,</span><span class="w"> </span><span class="nx">fh</span><span class="p">.</span><span class="nx">Size</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">"File: %s (%d bytes)\n"</span><span class="p">,</span><span class="w"> </span><span class="nx">fh</span><span class="p">.</span><span class="nx">Filename</span><span class="p">,</span><span class="w"> </span><span class="nx">fh</span><span class="p">.</span><span class="nx">Size</span><span class="p">)</span>
 <span class="w">        </span><span class="nx">f</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">fh</span><span class="p">.</span><span class="nx">Open</span><span class="p">()</span>
 <span class="w">        </span><span class="c1">// process file...</span>
 <span class="w">        </span><span class="nx">f</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span>
@@ -1611,12 +1611,12 @@
 <p>Use pointers for optional file uploads:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">ProfileUpdateRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">Body</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;name&quot;`</span>
-<span class="w">        </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;email&quot;`</span>
+<span class="w">        </span><span class="nx">Name</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"name"`</span>
+<span class="w">        </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"email"`</span>
 
 <span class="w">        </span><span class="c1">// Optional avatar (nil if not uploaded)</span>
-<span class="w">        </span><span class="nx">Avatar</span><span class="w"> </span><span class="o">*</span><span class="nx">io</span><span class="p">.</span><span class="nx">ReadCloser</span><span class="w"> </span><span class="s">`schema:&quot;avatar&quot;`</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="s">`body:&quot;multipart&quot;`</span>
+<span class="w">        </span><span class="nx">Avatar</span><span class="w"> </span><span class="o">*</span><span class="nx">io</span><span class="p">.</span><span class="nx">ReadCloser</span><span class="w"> </span><span class="s">`schema:"avatar"`</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="s">`body:"multipart"`</span>
 <span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="nx">handler</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -1823,10 +1823,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.code.annotate", "content.code.mermaid"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.code.annotate", "content.code.mermaid"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
         <script src="../../js/timeago.min.js"></script>
       

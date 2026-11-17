@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -31,10 +31,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -1306,9 +1306,9 @@
 <p>Query parameters are the most common type. By default, fields without a location are treated as query parameters.</p>
 <h3 id="basic-query-parameters">Basic Query Parameters<a class="headerlink" href="#basic-query-parameters" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">SearchRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Query</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;q&quot;`</span><span class="w">        </span><span class="c1">// ?q=golang</span>
-<span class="w">    </span><span class="nx">Page</span><span class="w">  </span><span class="kt">int</span><span class="w">    </span><span class="s">`schema:&quot;page&quot;`</span><span class="w">     </span><span class="c1">// ?page=2</span>
-<span class="w">    </span><span class="nx">Limit</span><span class="w"> </span><span class="kt">int</span><span class="w">    </span><span class="s">`schema:&quot;limit&quot;`</span><span class="w">    </span><span class="c1">// ?limit=20</span>
+<span class="w">    </span><span class="nx">Query</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"q"`</span><span class="w">        </span><span class="c1">// ?q=golang</span>
+<span class="w">    </span><span class="nx">Page</span><span class="w">  </span><span class="kt">int</span><span class="w">    </span><span class="s">`schema:"page"`</span><span class="w">     </span><span class="c1">// ?page=2</span>
+<span class="w">    </span><span class="nx">Limit</span><span class="w"> </span><span class="kt">int</span><span class="w">    </span><span class="s">`schema:"limit"`</span><span class="w">    </span><span class="c1">// ?limit=20</span>
 <span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="nx">handler</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -1321,32 +1321,32 @@
 <h3 id="query-parameters-with-default-values">Query Parameters with Default Values<a class="headerlink" href="#query-parameters-with-default-values" title="Anchor link to this section">&para;</a></h3>
 <p>Use the <code>default</code> tag to provide fallback values:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">APIRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Format</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;format&quot; default:&quot;json&quot;`</span>
-<span class="w">    </span><span class="nx">Timeout</span><span class="w"> </span><span class="kt">int</span><span class="w">    </span><span class="s">`schema:&quot;timeout&quot; default:&quot;30&quot;`</span>
-<span class="w">    </span><span class="nx">Debug</span><span class="w">   </span><span class="kt">bool</span><span class="w">   </span><span class="s">`schema:&quot;debug&quot; default:&quot;false&quot;`</span>
+<span class="w">    </span><span class="nx">Format</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"format" default:"json"`</span>
+<span class="w">    </span><span class="nx">Timeout</span><span class="w"> </span><span class="kt">int</span><span class="w">    </span><span class="s">`schema:"timeout" default:"30"`</span>
+<span class="w">    </span><span class="nx">Debug</span><span class="w">   </span><span class="kt">bool</span><span class="w">   </span><span class="s">`schema:"debug" default:"false"`</span>
 <span class="p">}</span>
 
 <span class="c1">// GET /api</span>
-<span class="c1">// Result: Format=&quot;json&quot;, Timeout=30, Debug=false</span>
+<span class="c1">// Result: Format="json", Timeout=30, Debug=false</span>
 
 <span class="c1">// GET /api?format=xml&amp;timeout=60</span>
-<span class="c1">// Result: Format=&quot;xml&quot;, Timeout=60, Debug=false</span>
+<span class="c1">// Result: Format="xml", Timeout=60, Debug=false</span>
 </code></pre></div>
 <h3 id="array-query-parameters">Array Query Parameters<a class="headerlink" href="#array-query-parameters" title="Anchor link to this section">&para;</a></h3>
 <p>Handle multiple values for the same parameter:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">FilterRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// ?tags=go&amp;tags=api&amp;tags=rest</span>
-<span class="w">    </span><span class="nx">Tags</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;tags&quot;`</span>
+<span class="w">    </span><span class="nx">Tags</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"tags"`</span>
 
 <span class="w">    </span><span class="c1">// ?ids=1&amp;ids=2&amp;ids=3</span>
-<span class="w">    </span><span class="nx">IDs</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="w"> </span><span class="s">`schema:&quot;ids&quot;`</span>
+<span class="w">    </span><span class="nx">IDs</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="w"> </span><span class="s">`schema:"ids"`</span>
 <span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="nx">handler</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">req</span><span class="w"> </span><span class="nx">FilterRequest</span>
 <span class="w">    </span><span class="nx">codec</span><span class="p">.</span><span class="nx">DecodeRequest</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">req</span><span class="p">)</span>
 
-<span class="w">    </span><span class="c1">// req.Tags = [&quot;go&quot;, &quot;api&quot;, &quot;rest&quot;]</span>
+<span class="w">    </span><span class="c1">// req.Tags = ["go", "api", "rest"]</span>
 <span class="w">    </span><span class="c1">// req.IDs = [1, 2, 3]</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -1355,94 +1355,94 @@
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">SearchRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Deep object style: ?filter[status]=active&amp;filter[type]=user</span>
 <span class="w">    </span><span class="nx">Filter</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">Status</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;status&quot;`</span>
-<span class="w">        </span><span class="nx">Type</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;type&quot;`</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="s">`schema:&quot;filter,location=query,style=deepObject&quot;`</span>
+<span class="w">        </span><span class="nx">Status</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"status"`</span>
+<span class="w">        </span><span class="nx">Type</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"type"`</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="s">`schema:"filter,location=query,style=deepObject"`</span>
 <span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="nx">handler</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">req</span><span class="w"> </span><span class="nx">SearchRequest</span>
 <span class="w">    </span><span class="nx">codec</span><span class="p">.</span><span class="nx">DecodeRequest</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">req</span><span class="p">)</span>
 
-<span class="w">    </span><span class="c1">// req.Filter.Status = &quot;active&quot;</span>
-<span class="w">    </span><span class="c1">// req.Filter.Type = &quot;user&quot;</span>
+<span class="w">    </span><span class="c1">// req.Filter.Status = "active"</span>
+<span class="w">    </span><span class="c1">// req.Filter.Type = "user"</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="optional-query-parameters">Optional Query Parameters<a class="headerlink" href="#optional-query-parameters" title="Anchor link to this section">&para;</a></h3>
 <p>All query parameters are optional by default. Missing parameters result in zero values:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">SearchRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Query</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;q&quot;`</span><span class="w">       </span><span class="c1">// &quot;&quot; if missing</span>
-<span class="w">    </span><span class="nx">Page</span><span class="w">   </span><span class="kt">int</span><span class="w">    </span><span class="s">`schema:&quot;page&quot;`</span><span class="w">    </span><span class="c1">// 0 if missing</span>
-<span class="w">    </span><span class="nx">Active</span><span class="w"> </span><span class="o">*</span><span class="kt">bool</span><span class="w">  </span><span class="s">`schema:&quot;active&quot;`</span><span class="w">  </span><span class="c1">// nil if missing (pointer for explicit absence)</span>
+<span class="w">    </span><span class="nx">Query</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"q"`</span><span class="w">       </span><span class="c1">// "" if missing</span>
+<span class="w">    </span><span class="nx">Page</span><span class="w">   </span><span class="kt">int</span><span class="w">    </span><span class="s">`schema:"page"`</span><span class="w">    </span><span class="c1">// 0 if missing</span>
+<span class="w">    </span><span class="nx">Active</span><span class="w"> </span><span class="o">*</span><span class="kt">bool</span><span class="w">  </span><span class="s">`schema:"active"`</span><span class="w">  </span><span class="c1">// nil if missing (pointer for explicit absence)</span>
 <span class="p">}</span>
 
 <span class="c1">// GET /search</span>
-<span class="c1">// Result: Query=&quot;&quot;, Page=0, Active=nil</span>
+<span class="c1">// Result: Query="", Page=0, Active=nil</span>
 
 <span class="c1">// GET /search?q=golang&amp;page=2</span>
-<span class="c1">// Result: Query=&quot;golang&quot;, Page=2, Active=nil</span>
+<span class="c1">// Result: Query="golang", Page=2, Active=nil</span>
 </code></pre></div>
 <h2 id="path-parameters">Path Parameters<a class="headerlink" href="#path-parameters" title="Anchor link to this section">&para;</a></h2>
 <p>Path parameters come from your router.</p>
 <h3 id="basic-path-parameters">Basic Path Parameters<a class="headerlink" href="#basic-path-parameters" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">GetUserRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">UserID</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;user_id,location=path&quot;`</span>
+<span class="w">    </span><span class="nx">UserID</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"user_id,location=path"`</span>
 <span class="p">}</span>
 
 <span class="c1">// Using Chi router</span>
-<span class="nx">r</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="s">&quot;/users/{user_id}&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">routerParams</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
-<span class="w">        </span><span class="s">&quot;user_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">chi</span><span class="p">.</span><span class="nx">URLParam</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;user_id&quot;</span><span class="p">),</span>
+<span class="nx">r</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="s">"/users/{user_id}"</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">routerParams</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
+<span class="w">        </span><span class="s">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="nx">chi</span><span class="p">.</span><span class="nx">URLParam</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="s">"user_id"</span><span class="p">),</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">req</span><span class="w"> </span><span class="nx">GetUserRequest</span>
 <span class="w">    </span><span class="nx">codec</span><span class="p">.</span><span class="nx">DecodeRequest</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="nx">routerParams</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">req</span><span class="p">)</span>
 
-<span class="w">    </span><span class="c1">// req.UserID = &quot;123&quot;</span>
+<span class="w">    </span><span class="c1">// req.UserID = "123"</span>
 <span class="p">})</span>
 </code></pre></div>
 <h3 id="multiple-path-parameters">Multiple Path Parameters<a class="headerlink" href="#multiple-path-parameters" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">GetResourceRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">OrgID</span><span class="w">      </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;org_id,location=path&quot;`</span>
-<span class="w">    </span><span class="nx">ProjectID</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;project_id,location=path&quot;`</span>
-<span class="w">    </span><span class="nx">ResourceID</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;resource_id,location=path&quot;`</span>
+<span class="w">    </span><span class="nx">OrgID</span><span class="w">      </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"org_id,location=path"`</span>
+<span class="w">    </span><span class="nx">ProjectID</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"project_id,location=path"`</span>
+<span class="w">    </span><span class="nx">ResourceID</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"resource_id,location=path"`</span>
 <span class="p">}</span>
 
 <span class="c1">// Route: /orgs/{org_id}/projects/{project_id}/resources/{resource_id}</span>
-<span class="nx">r</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="s">&quot;/orgs/{org_id}/projects/{project_id}/resources/{resource_id}&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="nx">r</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="s">"/orgs/{org_id}/projects/{project_id}/resources/{resource_id}"</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="kd">func</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">routerParams</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
-<span class="w">            </span><span class="s">&quot;org_id&quot;</span><span class="p">:</span><span class="w">      </span><span class="nx">chi</span><span class="p">.</span><span class="nx">URLParam</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;org_id&quot;</span><span class="p">),</span>
-<span class="w">            </span><span class="s">&quot;project_id&quot;</span><span class="p">:</span><span class="w">  </span><span class="nx">chi</span><span class="p">.</span><span class="nx">URLParam</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;project_id&quot;</span><span class="p">),</span>
-<span class="w">            </span><span class="s">&quot;resource_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">chi</span><span class="p">.</span><span class="nx">URLParam</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;resource_id&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">routerParams</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
+<span class="w">            </span><span class="s">"org_id"</span><span class="p">:</span><span class="w">      </span><span class="nx">chi</span><span class="p">.</span><span class="nx">URLParam</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="s">"org_id"</span><span class="p">),</span>
+<span class="w">            </span><span class="s">"project_id"</span><span class="p">:</span><span class="w">  </span><span class="nx">chi</span><span class="p">.</span><span class="nx">URLParam</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="s">"project_id"</span><span class="p">),</span>
+<span class="w">            </span><span class="s">"resource_id"</span><span class="p">:</span><span class="w"> </span><span class="nx">chi</span><span class="p">.</span><span class="nx">URLParam</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="s">"resource_id"</span><span class="p">),</span>
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">req</span><span class="w"> </span><span class="nx">GetResourceRequest</span>
 <span class="w">        </span><span class="nx">codec</span><span class="p">.</span><span class="nx">DecodeRequest</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="nx">routerParams</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">req</span><span class="p">)</span>
 
-<span class="w">        </span><span class="c1">// req.OrgID = &quot;acme&quot;</span>
-<span class="w">        </span><span class="c1">// req.ProjectID = &quot;website&quot;</span>
-<span class="w">        </span><span class="c1">// req.ResourceID = &quot;42&quot;</span>
+<span class="w">        </span><span class="c1">// req.OrgID = "acme"</span>
+<span class="w">        </span><span class="c1">// req.ProjectID = "website"</span>
+<span class="w">        </span><span class="c1">// req.ResourceID = "42"</span>
 <span class="w">    </span><span class="p">})</span>
 </code></pre></div>
 <h3 id="path-parameters-with-type-conversion">Path Parameters with Type Conversion<a class="headerlink" href="#path-parameters-with-type-conversion" title="Anchor link to this section">&para;</a></h3>
 <p>Path parameters are automatically converted to the target type:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">GetItemRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">ItemID</span><span class="w"> </span><span class="kt">int</span><span class="w">    </span><span class="s">`schema:&quot;item_id,location=path&quot;`</span><span class="w">  </span><span class="c1">// Converts string to int</span>
-<span class="w">    </span><span class="nx">Slug</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;slug,location=path&quot;`</span>
+<span class="w">    </span><span class="nx">ItemID</span><span class="w"> </span><span class="kt">int</span><span class="w">    </span><span class="s">`schema:"item_id,location=path"`</span><span class="w">  </span><span class="c1">// Converts string to int</span>
+<span class="w">    </span><span class="nx">Slug</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"slug,location=path"`</span>
 <span class="p">}</span>
 
 <span class="c1">// Route: /items/{item_id}/slug/{slug}</span>
 <span class="c1">// GET /items/123/slug/my-item</span>
-<span class="c1">// Result: ItemID=123 (int), Slug=&quot;my-item&quot; (string)</span>
+<span class="c1">// Result: ItemID=123 (int), Slug="my-item" (string)</span>
 </code></pre></div>
 <h2 id="header-parameters">Header Parameters<a class="headerlink" href="#header-parameters" title="Anchor link to this section">&para;</a></h2>
 <p>Headers are case-insensitive in HTTP but should be specified in canonical form.</p>
 <h3 id="basic-headers">Basic Headers<a class="headerlink" href="#basic-headers" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">AuthRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">APIKey</span><span class="w">      </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;X-API-Key,location=header&quot;`</span>
-<span class="w">    </span><span class="nx">ContentType</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;Content-Type,location=header&quot;`</span>
-<span class="w">    </span><span class="nx">UserAgent</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;User-Agent,location=header&quot;`</span>
+<span class="w">    </span><span class="nx">APIKey</span><span class="w">      </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"X-API-Key,location=header"`</span>
+<span class="w">    </span><span class="nx">ContentType</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"Content-Type,location=header"`</span>
+<span class="w">    </span><span class="nx">UserAgent</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"User-Agent,location=header"`</span>
 <span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="nx">handler</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -1450,14 +1450,14 @@
 <span class="w">    </span><span class="nx">codec</span><span class="p">.</span><span class="nx">DecodeRequest</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">req</span><span class="p">)</span>
 
 <span class="w">    </span><span class="c1">// Headers are case-insensitive</span>
-<span class="w">    </span><span class="c1">// &quot;X-API-Key&quot;, &quot;x-api-key&quot;, &quot;X-Api-Key&quot; all work</span>
+<span class="w">    </span><span class="c1">// "X-API-Key", "x-api-key", "X-Api-Key" all work</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="custom-headers">Custom Headers<a class="headerlink" href="#custom-headers" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">RequestWithHeaders</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">RequestID</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;X-Request-ID,location=header&quot;`</span>
-<span class="w">    </span><span class="nx">TraceID</span><span class="w">     </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;X-Trace-ID,location=header&quot;`</span>
-<span class="w">    </span><span class="nx">Correlation</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;X-Correlation-ID,location=header&quot;`</span>
+<span class="w">    </span><span class="nx">RequestID</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"X-Request-ID,location=header"`</span>
+<span class="w">    </span><span class="nx">TraceID</span><span class="w">     </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"X-Trace-ID,location=header"`</span>
+<span class="w">    </span><span class="nx">Correlation</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"X-Correlation-ID,location=header"`</span>
 <span class="p">}</span>
 
 <span class="c1">// All standard and custom headers are supported</span>
@@ -1466,31 +1466,31 @@
 <p>Multiple header values are supported:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">HeaderArrayRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Header: Accept: application/json, text/html</span>
-<span class="w">    </span><span class="nx">Accept</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;Accept,location=header&quot;`</span>
+<span class="w">    </span><span class="nx">Accept</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"Accept,location=header"`</span>
 <span class="p">}</span>
 
-<span class="c1">// req.Accept = [&quot;application/json&quot;, &quot;text/html&quot;]</span>
+<span class="c1">// req.Accept = ["application/json", "text/html"]</span>
 </code></pre></div>
 <h2 id="cookie-parameters">Cookie Parameters<a class="headerlink" href="#cookie-parameters" title="Anchor link to this section">&para;</a></h2>
 <p>Extract values from cookies:</p>
 <h3 id="basic-cookies">Basic Cookies<a class="headerlink" href="#basic-cookies" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">SessionRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">SessionID</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;session_id,location=cookie&quot;`</span>
-<span class="w">    </span><span class="nx">UserLang</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;user_lang,location=cookie&quot;`</span>
+<span class="w">    </span><span class="nx">SessionID</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"session_id,location=cookie"`</span>
+<span class="w">    </span><span class="nx">UserLang</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"user_lang,location=cookie"`</span>
 <span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="nx">handler</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">req</span><span class="w"> </span><span class="nx">SessionRequest</span>
 <span class="w">    </span><span class="nx">codec</span><span class="p">.</span><span class="nx">DecodeRequest</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">req</span><span class="p">)</span>
 
-<span class="w">    </span><span class="c1">// req.SessionID = &quot;abc123&quot;</span>
-<span class="w">    </span><span class="c1">// req.UserLang = &quot;en&quot;</span>
+<span class="w">    </span><span class="c1">// req.SessionID = "abc123"</span>
+<span class="w">    </span><span class="c1">// req.UserLang = "en"</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="cookie-with-default-values">Cookie with Default Values<a class="headerlink" href="#cookie-with-default-values" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">PreferencesRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Theme</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;theme,location=cookie&quot; default:&quot;light&quot;`</span>
-<span class="w">    </span><span class="nx">Timezone</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;timezone,location=cookie&quot; default:&quot;UTC&quot;`</span>
+<span class="w">    </span><span class="nx">Theme</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"theme,location=cookie" default:"light"`</span>
+<span class="w">    </span><span class="nx">Timezone</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"timezone,location=cookie" default:"UTC"`</span>
 <span class="p">}</span>
 
 <span class="c1">// If cookies not present, defaults are used</span>
@@ -1499,23 +1499,23 @@
 <p>Combine parameters from multiple locations:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">CompleteRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Path parameter</span>
-<span class="w">    </span><span class="nx">UserID</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;user_id,location=path&quot;`</span>
+<span class="w">    </span><span class="nx">UserID</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"user_id,location=path"`</span>
 
 <span class="w">    </span><span class="c1">// Query parameters</span>
-<span class="w">    </span><span class="nx">Format</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;format,location=query&quot;`</span>
-<span class="w">    </span><span class="nx">Page</span><span class="w">   </span><span class="kt">int</span><span class="w">    </span><span class="s">`schema:&quot;page,location=query&quot;`</span>
+<span class="w">    </span><span class="nx">Format</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"format,location=query"`</span>
+<span class="w">    </span><span class="nx">Page</span><span class="w">   </span><span class="kt">int</span><span class="w">    </span><span class="s">`schema:"page,location=query"`</span>
 
 <span class="w">    </span><span class="c1">// Header parameters</span>
-<span class="w">    </span><span class="nx">APIKey</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;X-API-Key,location=header&quot;`</span>
+<span class="w">    </span><span class="nx">APIKey</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"X-API-Key,location=header"`</span>
 
 <span class="w">    </span><span class="c1">// Cookie parameters</span>
-<span class="w">    </span><span class="nx">SessionID</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;session_id,location=cookie&quot;`</span>
+<span class="w">    </span><span class="nx">SessionID</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"session_id,location=cookie"`</span>
 <span class="p">}</span>
 
 <span class="c1">// Route: /users/{user_id}</span>
-<span class="nx">r</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="s">&quot;/users/{user_id}&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">routerParams</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
-<span class="w">        </span><span class="s">&quot;user_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">chi</span><span class="p">.</span><span class="nx">URLParam</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;user_id&quot;</span><span class="p">),</span>
+<span class="nx">r</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="s">"/users/{user_id}"</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">routerParams</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
+<span class="w">        </span><span class="s">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="nx">chi</span><span class="p">.</span><span class="nx">URLParam</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="s">"user_id"</span><span class="p">),</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">req</span><span class="w"> </span><span class="nx">CompleteRequest</span>
@@ -1528,25 +1528,25 @@
 <h3 id="field-name-vs-parameter-name">Field Name vs Parameter Name<a class="headerlink" href="#field-name-vs-parameter-name" title="Anchor link to this section">&para;</a></h3>
 <p>The schema tag value determines the parameter name:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Request</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Parameter name: &quot;user_id&quot;</span>
-<span class="w">    </span><span class="nx">UserID</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;user_id&quot;`</span>
+<span class="w">    </span><span class="c1">// Parameter name: "user_id"</span>
+<span class="w">    </span><span class="nx">UserID</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"user_id"`</span>
 
-<span class="w">    </span><span class="c1">// Parameter name: &quot;api-key&quot; (matches HTTP conventions)</span>
-<span class="w">    </span><span class="nx">APIKey</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;api-key,location=header&quot;`</span>
+<span class="w">    </span><span class="c1">// Parameter name: "api-key" (matches HTTP conventions)</span>
+<span class="w">    </span><span class="nx">APIKey</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"api-key,location=header"`</span>
 
-<span class="w">    </span><span class="c1">// Parameter name: same as field name &quot;Name&quot; (no tag value)</span>
-<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;,location=query&quot;`</span>
+<span class="w">    </span><span class="c1">// Parameter name: same as field name "Name" (no tag value)</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:",location=query"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="skipping-fields">Skipping Fields<a class="headerlink" href="#skipping-fields" title="Anchor link to this section">&para;</a></h3>
 <p>Use <code>-</code> to skip fields:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Request</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Username</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;username&quot;`</span>
-<span class="w">    </span><span class="nx">Password</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;password&quot;`</span>
+<span class="w">    </span><span class="nx">Username</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"username"`</span>
+<span class="w">    </span><span class="nx">Password</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"password"`</span>
 
 <span class="w">    </span><span class="c1">// Not decoded from request even if present</span>
-<span class="w">    </span><span class="nx">Internal</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;-&quot;`</span>
-<span class="w">    </span><span class="nx">Computed</span><span class="w"> </span><span class="kt">int</span><span class="w">    </span><span class="s">`schema:&quot;-&quot;`</span>
+<span class="w">    </span><span class="nx">Internal</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"-"`</span>
+<span class="w">    </span><span class="nx">Computed</span><span class="w"> </span><span class="kt">int</span><span class="w">    </span><span class="s">`schema:"-"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Anchor link to this section">&para;</a></h2>
@@ -1673,10 +1673,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.code.annotate", "content.code.mermaid"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.code.annotate", "content.code.mermaid"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
         <script src="../../js/timeago.min.js"></script>
       

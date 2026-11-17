@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -31,10 +31,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -1335,17 +1335,17 @@
 </table>
 <h3 id="example">Example<a class="headerlink" href="#example" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">ConfigRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Host</span><span class="w">     </span><span class="kt">string</span><span class="w">  </span><span class="s">`schema:&quot;host&quot;`</span><span class="w">      </span><span class="c1">// &quot;localhost&quot;</span>
-<span class="w">    </span><span class="nx">Port</span><span class="w">     </span><span class="kt">int</span><span class="w">     </span><span class="s">`schema:&quot;port&quot;`</span><span class="w">      </span><span class="c1">// &quot;8080&quot; → 8080</span>
-<span class="w">    </span><span class="nx">Enabled</span><span class="w">  </span><span class="kt">bool</span><span class="w">    </span><span class="s">`schema:&quot;enabled&quot;`</span><span class="w">   </span><span class="c1">// &quot;true&quot; → true</span>
-<span class="w">    </span><span class="nx">Timeout</span><span class="w">  </span><span class="kt">float64</span><span class="w"> </span><span class="s">`schema:&quot;timeout&quot;`</span><span class="w">   </span><span class="c1">// &quot;30.5&quot; → 30.5</span>
-<span class="w">    </span><span class="nx">Replicas</span><span class="w"> </span><span class="kt">uint</span><span class="w">    </span><span class="s">`schema:&quot;replicas&quot;`</span><span class="w">  </span><span class="c1">// &quot;3&quot; → 3</span>
+<span class="w">    </span><span class="nx">Host</span><span class="w">     </span><span class="kt">string</span><span class="w">  </span><span class="s">`schema:"host"`</span><span class="w">      </span><span class="c1">// "localhost"</span>
+<span class="w">    </span><span class="nx">Port</span><span class="w">     </span><span class="kt">int</span><span class="w">     </span><span class="s">`schema:"port"`</span><span class="w">      </span><span class="c1">// "8080" → 8080</span>
+<span class="w">    </span><span class="nx">Enabled</span><span class="w">  </span><span class="kt">bool</span><span class="w">    </span><span class="s">`schema:"enabled"`</span><span class="w">   </span><span class="c1">// "true" → true</span>
+<span class="w">    </span><span class="nx">Timeout</span><span class="w">  </span><span class="kt">float64</span><span class="w"> </span><span class="s">`schema:"timeout"`</span><span class="w">   </span><span class="c1">// "30.5" → 30.5</span>
+<span class="w">    </span><span class="nx">Replicas</span><span class="w"> </span><span class="kt">uint</span><span class="w">    </span><span class="s">`schema:"replicas"`</span><span class="w">  </span><span class="c1">// "3" → 3</span>
 <span class="p">}</span>
 
 <span class="c1">// Query: ?host=localhost&amp;port=8080&amp;enabled=true&amp;timeout=30.5&amp;replicas=3</span>
 </code></pre></div>
 <p>Test:
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span><span class="s2">&quot;http://localhost:8080/config?host=localhost&amp;port=8080&amp;enabled=true&amp;timeout=30.5&amp;replicas=3&quot;</span>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span><span class="s2">"http://localhost:8080/config?host=localhost&amp;port=8080&amp;enabled=true&amp;timeout=30.5&amp;replicas=3"</span>
 </code></pre></div></p>
 <h2 id="boolean-conversions">Boolean Conversions<a class="headerlink" href="#boolean-conversions" title="Anchor link to this section">&para;</a></h2>
 <p>Multiple representations of boolean values are supported:</p>
@@ -1368,9 +1368,9 @@
 </tbody>
 </table>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">FeatureFlags</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Debug</span><span class="w">     </span><span class="kt">bool</span><span class="w"> </span><span class="s">`schema:&quot;debug&quot;`</span><span class="w">      </span><span class="c1">// ?debug=true</span>
-<span class="w">    </span><span class="nx">Profiling</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="s">`schema:&quot;profiling&quot;`</span><span class="w">  </span><span class="c1">// ?profiling=1</span>
-<span class="w">    </span><span class="nx">Logging</span><span class="w">   </span><span class="kt">bool</span><span class="w"> </span><span class="s">`schema:&quot;logging&quot;`</span><span class="w">    </span><span class="c1">// ?logging=false</span>
+<span class="w">    </span><span class="nx">Debug</span><span class="w">     </span><span class="kt">bool</span><span class="w"> </span><span class="s">`schema:"debug"`</span><span class="w">      </span><span class="c1">// ?debug=true</span>
+<span class="w">    </span><span class="nx">Profiling</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="s">`schema:"profiling"`</span><span class="w">  </span><span class="c1">// ?profiling=1</span>
+<span class="w">    </span><span class="nx">Logging</span><span class="w">   </span><span class="kt">bool</span><span class="w"> </span><span class="s">`schema:"logging"`</span><span class="w">    </span><span class="c1">// ?logging=false</span>
 <span class="p">}</span>
 
 <span class="c1">// All of these work:</span>
@@ -1386,74 +1386,74 @@
 <h2 id="numeric-conversions">Numeric Conversions<a class="headerlink" href="#numeric-conversions" title="Anchor link to this section">&para;</a></h2>
 <h3 id="integer-types">Integer Types<a class="headerlink" href="#integer-types" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">RangeRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Min</span><span class="w">    </span><span class="kt">int</span><span class="w">   </span><span class="s">`schema:&quot;min&quot;`</span><span class="w">     </span><span class="c1">// ?min=0</span>
-<span class="w">    </span><span class="nx">Max</span><span class="w">    </span><span class="kt">int</span><span class="w">   </span><span class="s">`schema:&quot;max&quot;`</span><span class="w">     </span><span class="c1">// ?max=100</span>
-<span class="w">    </span><span class="nx">Offset</span><span class="w"> </span><span class="kt">int64</span><span class="w"> </span><span class="s">`schema:&quot;offset&quot;`</span><span class="w">  </span><span class="c1">// ?offset=1000</span>
-<span class="w">    </span><span class="nx">Limit</span><span class="w">  </span><span class="kt">uint</span><span class="w">  </span><span class="s">`schema:&quot;limit&quot;`</span><span class="w">   </span><span class="c1">// ?limit=50</span>
+<span class="w">    </span><span class="nx">Min</span><span class="w">    </span><span class="kt">int</span><span class="w">   </span><span class="s">`schema:"min"`</span><span class="w">     </span><span class="c1">// ?min=0</span>
+<span class="w">    </span><span class="nx">Max</span><span class="w">    </span><span class="kt">int</span><span class="w">   </span><span class="s">`schema:"max"`</span><span class="w">     </span><span class="c1">// ?max=100</span>
+<span class="w">    </span><span class="nx">Offset</span><span class="w"> </span><span class="kt">int64</span><span class="w"> </span><span class="s">`schema:"offset"`</span><span class="w">  </span><span class="c1">// ?offset=1000</span>
+<span class="w">    </span><span class="nx">Limit</span><span class="w">  </span><span class="kt">uint</span><span class="w">  </span><span class="s">`schema:"limit"`</span><span class="w">   </span><span class="c1">// ?limit=50</span>
 <span class="p">}</span>
 
 <span class="c1">// Conversions:</span>
-<span class="c1">// &quot;42&quot; → 42</span>
-<span class="c1">// &quot;3.14&quot; → 3 (truncates)</span>
-<span class="c1">// &quot;0&quot; → 0</span>
-<span class="c1">// &quot;-10&quot; → -10</span>
+<span class="c1">// "42" → 42</span>
+<span class="c1">// "3.14" → 3 (truncates)</span>
+<span class="c1">// "0" → 0</span>
+<span class="c1">// "-10" → -10</span>
 </code></pre></div>
 <h3 id="floating-point-types">Floating Point Types<a class="headerlink" href="#floating-point-types" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">MathRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Latitude</span><span class="w">  </span><span class="kt">float64</span><span class="w"> </span><span class="s">`schema:&quot;lat&quot;`</span><span class="w">   </span><span class="c1">// ?lat=40.7128</span>
-<span class="w">    </span><span class="nx">Longitude</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="s">`schema:&quot;lon&quot;`</span><span class="w">   </span><span class="c1">// ?lon=-74.0060</span>
-<span class="w">    </span><span class="nx">Precision</span><span class="w"> </span><span class="kt">float32</span><span class="w"> </span><span class="s">`schema:&quot;prec&quot;`</span><span class="w">  </span><span class="c1">// ?prec=0.001</span>
+<span class="w">    </span><span class="nx">Latitude</span><span class="w">  </span><span class="kt">float64</span><span class="w"> </span><span class="s">`schema:"lat"`</span><span class="w">   </span><span class="c1">// ?lat=40.7128</span>
+<span class="w">    </span><span class="nx">Longitude</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="s">`schema:"lon"`</span><span class="w">   </span><span class="c1">// ?lon=-74.0060</span>
+<span class="w">    </span><span class="nx">Precision</span><span class="w"> </span><span class="kt">float32</span><span class="w"> </span><span class="s">`schema:"prec"`</span><span class="w">  </span><span class="c1">// ?prec=0.001</span>
 <span class="p">}</span>
 
 <span class="c1">// Conversions:</span>
-<span class="c1">// &quot;3.14&quot; → 3.14</span>
-<span class="c1">// &quot;42&quot; → 42.0</span>
-<span class="c1">// &quot;1e-6&quot; → 0.000001</span>
+<span class="c1">// "3.14" → 3.14</span>
+<span class="c1">// "42" → 42.0</span>
+<span class="c1">// "1e-6" → 0.000001</span>
 </code></pre></div>
 <h2 id="collection-types">Collection Types<a class="headerlink" href="#collection-types" title="Anchor link to this section">&para;</a></h2>
 <h3 id="slices-and-arrays">Slices and Arrays<a class="headerlink" href="#slices-and-arrays" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">FilterRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// String slice</span>
-<span class="w">    </span><span class="nx">Tags</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;tags&quot;`</span><span class="w">  </span><span class="c1">// ?tags=go&amp;tags=api</span>
+<span class="w">    </span><span class="nx">Tags</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"tags"`</span><span class="w">  </span><span class="c1">// ?tags=go&amp;tags=api</span>
 
 <span class="w">    </span><span class="c1">// Integer slice</span>
-<span class="w">    </span><span class="nx">IDs</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="w"> </span><span class="s">`schema:&quot;ids&quot;`</span><span class="w">      </span><span class="c1">// ?ids=1&amp;ids=2&amp;ids=3</span>
+<span class="w">    </span><span class="nx">IDs</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="w"> </span><span class="s">`schema:"ids"`</span><span class="w">      </span><span class="c1">// ?ids=1&amp;ids=2&amp;ids=3</span>
 
 <span class="w">    </span><span class="c1">// Fixed-size array</span>
-<span class="w">    </span><span class="nx">Coords</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="kt">float64</span><span class="w"> </span><span class="s">`schema:&quot;coords&quot;`</span><span class="w"> </span><span class="c1">// ?coords=40.7&amp;coords=-74.0</span>
+<span class="w">    </span><span class="nx">Coords</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="kt">float64</span><span class="w"> </span><span class="s">`schema:"coords"`</span><span class="w"> </span><span class="c1">// ?coords=40.7&amp;coords=-74.0</span>
 <span class="p">}</span>
 
 <span class="c1">// Result:</span>
-<span class="c1">// req.Tags = [&quot;go&quot;, &quot;api&quot;]</span>
+<span class="c1">// req.Tags = ["go", "api"]</span>
 <span class="c1">// req.IDs = [1, 2, 3]</span>
 <span class="c1">// req.Coords = [40.7, -74.0]</span>
 </code></pre></div>
 <h3 id="maps">Maps<a class="headerlink" href="#maps" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">MetadataRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Map from string to string</span>
-<span class="w">    </span><span class="nx">Labels</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;labels,style=deepObject&quot;`</span>
+<span class="w">    </span><span class="nx">Labels</span><span class="w"> </span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"labels,style=deepObject"`</span>
 
 <span class="w">    </span><span class="c1">// Map with typed values</span>
-<span class="w">    </span><span class="nx">Counts</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="w"> </span><span class="s">`schema:&quot;counts,style=deepObject&quot;`</span>
+<span class="w">    </span><span class="nx">Counts</span><span class="w"> </span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="w"> </span><span class="s">`schema:"counts,style=deepObject"`</span>
 <span class="p">}</span>
 
 <span class="c1">// Query: ?labels[env]=prod&amp;labels[region]=us&amp;counts[users]=100&amp;counts[posts]=50</span>
 <span class="c1">// Result:</span>
-<span class="c1">// req.Labels = {&quot;env&quot;: &quot;prod&quot;, &quot;region&quot;: &quot;us&quot;}</span>
-<span class="c1">// req.Counts = {&quot;users&quot;: 100, &quot;posts&quot;: 50}</span>
+<span class="c1">// req.Labels = {"env": "prod", "region": "us"}</span>
+<span class="c1">// req.Counts = {"users": 100, "posts": 50}</span>
 </code></pre></div>
 <h2 id="struct-types">Struct Types<a class="headerlink" href="#struct-types" title="Anchor link to this section">&para;</a></h2>
 <h3 id="nested-structs">Nested Structs<a class="headerlink" href="#nested-structs" title="Anchor link to this section">&para;</a></h3>
 <p>Nested structs are handled automatically:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Address</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Street</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;street&quot;`</span>
-<span class="w">    </span><span class="nx">City</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;city&quot;`</span>
-<span class="w">    </span><span class="nx">ZipCode</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;zip_code&quot;`</span>
+<span class="w">    </span><span class="nx">Street</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"street"`</span>
+<span class="w">    </span><span class="nx">City</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"city"`</span>
+<span class="w">    </span><span class="nx">ZipCode</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"zip_code"`</span>
 <span class="p">}</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">UserRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Name</span><span class="w">    </span><span class="kt">string</span><span class="w">  </span><span class="s">`schema:&quot;name&quot;`</span>
-<span class="w">    </span><span class="nx">Address</span><span class="w"> </span><span class="nx">Address</span><span class="w"> </span><span class="s">`schema:&quot;address,style=deepObject&quot;`</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w">    </span><span class="kt">string</span><span class="w">  </span><span class="s">`schema:"name"`</span>
+<span class="w">    </span><span class="nx">Address</span><span class="w"> </span><span class="nx">Address</span><span class="w"> </span><span class="s">`schema:"address,style=deepObject"`</span>
 <span class="p">}</span>
 
 <span class="c1">// Query: ?name=Alice&amp;address[street]=123 Main St&amp;address[city]=NYC&amp;address[zip_code]=10001</span>
@@ -1461,50 +1461,50 @@
 <p><strong>JSON Body Example:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">CreateUserRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">Body</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">Name</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;name&quot;`</span>
+<span class="w">        </span><span class="nx">Name</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"name"`</span>
 <span class="w">        </span><span class="nx">Address</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">Street</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;street&quot;`</span>
-<span class="w">            </span><span class="nx">City</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;city&quot;`</span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="s">`schema:&quot;address&quot;`</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="s">`body:&quot;structured&quot;`</span>
+<span class="w">            </span><span class="nx">Street</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"street"`</span>
+<span class="w">            </span><span class="nx">City</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"city"`</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="s">`schema:"address"`</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="s">`body:"structured"`</span>
 <span class="p">}</span>
 
 <span class="c1">// POST with JSON body:</span>
 <span class="c1">// {</span>
-<span class="c1">//   &quot;name&quot;: &quot;Alice&quot;,</span>
-<span class="c1">//   &quot;address&quot;: {</span>
-<span class="c1">//     &quot;street&quot;: &quot;123 Main St&quot;,</span>
-<span class="c1">//     &quot;city&quot;: &quot;NYC&quot;</span>
+<span class="c1">//   "name": "Alice",</span>
+<span class="c1">//   "address": {</span>
+<span class="c1">//     "street": "123 Main St",</span>
+<span class="c1">//     "city": "NYC"</span>
 <span class="c1">//   }</span>
 <span class="c1">// }</span>
 </code></pre></div>
 <h3 id="embedded-structs">Embedded Structs<a class="headerlink" href="#embedded-structs" title="Anchor link to this section">&para;</a></h3>
 <p>Embedded structs promote their fields to the parent:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Timestamps</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">CreatedAt</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;created_at&quot;`</span>
-<span class="w">    </span><span class="nx">UpdatedAt</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;updated_at&quot;`</span>
+<span class="w">    </span><span class="nx">CreatedAt</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"created_at"`</span>
+<span class="w">    </span><span class="nx">UpdatedAt</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"updated_at"`</span>
 <span class="p">}</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">Article</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">Timestamps</span><span class="w">        </span><span class="c1">// Fields promoted to Article</span>
-<span class="w">    </span><span class="nx">Title</span><span class="w">      </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;title&quot;`</span>
-<span class="w">    </span><span class="nx">Content</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;content&quot;`</span>
+<span class="w">    </span><span class="nx">Title</span><span class="w">      </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"title"`</span>
+<span class="w">    </span><span class="nx">Content</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"content"`</span>
 <span class="p">}</span>
 
 <span class="c1">// JSON body (promoted fields at top level):</span>
 <span class="c1">// {</span>
-<span class="c1">//   &quot;title&quot;: &quot;My Article&quot;,</span>
-<span class="c1">//   &quot;content&quot;: &quot;Article content...&quot;,</span>
-<span class="c1">//   &quot;created_at&quot;: &quot;2024-01-01T00:00:00Z&quot;,</span>
-<span class="c1">//   &quot;updated_at&quot;: &quot;2024-01-02T00:00:00Z&quot;</span>
+<span class="c1">//   "title": "My Article",</span>
+<span class="c1">//   "content": "Article content...",</span>
+<span class="c1">//   "created_at": "2024-01-01T00:00:00Z",</span>
+<span class="c1">//   "updated_at": "2024-01-02T00:00:00Z"</span>
 <span class="c1">// }</span>
 
 <span class="c1">// Alternative (named embedded access):</span>
 <span class="c1">// {</span>
-<span class="c1">//   &quot;title&quot;: &quot;My Article&quot;,</span>
-<span class="c1">//   &quot;Timestamps&quot;: {</span>
-<span class="c1">//     &quot;created_at&quot;: &quot;2024-01-01T00:00:00Z&quot;,</span>
-<span class="c1">//     &quot;updated_at&quot;: &quot;2024-01-02T00:00:00Z&quot;</span>
+<span class="c1">//   "title": "My Article",</span>
+<span class="c1">//   "Timestamps": {</span>
+<span class="c1">//     "created_at": "2024-01-01T00:00:00Z",</span>
+<span class="c1">//     "updated_at": "2024-01-02T00:00:00Z"</span>
 <span class="c1">//   }</span>
 <span class="c1">// }</span>
 <span class="c1">// Both work!</span>
@@ -1514,16 +1514,16 @@
 <p>Use pointers to distinguish between missing parameters and zero values:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">UpdateRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Without pointer: 0 could be missing OR explicitly set to 0</span>
-<span class="w">    </span><span class="nx">Count</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="s">`schema:&quot;count&quot;`</span>
+<span class="w">    </span><span class="nx">Count</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="s">`schema:"count"`</span>
 
 <span class="w">    </span><span class="c1">// With pointer: nil = missing, *0 = explicitly set to 0</span>
-<span class="w">    </span><span class="nx">Limit</span><span class="w"> </span><span class="o">*</span><span class="kt">int</span><span class="w"> </span><span class="s">`schema:&quot;limit&quot;`</span>
+<span class="w">    </span><span class="nx">Limit</span><span class="w"> </span><span class="o">*</span><span class="kt">int</span><span class="w"> </span><span class="s">`schema:"limit"`</span>
 
 <span class="w">    </span><span class="c1">// Pointer to bool: nil = missing</span>
-<span class="w">    </span><span class="nx">Enabled</span><span class="w"> </span><span class="o">*</span><span class="kt">bool</span><span class="w"> </span><span class="s">`schema:&quot;enabled&quot;`</span>
+<span class="w">    </span><span class="nx">Enabled</span><span class="w"> </span><span class="o">*</span><span class="kt">bool</span><span class="w"> </span><span class="s">`schema:"enabled"`</span>
 
-<span class="w">    </span><span class="c1">// Pointer to string: nil = missing, *&quot;&quot; = empty string</span>
-<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="o">*</span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;name&quot;`</span>
+<span class="w">    </span><span class="c1">// Pointer to string: nil = missing, *"" = empty string</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="o">*</span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"name"`</span>
 <span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="nx">handler</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -1533,15 +1533,15 @@
 <span class="w">    </span><span class="c1">// Check if Limit was provided</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Limit</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1">// Not provided - use default or skip update</span>
-<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Limit not provided&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">"Limit not provided"</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1">// Provided - use the value (could be 0)</span>
-<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Limit set to %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="nx">req</span><span class="p">.</span><span class="nx">Limit</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">"Limit set to %d\n"</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="nx">req</span><span class="p">.</span><span class="nx">Limit</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="c1">// Check Enabled flag</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Enabled</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">*</span><span class="nx">req</span><span class="p">.</span><span class="nx">Enabled</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Explicitly enabled&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">"Explicitly enabled"</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -1579,13 +1579,13 @@
 </table>
 <h3 id="optional-structs">Optional Structs<a class="headerlink" href="#optional-structs" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">SearchRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Query</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;q&quot;`</span>
+<span class="w">    </span><span class="nx">Query</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"q"`</span>
 
 <span class="w">    </span><span class="c1">// Optional filter - nil if not provided</span>
 <span class="w">    </span><span class="nx">Filter</span><span class="w"> </span><span class="o">*</span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">Status</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;status&quot;`</span>
-<span class="w">        </span><span class="nx">Category</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;category&quot;`</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="s">`schema:&quot;filter,style=deepObject&quot;`</span>
+<span class="w">        </span><span class="nx">Status</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"status"`</span>
+<span class="w">        </span><span class="nx">Category</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"category"`</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="s">`schema:"filter,style=deepObject"`</span>
 <span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="nx">handler</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -1594,33 +1594,33 @@
 
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Filter</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1">// Filter was provided</span>
-<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Status: %s, Category: %s\n&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">"Status: %s, Category: %s\n"</span><span class="p">,</span><span class="w"> </span>
 <span class="w">            </span><span class="nx">req</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">Status</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">Category</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1">// No filter provided</span>
-<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;No filter&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">"No filter"</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="default-values">Default Values<a class="headerlink" href="#default-values" title="Anchor link to this section">&para;</a></h2>
 <p>Use the <code>default</code> tag to provide fallback values:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">APIRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Format</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;format&quot; default:&quot;json&quot;`</span>
-<span class="w">    </span><span class="nx">PageSize</span><span class="w"> </span><span class="kt">int</span><span class="w">    </span><span class="s">`schema:&quot;page_size&quot; default:&quot;20&quot;`</span>
-<span class="w">    </span><span class="nx">Timeout</span><span class="w">  </span><span class="kt">int</span><span class="w">    </span><span class="s">`schema:&quot;timeout&quot; default:&quot;30&quot;`</span>
-<span class="w">    </span><span class="nx">Debug</span><span class="w">    </span><span class="kt">bool</span><span class="w">   </span><span class="s">`schema:&quot;debug&quot; default:&quot;false&quot;`</span>
+<span class="w">    </span><span class="nx">Format</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"format" default:"json"`</span>
+<span class="w">    </span><span class="nx">PageSize</span><span class="w"> </span><span class="kt">int</span><span class="w">    </span><span class="s">`schema:"page_size" default:"20"`</span>
+<span class="w">    </span><span class="nx">Timeout</span><span class="w">  </span><span class="kt">int</span><span class="w">    </span><span class="s">`schema:"timeout" default:"30"`</span>
+<span class="w">    </span><span class="nx">Debug</span><span class="w">    </span><span class="kt">bool</span><span class="w">   </span><span class="s">`schema:"debug" default:"false"`</span>
 <span class="p">}</span>
 
 <span class="c1">// Query: (empty)</span>
-<span class="c1">// Result: Format=&quot;json&quot;, PageSize=20, Timeout=30, Debug=false</span>
+<span class="c1">// Result: Format="json", PageSize=20, Timeout=30, Debug=false</span>
 
 <span class="c1">// Query: ?format=xml&amp;page_size=50</span>
-<span class="c1">// Result: Format=&quot;xml&quot;, PageSize=50, Timeout=30, Debug=false</span>
+<span class="c1">// Result: Format="xml", PageSize=50, Timeout=30, Debug=false</span>
 </code></pre></div>
 <h3 id="defaults-with-pointers">Defaults with Pointers<a class="headerlink" href="#defaults-with-pointers" title="Anchor link to this section">&para;</a></h3>
 <p>Defaults work with pointers too:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Request</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Count</span><span class="w"> </span><span class="o">*</span><span class="kt">int</span><span class="w"> </span><span class="s">`schema:&quot;count&quot; default:&quot;10&quot;`</span>
+<span class="w">    </span><span class="nx">Count</span><span class="w"> </span><span class="o">*</span><span class="kt">int</span><span class="w"> </span><span class="s">`schema:"count" default:"10"`</span>
 <span class="p">}</span>
 
 <span class="c1">// Query: (empty)</span>
@@ -1636,34 +1636,34 @@
 <span class="kd">type</span><span class="w"> </span><span class="nx">Count</span><span class="w"> </span><span class="kt">int</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">Request</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">User</span><span class="w">  </span><span class="nx">UserID</span><span class="w"> </span><span class="s">`schema:&quot;user_id&quot;`</span>
-<span class="w">    </span><span class="nx">Total</span><span class="w"> </span><span class="nx">Count</span><span class="w">  </span><span class="s">`schema:&quot;total&quot;`</span>
+<span class="w">    </span><span class="nx">User</span><span class="w">  </span><span class="nx">UserID</span><span class="w"> </span><span class="s">`schema:"user_id"`</span>
+<span class="w">    </span><span class="nx">Total</span><span class="w"> </span><span class="nx">Count</span><span class="w">  </span><span class="s">`schema:"total"`</span>
 <span class="p">}</span>
 
 <span class="c1">// Query: ?user_id=user123&amp;total=42</span>
-<span class="c1">// Result: req.User = UserID(&quot;user123&quot;), req.Total = Count(42)</span>
+<span class="c1">// Result: req.User = UserID("user123"), req.Total = Count(42)</span>
 </code></pre></div>
 <h3 id="struct-types_1">Struct Types<a class="headerlink" href="#struct-types_1" title="Anchor link to this section">&para;</a></h3>
 <p>Custom struct types require JSON body or deep object style:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Coordinate</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Lat</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="s">`schema:&quot;lat&quot;`</span>
-<span class="w">    </span><span class="nx">Lon</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="s">`schema:&quot;lon&quot;`</span>
+<span class="w">    </span><span class="nx">Lat</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="s">`schema:"lat"`</span>
+<span class="w">    </span><span class="nx">Lon</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="s">`schema:"lon"`</span>
 <span class="p">}</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">LocationRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Deep object in query</span>
-<span class="w">    </span><span class="nx">Location</span><span class="w"> </span><span class="nx">Coordinate</span><span class="w"> </span><span class="s">`schema:&quot;location,style=deepObject&quot;`</span>
+<span class="w">    </span><span class="nx">Location</span><span class="w"> </span><span class="nx">Coordinate</span><span class="w"> </span><span class="s">`schema:"location,style=deepObject"`</span>
 <span class="p">}</span>
 
 <span class="c1">// Query: ?location[lat]=40.7128&amp;location[lon]=-74.0060</span>
 </code></pre></div>
 <h2 id="time-and-date-types">Time and Date Types<a class="headerlink" href="#time-and-date-types" title="Anchor link to this section">&para;</a></h2>
 <p>For time/date handling, use strings and parse manually:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="s">&quot;time&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="s">"time"</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">EventRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">StartDate</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;start_date&quot;`</span><span class="w"> </span><span class="c1">// &quot;2024-01-01&quot;</span>
-<span class="w">    </span><span class="nx">EndDate</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;end_date&quot;`</span><span class="w">   </span><span class="c1">// &quot;2024-12-31&quot;</span>
+<span class="w">    </span><span class="nx">StartDate</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"start_date"`</span><span class="w"> </span><span class="c1">// "2024-01-01"</span>
+<span class="w">    </span><span class="nx">EndDate</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"end_date"`</span><span class="w">   </span><span class="c1">// "2024-12-31"</span>
 <span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="nx">handler</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -1671,20 +1671,20 @@
 <span class="w">    </span><span class="nx">codec</span><span class="p">.</span><span class="nx">DecodeRequest</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">req</span><span class="p">)</span>
 
 <span class="w">    </span><span class="c1">// Parse dates</span>
-<span class="w">    </span><span class="nx">start</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Parse</span><span class="p">(</span><span class="s">&quot;2006-01-02&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">StartDate</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">start</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Parse</span><span class="p">(</span><span class="s">"2006-01-02"</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">StartDate</span><span class="p">)</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">http</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Invalid start_date&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">http</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="s">"Invalid start_date"</span><span class="p">,</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">)</span>
 <span class="w">        </span><span class="k">return</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="nx">end</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Parse</span><span class="p">(</span><span class="s">&quot;2006-01-02&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">EndDate</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">end</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Parse</span><span class="p">(</span><span class="s">"2006-01-02"</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">EndDate</span><span class="p">)</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">http</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Invalid end_date&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">http</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="s">"Invalid end_date"</span><span class="p">,</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">)</span>
 <span class="w">        </span><span class="k">return</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="c1">// Use parsed times</span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Range: %s to %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">start</span><span class="p">,</span><span class="w"> </span><span class="nx">end</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">"Range: %s to %s\n"</span><span class="p">,</span><span class="w"> </span><span class="nx">start</span><span class="p">,</span><span class="w"> </span><span class="nx">end</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
 <div class="admonition tip">
@@ -1815,10 +1815,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.code.annotate", "content.code.mermaid"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.code.annotate", "content.code.mermaid"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
         <script src="../../js/timeago.min.js"></script>
       

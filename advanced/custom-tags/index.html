@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -29,10 +29,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -1268,12 +1268,12 @@
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
-<span class="w">    </span><span class="s">&quot;reflect&quot;</span>
-<span class="w">    </span><span class="s">&quot;strings&quot;</span>
+<span class="w">    </span><span class="s">"fmt"</span>
+<span class="w">    </span><span class="s">"reflect"</span>
+<span class="w">    </span><span class="s">"strings"</span>
 
-<span class="w">    </span><span class="s">&quot;github.com/talav/schema&quot;</span>
-<span class="w">    </span><span class="s">&quot;github.com/talav/mapstructure&quot;</span>
+<span class="w">    </span><span class="s">"github.com/talav/schema"</span>
+<span class="w">    </span><span class="s">"github.com/talav/mapstructure"</span>
 <span class="p">)</span>
 
 <span class="c1">// Define metadata structure</span>
@@ -1290,19 +1290,19 @@
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="c1">// Parse tag options</span>
-<span class="w">    </span><span class="nx">parts</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">Split</span><span class="p">(</span><span class="nx">tagValue</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;,&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">parts</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">Split</span><span class="p">(</span><span class="nx">tagValue</span><span class="p">,</span><span class="w"> </span><span class="s">","</span><span class="p">)</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">part</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">parts</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">kv</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">SplitN</span><span class="p">(</span><span class="nx">part</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;=&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">kv</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">SplitN</span><span class="p">(</span><span class="nx">part</span><span class="p">,</span><span class="w"> </span><span class="s">"="</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">kv</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">continue</span>
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">kv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="nx">kv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;ttl&quot;</span><span class="p">:</span>
-<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sscanf</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">meta</span><span class="p">.</span><span class="nx">TTL</span><span class="p">)</span>
-<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;enabled&quot;</span><span class="p">:</span>
-<span class="w">            </span><span class="nx">meta</span><span class="p">.</span><span class="nx">Enabled</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="s">"ttl"</span><span class="p">:</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sscanf</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="s">"%d"</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">meta</span><span class="p">.</span><span class="nx">TTL</span><span class="p">)</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="s">"enabled"</span><span class="p">:</span>
+<span class="w">            </span><span class="nx">meta</span><span class="p">.</span><span class="nx">Enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">"true"</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 
@@ -1312,9 +1312,9 @@
 <span class="c1">// Register the parser</span>
 <span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">registry</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">NewTagParserRegistry</span><span class="p">(</span>
-<span class="w">        </span><span class="nx">schema</span><span class="p">.</span><span class="nx">WithTagParser</span><span class="p">(</span><span class="s">&quot;schema&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">ParseSchemaTag</span><span class="p">,</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">DefaultSchemaMetadata</span><span class="p">),</span>
-<span class="w">        </span><span class="nx">schema</span><span class="p">.</span><span class="nx">WithTagParser</span><span class="p">(</span><span class="s">&quot;body&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">ParseBodyTag</span><span class="p">),</span>
-<span class="w">        </span><span class="nx">schema</span><span class="p">.</span><span class="nx">WithTagParser</span><span class="p">(</span><span class="s">&quot;cache&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">ParseCacheTag</span><span class="p">),</span><span class="w"> </span><span class="c1">// Custom tag</span>
+<span class="w">        </span><span class="nx">schema</span><span class="p">.</span><span class="nx">WithTagParser</span><span class="p">(</span><span class="s">"schema"</span><span class="p">,</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">ParseSchemaTag</span><span class="p">,</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">DefaultSchemaMetadata</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">schema</span><span class="p">.</span><span class="nx">WithTagParser</span><span class="p">(</span><span class="s">"body"</span><span class="p">,</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">ParseBodyTag</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">schema</span><span class="p">.</span><span class="nx">WithTagParser</span><span class="p">(</span><span class="s">"cache"</span><span class="p">,</span><span class="w"> </span><span class="nx">ParseCacheTag</span><span class="p">),</span><span class="w"> </span><span class="c1">// Custom tag</span>
 <span class="w">    </span><span class="p">)</span>
 
 <span class="w">    </span><span class="nx">metadata</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">NewMetadata</span><span class="p">(</span><span class="nx">registry</span><span class="p">)</span>
@@ -1324,13 +1324,13 @@
 <span class="w">    </span><span class="nx">codec</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">NewCodec</span><span class="p">(</span><span class="nx">metadata</span><span class="p">,</span><span class="w"> </span><span class="nx">unmarshaler</span><span class="p">,</span><span class="w"> </span><span class="nx">decoder</span><span class="p">)</span>
 
 <span class="w">    </span><span class="c1">// Use codec normally</span>
-<span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">codec</span>
+<span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">codec</span>
 <span class="p">}</span>
 
 <span class="c1">// Use the custom tag</span>
 <span class="kd">type</span><span class="w"> </span><span class="nx">UserRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Username</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;username&quot; cache:&quot;ttl=600,enabled=true&quot;`</span>
-<span class="w">    </span><span class="nx">Email</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;email&quot; cache:&quot;ttl=300&quot;`</span>
+<span class="w">    </span><span class="nx">Username</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"username" cache:"ttl=600,enabled=true"`</span>
+<span class="w">    </span><span class="nx">Email</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"email" cache:"ttl=300"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="default-metadata-function">Default Metadata Function<a class="headerlink" href="#default-metadata-function" title="Anchor link to this section">&para;</a></h2>
@@ -1348,27 +1348,27 @@
 
 <span class="c1">// Register with default</span>
 <span class="nx">registry</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">NewTagParserRegistry</span><span class="p">(</span>
-<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">WithTagParser</span><span class="p">(</span><span class="s">&quot;cache&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">ParseCacheTag</span><span class="p">,</span><span class="w"> </span><span class="nx">DefaultCacheMetadata</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">WithTagParser</span><span class="p">(</span><span class="s">"cache"</span><span class="p">,</span><span class="w"> </span><span class="nx">ParseCacheTag</span><span class="p">,</span><span class="w"> </span><span class="nx">DefaultCacheMetadata</span><span class="p">),</span>
 <span class="p">)</span>
 
 <span class="c1">// Now fields without cache tag get default metadata</span>
 <span class="kd">type</span><span class="w"> </span><span class="nx">Request</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Username</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;username&quot;`</span><span class="w"> </span><span class="c1">// Gets default cache metadata</span>
-<span class="w">    </span><span class="nx">Email</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;email&quot; cache:&quot;ttl=600&quot;`</span><span class="w"> </span><span class="c1">// Uses custom</span>
+<span class="w">    </span><span class="nx">Username</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"username"`</span><span class="w"> </span><span class="c1">// Gets default cache metadata</span>
+<span class="w">    </span><span class="nx">Email</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"email" cache:"ttl=600"`</span><span class="w"> </span><span class="c1">// Uses custom</span>
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="accessing-custom-metadata">Accessing Custom Metadata<a class="headerlink" href="#accessing-custom-metadata" title="Anchor link to this section">&para;</a></h2>
 <p>Use <code>GetTagMetadata</code> to access parsed metadata:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Type-safe access to custom metadata</span>
 <span class="kd">func</span><span class="w"> </span><span class="nx">getCacheMetadata</span><span class="p">(</span><span class="nx">field</span><span class="w"> </span><span class="o">*</span><span class="nx">schema</span><span class="p">.</span><span class="nx">FieldMetadata</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">CacheMetadata</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">GetTagMetadata</span><span class="p">[</span><span class="o">*</span><span class="nx">CacheMetadata</span><span class="p">](</span><span class="nx">field</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cache&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">GetTagMetadata</span><span class="p">[</span><span class="o">*</span><span class="nx">CacheMetadata</span><span class="p">](</span><span class="nx">field</span><span class="p">,</span><span class="w"> </span><span class="s">"cache"</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="c1">// Usage in custom decoder</span>
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">d</span><span class="w"> </span><span class="o">*</span><span class="nx">CustomDecoder</span><span class="p">)</span><span class="w"> </span><span class="nx">Decode</span><span class="p">(</span><span class="o">...</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">d</span><span class="w"> </span><span class="o">*</span><span class="nx">CustomDecoder</span><span class="p">)</span><span class="w"> </span><span class="nx">Decode</span><span class="p">(...)</span><span class="w"> </span><span class="p">(</span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">field</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">metadata</span><span class="p">.</span><span class="nx">Fields</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">cacheMeta</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">getCacheMetadata</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">field</span><span class="p">);</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Field %s: TTL=%d, Enabled=%v&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">            </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">"Field %s: TTL=%d, Enabled=%v"</span><span class="p">,</span><span class="w"> </span>
 <span class="w">                </span><span class="nx">field</span><span class="p">.</span><span class="nx">StructFieldName</span><span class="p">,</span><span class="w"> </span><span class="nx">cacheMeta</span><span class="p">.</span><span class="nx">TTL</span><span class="p">,</span><span class="w"> </span><span class="nx">cacheMeta</span><span class="p">.</span><span class="nx">Enabled</span><span class="p">)</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
@@ -1381,14 +1381,14 @@
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
-<span class="w">    </span><span class="s">&quot;reflect&quot;</span>
-<span class="w">    </span><span class="s">&quot;regexp&quot;</span>
-<span class="w">    </span><span class="s">&quot;strconv&quot;</span>
-<span class="w">    </span><span class="s">&quot;strings&quot;</span>
+<span class="w">    </span><span class="s">"fmt"</span>
+<span class="w">    </span><span class="s">"reflect"</span>
+<span class="w">    </span><span class="s">"regexp"</span>
+<span class="w">    </span><span class="s">"strconv"</span>
+<span class="w">    </span><span class="s">"strings"</span>
 
-<span class="w">    </span><span class="s">&quot;github.com/talav/schema&quot;</span>
-<span class="w">    </span><span class="s">&quot;github.com/talav/mapstructure&quot;</span>
+<span class="w">    </span><span class="s">"github.com/talav/schema"</span>
+<span class="w">    </span><span class="s">"github.com/talav/mapstructure"</span>
 <span class="p">)</span>
 
 <span class="c1">// Validation metadata</span>
@@ -1402,50 +1402,50 @@
 <span class="p">}</span>
 
 <span class="c1">// Parse validate tag</span>
-<span class="c1">// Format: validate:&quot;required,min:2,max:50,pattern:^[a-z]+$&quot;</span>
+<span class="c1">// Format: validate:"required,min:2,max:50,pattern:^[a-z]+$"</span>
 <span class="kd">func</span><span class="w"> </span><span class="nx">ParseValidateTag</span><span class="p">(</span><span class="nx">field</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">StructField</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">tagValue</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">any</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">meta</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">ValidateMetadata</span><span class="p">{}</span>
 
-<span class="w">    </span><span class="nx">rules</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">Split</span><span class="p">(</span><span class="nx">tagValue</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;,&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">rules</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">Split</span><span class="p">(</span><span class="nx">tagValue</span><span class="p">,</span><span class="w"> </span><span class="s">","</span><span class="p">)</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">rule</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">rules</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">rule</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">TrimSpace</span><span class="p">(</span><span class="nx">rule</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">rule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">TrimSpace</span><span class="p">(</span><span class="nx">rule</span><span class="p">)</span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">rule</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;required&quot;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">meta</span><span class="p">.</span><span class="nx">Required</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">rule</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">"required"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">meta</span><span class="p">.</span><span class="nx">Required</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">            </span><span class="k">continue</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="nx">parts</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">SplitN</span><span class="p">(</span><span class="nx">rule</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;:&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">parts</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">SplitN</span><span class="p">(</span><span class="nx">rule</span><span class="p">,</span><span class="w"> </span><span class="s">":"</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">parts</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">continue</span>
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="nx">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;min&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="s">"min"</span><span class="p">:</span>
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nx">field</span><span class="p">.</span><span class="nx">Type</span><span class="p">.</span><span class="nx">Kind</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">String</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="nx">v</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">strconv</span><span class="p">.</span><span class="nx">Atoi</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
-<span class="w">                </span><span class="nx">meta</span><span class="p">.</span><span class="nx">MinLength</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">v</span>
+<span class="w">                </span><span class="nx">meta</span><span class="p">.</span><span class="nx">MinLength</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">v</span>
 <span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="nx">v</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">strconv</span><span class="p">.</span><span class="nx">ParseFloat</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="mi">64</span><span class="p">)</span>
-<span class="w">                </span><span class="nx">meta</span><span class="p">.</span><span class="nx">Min</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">v</span>
+<span class="w">                </span><span class="nx">meta</span><span class="p">.</span><span class="nx">Min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">v</span>
 <span class="w">            </span><span class="p">}</span>
 
-<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;max&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="s">"max"</span><span class="p">:</span>
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nx">field</span><span class="p">.</span><span class="nx">Type</span><span class="p">.</span><span class="nx">Kind</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">String</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="nx">v</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">strconv</span><span class="p">.</span><span class="nx">Atoi</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
-<span class="w">                </span><span class="nx">meta</span><span class="p">.</span><span class="nx">MaxLength</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">v</span>
+<span class="w">                </span><span class="nx">meta</span><span class="p">.</span><span class="nx">MaxLength</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">v</span>
 <span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="nx">v</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">strconv</span><span class="p">.</span><span class="nx">ParseFloat</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="mi">64</span><span class="p">)</span>
-<span class="w">                </span><span class="nx">meta</span><span class="p">.</span><span class="nx">Max</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">v</span>
+<span class="w">                </span><span class="nx">meta</span><span class="p">.</span><span class="nx">Max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">v</span>
 <span class="w">            </span><span class="p">}</span>
 
-<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;pattern&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="s">"pattern"</span><span class="p">:</span>
 <span class="w">            </span><span class="nx">pattern</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">regexp</span><span class="p">.</span><span class="nx">Compile</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;invalid pattern: %w&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">"invalid pattern: %w"</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
 <span class="w">            </span><span class="p">}</span>
-<span class="w">            </span><span class="nx">meta</span><span class="p">.</span><span class="nx">Pattern</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">pattern</span>
+<span class="w">            </span><span class="nx">meta</span><span class="p">.</span><span class="nx">Pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">pattern</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 
@@ -1456,29 +1456,29 @@
 <span class="kd">func</span><span class="w"> </span><span class="nx">validateField</span><span class="p">(</span><span class="nx">fieldValue</span><span class="w"> </span><span class="kt">any</span><span class="p">,</span><span class="w"> </span><span class="nx">meta</span><span class="w"> </span><span class="o">*</span><span class="nx">ValidateMetadata</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Check required</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">meta</span><span class="p">.</span><span class="nx">Required</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">isZeroValue</span><span class="p">(</span><span class="nx">fieldValue</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;field is required&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">"field is required"</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="c1">// String validations</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">str</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">fieldValue</span><span class="p">.(</span><span class="kt">string</span><span class="p">);</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">meta</span><span class="p">.</span><span class="nx">MinLength</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">meta</span><span class="p">.</span><span class="nx">MinLength</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;minimum length is %d&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">meta</span><span class="p">.</span><span class="nx">MinLength</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">meta</span><span class="p">.</span><span class="nx">MinLength</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">meta</span><span class="p">.</span><span class="nx">MinLength</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">"minimum length is %d"</span><span class="p">,</span><span class="w"> </span><span class="nx">meta</span><span class="p">.</span><span class="nx">MinLength</span><span class="p">)</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">meta</span><span class="p">.</span><span class="nx">MaxLength</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="nx">meta</span><span class="p">.</span><span class="nx">MaxLength</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;maximum length is %d&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">meta</span><span class="p">.</span><span class="nx">MaxLength</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">meta</span><span class="p">.</span><span class="nx">MaxLength</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nx">meta</span><span class="p">.</span><span class="nx">MaxLength</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">"maximum length is %d"</span><span class="p">,</span><span class="w"> </span><span class="nx">meta</span><span class="p">.</span><span class="nx">MaxLength</span><span class="p">)</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">meta</span><span class="p">.</span><span class="nx">Pattern</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">!</span><span class="nx">meta</span><span class="p">.</span><span class="nx">Pattern</span><span class="p">.</span><span class="nx">MatchString</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;does not match pattern&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">meta</span><span class="p">.</span><span class="nx">Pattern</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="nx">meta</span><span class="p">.</span><span class="nx">Pattern</span><span class="p">.</span><span class="nx">MatchString</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">"does not match pattern"</span><span class="p">)</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="c1">// Numeric validations</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">num</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">convertToFloat64</span><span class="p">(</span><span class="nx">fieldValue</span><span class="p">);</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">meta</span><span class="p">.</span><span class="nx">Min</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">num</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="o">*</span><span class="nx">meta</span><span class="p">.</span><span class="nx">Min</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;minimum value is %f&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="nx">meta</span><span class="p">.</span><span class="nx">Min</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">meta</span><span class="p">.</span><span class="nx">Min</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">num</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="o">*</span><span class="nx">meta</span><span class="p">.</span><span class="nx">Min</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">"minimum value is %f"</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="nx">meta</span><span class="p">.</span><span class="nx">Min</span><span class="p">)</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">meta</span><span class="p">.</span><span class="nx">Max</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">num</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="o">*</span><span class="nx">meta</span><span class="p">.</span><span class="nx">Max</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;maximum value is %f&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="nx">meta</span><span class="p">.</span><span class="nx">Max</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">meta</span><span class="p">.</span><span class="nx">Max</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">num</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">*</span><span class="nx">meta</span><span class="p">.</span><span class="nx">Max</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">"maximum value is %f"</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="nx">meta</span><span class="p">.</span><span class="nx">Max</span><span class="p">)</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 
@@ -1499,9 +1499,9 @@
 <span class="w">    </span><span class="nx">val</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">ValueOf</span><span class="p">(</span><span class="nx">v</span><span class="p">)</span>
 <span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="nx">val</span><span class="p">.</span><span class="nx">Kind</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Int</span><span class="p">,</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Int8</span><span class="p">,</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Int16</span><span class="p">,</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Int32</span><span class="p">,</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Int64</span><span class="p">:</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">float64</span><span class="p">(</span><span class="nx">val</span><span class="p">.</span><span class="nx">Int</span><span class="p">()),</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kt">float64</span><span class="p">(</span><span class="nx">val</span><span class="p">.</span><span class="nx">Int</span><span class="p">()),</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Uint</span><span class="p">,</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Uint8</span><span class="p">,</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Uint16</span><span class="p">,</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Uint32</span><span class="p">,</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Uint64</span><span class="p">:</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">float64</span><span class="p">(</span><span class="nx">val</span><span class="p">.</span><span class="nx">Uint</span><span class="p">()),</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kt">float64</span><span class="p">(</span><span class="nx">val</span><span class="p">.</span><span class="nx">Uint</span><span class="p">()),</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Float32</span><span class="p">,</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Float64</span><span class="p">:</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">val</span><span class="p">.</span><span class="nx">Float</span><span class="p">(),</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">    </span><span class="k">default</span><span class="p">:</span>
@@ -1511,10 +1511,10 @@
 
 <span class="c1">// Usage</span>
 <span class="kd">type</span><span class="w"> </span><span class="nx">CreateUserRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Name</span><span class="w">     </span><span class="kt">string</span><span class="w">  </span><span class="s">`schema:&quot;name&quot; validate:&quot;required,min:2,max:50&quot;`</span>
-<span class="w">    </span><span class="nx">Email</span><span class="w">    </span><span class="kt">string</span><span class="w">  </span><span class="s">`schema:&quot;email&quot; validate:&quot;required,pattern:^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$&quot;`</span>
-<span class="w">    </span><span class="nx">Age</span><span class="w">      </span><span class="kt">int</span><span class="w">     </span><span class="s">`schema:&quot;age&quot; validate:&quot;min:18,max:120&quot;`</span>
-<span class="w">    </span><span class="nx">Username</span><span class="w"> </span><span class="kt">string</span><span class="w">  </span><span class="s">`schema:&quot;username&quot; validate:&quot;required,min:3,max:20,pattern:^[a-zA-Z0-9_]+$&quot;`</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w">     </span><span class="kt">string</span><span class="w">  </span><span class="s">`schema:"name" validate:"required,min:2,max:50"`</span>
+<span class="w">    </span><span class="nx">Email</span><span class="w">    </span><span class="kt">string</span><span class="w">  </span><span class="s">`schema:"email" validate:"required,pattern:^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$"`</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w">      </span><span class="kt">int</span><span class="w">     </span><span class="s">`schema:"age" validate:"min:18,max:120"`</span>
+<span class="w">    </span><span class="nx">Username</span><span class="w"> </span><span class="kt">string</span><span class="w">  </span><span class="s">`schema:"username" validate:"required,min:3,max:20,pattern:^[a-zA-Z0-9_]+$"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="example-2-documentation-tag">Example 2: Documentation Tag<a class="headerlink" href="#example-2-documentation-tag" title="Anchor link to this section">&para;</a></h3>
@@ -1522,12 +1522,12 @@
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
-<span class="w">    </span><span class="s">&quot;reflect&quot;</span>
-<span class="w">    </span><span class="s">&quot;strings&quot;</span>
+<span class="w">    </span><span class="s">"fmt"</span>
+<span class="w">    </span><span class="s">"reflect"</span>
+<span class="w">    </span><span class="s">"strings"</span>
 
-<span class="w">    </span><span class="s">&quot;github.com/talav/schema&quot;</span>
-<span class="w">    </span><span class="s">&quot;github.com/talav/mapstructure&quot;</span>
+<span class="w">    </span><span class="s">"github.com/talav/schema"</span>
+<span class="w">    </span><span class="s">"github.com/talav/mapstructure"</span>
 <span class="p">)</span>
 
 <span class="c1">// Documentation metadata</span>
@@ -1539,23 +1539,23 @@
 <span class="p">}</span>
 
 <span class="c1">// Parse doc tag</span>
-<span class="c1">// Format: doc:&quot;description|example|deprecated|since:v1.0&quot;</span>
+<span class="c1">// Format: doc:"description|example|deprecated|since:v1.0"</span>
 <span class="kd">func</span><span class="w"> </span><span class="nx">ParseDocTag</span><span class="p">(</span><span class="nx">field</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">StructField</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">tagValue</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">any</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">parts</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">Split</span><span class="p">(</span><span class="nx">tagValue</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;|&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">parts</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">Split</span><span class="p">(</span><span class="nx">tagValue</span><span class="p">,</span><span class="w"> </span><span class="s">"|"</span><span class="p">)</span>
 
 <span class="w">    </span><span class="nx">meta</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">DocMetadata</span><span class="p">{}</span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">parts</span><span class="p">)</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">meta</span><span class="p">.</span><span class="nx">Description</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">parts</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">meta</span><span class="p">.</span><span class="nx">Description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">parts</span><span class="p">)</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">meta</span><span class="p">.</span><span class="nx">Example</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">parts</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">meta</span><span class="p">.</span><span class="nx">Example</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">parts</span><span class="p">)</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">meta</span><span class="p">.</span><span class="nx">Deprecated</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">parts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;deprecated&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">parts</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">meta</span><span class="p">.</span><span class="nx">Deprecated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">parts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">"deprecated"</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">parts</span><span class="p">)</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">meta</span><span class="p">.</span><span class="nx">Since</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">TrimPrefix</span><span class="p">(</span><span class="nx">parts</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="w"> </span><span class="s">&quot;since:&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">parts</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">meta</span><span class="p">.</span><span class="nx">Since</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">TrimPrefix</span><span class="p">(</span><span class="nx">parts</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="w"> </span><span class="s">"since:"</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">meta</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span>
@@ -1565,29 +1565,29 @@
 <span class="kd">func</span><span class="w"> </span><span class="nx">generateDocumentation</span><span class="p">(</span><span class="nx">typ</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Type</span><span class="p">,</span><span class="w"> </span><span class="nx">metadata</span><span class="w"> </span><span class="o">*</span><span class="nx">schema</span><span class="p">.</span><span class="nx">Metadata</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">structMeta</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">metadata</span><span class="p">.</span><span class="nx">GetStructMetadata</span><span class="p">(</span><span class="nx">typ</span><span class="p">)</span>
 
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;## %s\n\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">typ</span><span class="p">.</span><span class="nx">Name</span><span class="p">())</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">"## %s\n\n"</span><span class="p">,</span><span class="w"> </span><span class="nx">typ</span><span class="p">.</span><span class="nx">Name</span><span class="p">())</span>
 
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">field</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">structMeta</span><span class="p">.</span><span class="nx">Fields</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1">// Get schema metadata</span>
-<span class="w">        </span><span class="nx">schemaMeta</span><span class="p">,</span><span class="w"> </span><span class="nx">hasSchema</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">GetTagMetadata</span><span class="p">[</span><span class="o">*</span><span class="nx">schema</span><span class="p">.</span><span class="nx">SchemaMetadata</span><span class="p">](</span><span class="o">&amp;</span><span class="nx">field</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;schema&quot;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">!</span><span class="nx">hasSchema</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">schemaMeta</span><span class="p">,</span><span class="w"> </span><span class="nx">hasSchema</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">GetTagMetadata</span><span class="p">[</span><span class="o">*</span><span class="nx">schema</span><span class="p">.</span><span class="nx">SchemaMetadata</span><span class="p">](</span><span class="o">&amp;</span><span class="nx">field</span><span class="p">,</span><span class="w"> </span><span class="s">"schema"</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">!</span><span class="nx">hasSchema</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">continue</span>
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="c1">// Get doc metadata</span>
-<span class="w">        </span><span class="nx">docMeta</span><span class="p">,</span><span class="w"> </span><span class="nx">hasDoc</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">GetTagMetadata</span><span class="p">[</span><span class="o">*</span><span class="nx">DocMetadata</span><span class="p">](</span><span class="o">&amp;</span><span class="nx">field</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;doc&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">docMeta</span><span class="p">,</span><span class="w"> </span><span class="nx">hasDoc</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">GetTagMetadata</span><span class="p">[</span><span class="o">*</span><span class="nx">DocMetadata</span><span class="p">](</span><span class="o">&amp;</span><span class="nx">field</span><span class="p">,</span><span class="w"> </span><span class="s">"doc"</span><span class="p">)</span>
 
-<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;### %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">schemaMeta</span><span class="p">.</span><span class="nx">ParamName</span><span class="p">)</span>
-<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;- **Location**: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">schemaMeta</span><span class="p">.</span><span class="nx">Location</span><span class="p">)</span>
-<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;- **Type**: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">field</span><span class="p">.</span><span class="nx">Type</span><span class="p">.</span><span class="nx">String</span><span class="p">())</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">"### %s\n"</span><span class="p">,</span><span class="w"> </span><span class="nx">schemaMeta</span><span class="p">.</span><span class="nx">ParamName</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">"- **Location**: %s\n"</span><span class="p">,</span><span class="w"> </span><span class="nx">schemaMeta</span><span class="p">.</span><span class="nx">Location</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">"- **Type**: %s\n"</span><span class="p">,</span><span class="w"> </span><span class="nx">field</span><span class="p">.</span><span class="nx">Type</span><span class="p">.</span><span class="nx">String</span><span class="p">())</span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">hasDoc</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;- **Description**: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">docMeta</span><span class="p">.</span><span class="nx">Description</span><span class="p">)</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nx">docMeta</span><span class="p">.</span><span class="nx">Example</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;- **Example**: `%s`\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">docMeta</span><span class="p">.</span><span class="nx">Example</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">"- **Description**: %s\n"</span><span class="p">,</span><span class="w"> </span><span class="nx">docMeta</span><span class="p">.</span><span class="nx">Description</span><span class="p">)</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nx">docMeta</span><span class="p">.</span><span class="nx">Example</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">""</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">"- **Example**: `%s`\n"</span><span class="p">,</span><span class="w"> </span><span class="nx">docMeta</span><span class="p">.</span><span class="nx">Example</span><span class="p">)</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nx">docMeta</span><span class="p">.</span><span class="nx">Deprecated</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;- **⚠️ Deprecated** (since %s)\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">docMeta</span><span class="p">.</span><span class="nx">Since</span><span class="p">)</span>
+<span class="w">                </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">"- **⚠️ Deprecated** (since %s)\n"</span><span class="p">,</span><span class="w"> </span><span class="nx">docMeta</span><span class="p">.</span><span class="nx">Since</span><span class="p">)</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">()</span>
@@ -1596,17 +1596,17 @@
 
 <span class="c1">// Usage</span>
 <span class="kd">type</span><span class="w"> </span><span class="nx">SearchRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Query</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;q&quot; doc:&quot;Search query text|golang web framework&quot;`</span>
-<span class="w">    </span><span class="nx">Page</span><span class="w">     </span><span class="kt">int</span><span class="w">    </span><span class="s">`schema:&quot;page&quot; doc:&quot;Page number (1-indexed)|1&quot;`</span>
-<span class="w">    </span><span class="nx">Limit</span><span class="w">    </span><span class="kt">int</span><span class="w">    </span><span class="s">`schema:&quot;limit&quot; doc:&quot;Results per page|20&quot;`</span>
-<span class="w">    </span><span class="nx">OldField</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;old_field&quot; doc:&quot;Legacy field|deprecated|since:v2.0&quot;`</span>
+<span class="w">    </span><span class="nx">Query</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"q" doc:"Search query text|golang web framework"`</span>
+<span class="w">    </span><span class="nx">Page</span><span class="w">     </span><span class="kt">int</span><span class="w">    </span><span class="s">`schema:"page" doc:"Page number (1-indexed)|1"`</span>
+<span class="w">    </span><span class="nx">Limit</span><span class="w">    </span><span class="kt">int</span><span class="w">    </span><span class="s">`schema:"limit" doc:"Results per page|20"`</span>
+<span class="w">    </span><span class="nx">OldField</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"old_field" doc:"Legacy field|deprecated|since:v2.0"`</span>
 <span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Register parsers</span>
 <span class="w">    </span><span class="nx">registry</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">NewTagParserRegistry</span><span class="p">(</span>
-<span class="w">        </span><span class="nx">schema</span><span class="p">.</span><span class="nx">WithTagParser</span><span class="p">(</span><span class="s">&quot;schema&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">ParseSchemaTag</span><span class="p">,</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">DefaultSchemaMetadata</span><span class="p">),</span>
-<span class="w">        </span><span class="nx">schema</span><span class="p">.</span><span class="nx">WithTagParser</span><span class="p">(</span><span class="s">&quot;doc&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">ParseDocTag</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">schema</span><span class="p">.</span><span class="nx">WithTagParser</span><span class="p">(</span><span class="s">"schema"</span><span class="p">,</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">ParseSchemaTag</span><span class="p">,</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">DefaultSchemaMetadata</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">schema</span><span class="p">.</span><span class="nx">WithTagParser</span><span class="p">(</span><span class="s">"doc"</span><span class="p">,</span><span class="w"> </span><span class="nx">ParseDocTag</span><span class="p">),</span>
 <span class="w">    </span><span class="p">)</span>
 
 <span class="w">    </span><span class="nx">metadata</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">NewMetadata</span><span class="p">(</span><span class="nx">registry</span><span class="p">)</span>
@@ -1620,12 +1620,12 @@
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
-<span class="w">    </span><span class="s">&quot;reflect&quot;</span>
-<span class="w">    </span><span class="s">&quot;strings&quot;</span>
+<span class="w">    </span><span class="s">"fmt"</span>
+<span class="w">    </span><span class="s">"reflect"</span>
+<span class="w">    </span><span class="s">"strings"</span>
 
-<span class="w">    </span><span class="s">&quot;github.com/talav/schema&quot;</span>
-<span class="w">    </span><span class="s">&quot;github.com/talav/mapstructure&quot;</span>
+<span class="w">    </span><span class="s">"github.com/talav/schema"</span>
+<span class="w">    </span><span class="s">"github.com/talav/mapstructure"</span>
 <span class="p">)</span>
 
 <span class="c1">// Authorization metadata</span>
@@ -1636,28 +1636,28 @@
 <span class="p">}</span>
 
 <span class="c1">// Parse auth tag</span>
-<span class="c1">// Format: auth:&quot;roles:admin,editor;permissions:read,write&quot; or auth:&quot;public&quot;</span>
+<span class="c1">// Format: auth:"roles:admin,editor;permissions:read,write" or auth:"public"</span>
 <span class="kd">func</span><span class="w"> </span><span class="nx">ParseAuthTag</span><span class="p">(</span><span class="nx">field</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">StructField</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">tagValue</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">any</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">meta</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">AuthMetadata</span><span class="p">{}</span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">tagValue</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;public&quot;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">meta</span><span class="p">.</span><span class="nx">Public</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">tagValue</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">"public"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">meta</span><span class="p">.</span><span class="nx">Public</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">meta</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="nx">parts</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">Split</span><span class="p">(</span><span class="nx">tagValue</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;;&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">parts</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">Split</span><span class="p">(</span><span class="nx">tagValue</span><span class="p">,</span><span class="w"> </span><span class="s">";"</span><span class="p">)</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">part</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">parts</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">kv</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">SplitN</span><span class="p">(</span><span class="nx">part</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;:&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">kv</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">SplitN</span><span class="p">(</span><span class="nx">part</span><span class="p">,</span><span class="w"> </span><span class="s">":"</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">kv</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">continue</span>
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">kv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="nx">kv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;roles&quot;</span><span class="p">:</span>
-<span class="w">            </span><span class="nx">meta</span><span class="p">.</span><span class="nx">Roles</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">Split</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;,&quot;</span><span class="p">)</span>
-<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;permissions&quot;</span><span class="p">:</span>
-<span class="w">            </span><span class="nx">meta</span><span class="p">.</span><span class="nx">Permissions</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">Split</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;,&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="s">"roles"</span><span class="p">:</span>
+<span class="w">            </span><span class="nx">meta</span><span class="p">.</span><span class="nx">Roles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">Split</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="s">","</span><span class="p">)</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="s">"permissions"</span><span class="p">:</span>
+<span class="w">            </span><span class="nx">meta</span><span class="p">.</span><span class="nx">Permissions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">Split</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="s">","</span><span class="p">)</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 
@@ -1671,15 +1671,15 @@
 
 <span class="w">        </span><span class="c1">// Check authorization metadata</span>
 <span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">field</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">structMeta</span><span class="p">.</span><span class="nx">Fields</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nx">authMeta</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">GetTagMetadata</span><span class="p">[</span><span class="o">*</span><span class="nx">AuthMetadata</span><span class="p">](</span><span class="o">&amp;</span><span class="nx">field</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;auth&quot;</span><span class="p">);</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nx">authMeta</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">GetTagMetadata</span><span class="p">[</span><span class="o">*</span><span class="nx">AuthMetadata</span><span class="p">](</span><span class="o">&amp;</span><span class="nx">field</span><span class="p">,</span><span class="w"> </span><span class="s">"auth"</span><span class="p">);</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="nx">authMeta</span><span class="p">.</span><span class="nx">Public</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                    </span><span class="k">continue</span>
 <span class="w">                </span><span class="p">}</span>
 
 <span class="w">                </span><span class="c1">// Check user roles/permissions</span>
 <span class="w">                </span><span class="nx">userRoles</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">extractUserRoles</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>
-<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">!</span><span class="nx">hasAnyRequiredRole</span><span class="p">(</span><span class="nx">userRoles</span><span class="p">,</span><span class="w"> </span><span class="nx">authMeta</span><span class="p">.</span><span class="nx">Roles</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                    </span><span class="nx">http</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Forbidden&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusForbidden</span><span class="p">)</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="o">!</span><span class="nx">hasAnyRequiredRole</span><span class="p">(</span><span class="nx">userRoles</span><span class="p">,</span><span class="w"> </span><span class="nx">authMeta</span><span class="p">.</span><span class="nx">Roles</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">http</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="s">"Forbidden"</span><span class="p">,</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusForbidden</span><span class="p">)</span>
 <span class="w">                    </span><span class="k">return</span>
 <span class="w">                </span><span class="p">}</span>
 <span class="w">            </span><span class="p">}</span>
@@ -1692,19 +1692,19 @@
 <span class="c1">// Helper: Extract user roles from request (example - implement based on your auth system)</span>
 <span class="kd">func</span><span class="w"> </span><span class="nx">extractUserRoles</span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Example: extract from JWT, session, etc.</span>
-<span class="w">    </span><span class="nx">token</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">Header</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="s">&quot;Authorization&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">token</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">Header</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="s">"Authorization"</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">""</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="p">{}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="c1">// Parse token and return roles</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;user&quot;</span><span class="p">}</span><span class="w"> </span><span class="c1">// Simplified example</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">"user"</span><span class="p">}</span><span class="w"> </span><span class="c1">// Simplified example</span>
 <span class="p">}</span>
 
 <span class="c1">// Helper: Check if user has any required role</span>
 <span class="kd">func</span><span class="w"> </span><span class="nx">hasAnyRequiredRole</span><span class="p">(</span><span class="nx">userRoles</span><span class="p">,</span><span class="w"> </span><span class="nx">requiredRoles</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">roleMap</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">bool</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">roleMap</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kt">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">bool</span><span class="p">)</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">role</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">userRoles</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">roleMap</span><span class="p">[</span><span class="nx">role</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">        </span><span class="nx">roleMap</span><span class="p">[</span><span class="nx">role</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">required</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">requiredRoles</span><span class="w"> </span><span class="p">{</span>
@@ -1718,21 +1718,21 @@
 
 <span class="c1">// Usage</span>
 <span class="kd">type</span><span class="w"> </span><span class="nx">AdminRequest</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Action</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;action&quot; auth:&quot;roles:admin;permissions:write&quot;`</span>
-<span class="w">    </span><span class="nx">UserID</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:&quot;user_id&quot; auth:&quot;public&quot;`</span>
+<span class="w">    </span><span class="nx">Action</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"action" auth:"roles:admin;permissions:write"`</span>
+<span class="w">    </span><span class="nx">UserID</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`schema:"user_id" auth:"public"`</span>
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="tag-parser-best-practices">Tag Parser Best Practices<a class="headerlink" href="#tag-parser-best-practices" title="Anchor link to this section">&para;</a></h2>
 <h3 id="1-handle-errors-gracefully">1. Handle Errors Gracefully<a class="headerlink" href="#1-handle-errors-gracefully" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1">// ✅ Good: Return descriptive errors</span>
 <span class="kd">func</span><span class="w"> </span><span class="nx">ParseCustomTag</span><span class="p">(</span><span class="nx">field</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">StructField</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">tagValue</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">any</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">tagValue</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;empty tag value for field %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">field</span><span class="p">.</span><span class="nx">Name</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">tagValue</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">""</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">"empty tag value for field %s"</span><span class="p">,</span><span class="w"> </span><span class="nx">field</span><span class="p">.</span><span class="nx">Name</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="c1">// Parse...</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">invalid</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;invalid tag format: expected key=value, got %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">tagValue</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">"invalid tag format: expected key=value, got %s"</span><span class="p">,</span><span class="w"> </span><span class="nx">tagValue</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">meta</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span>
@@ -1760,7 +1760,7 @@
 
 <span class="w">    </span><span class="c1">// Validate pattern is valid regex</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">regexp</span><span class="p">.</span><span class="nx">Compile</span><span class="p">(</span><span class="nx">pattern</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;invalid regex pattern: %w&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">"invalid regex pattern: %w"</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">meta</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span>
@@ -1769,7 +1769,7 @@
 <h3 id="4-use-type-safe-accessors">4. Use Type-Safe Accessors<a class="headerlink" href="#4-use-type-safe-accessors" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1">// ✅ Good: Type-safe helper function</span>
 <span class="kd">func</span><span class="w"> </span><span class="nx">getValidationMetadata</span><span class="p">(</span><span class="nx">field</span><span class="w"> </span><span class="o">*</span><span class="nx">schema</span><span class="p">.</span><span class="nx">FieldMetadata</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">ValidateMetadata</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">GetTagMetadata</span><span class="p">[</span><span class="o">*</span><span class="nx">ValidateMetadata</span><span class="p">](</span><span class="nx">field</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;validate&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">GetTagMetadata</span><span class="p">[</span><span class="o">*</span><span class="nx">ValidateMetadata</span><span class="p">](</span><span class="nx">field</span><span class="p">,</span><span class="w"> </span><span class="s">"validate"</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="c1">// Usage</span>
@@ -1782,9 +1782,9 @@
 </code></pre></div>
 <h3 id="5-document-tag-format">5. Document Tag Format<a class="headerlink" href="#5-document-tag-format" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1">// ✅ Good: Clear documentation</span>
-<span class="c1">// ParseMyTag parses the &quot;mytag&quot; struct tag.</span>
+<span class="c1">// ParseMyTag parses the "mytag" struct tag.</span>
 <span class="c1">//</span>
-<span class="c1">// Format: mytag:&quot;option1=value1,option2=value2&quot;</span>
+<span class="c1">// Format: mytag:"option1=value1,option2=value2"</span>
 <span class="c1">//</span>
 <span class="c1">// Options:</span>
 <span class="c1">//   - enabled: true/false (default: true)</span>
@@ -1792,8 +1792,8 @@
 <span class="c1">//   - priority: high/medium/low (default: medium)</span>
 <span class="c1">//</span>
 <span class="c1">// Examples:</span>
-<span class="c1">//   `mytag:&quot;enabled=true,ttl=600&quot;`</span>
-<span class="c1">//   `mytag:&quot;priority=high&quot;`</span>
+<span class="c1">//   `mytag:"enabled=true,ttl=600"`</span>
+<span class="c1">//   `mytag:"priority=high"`</span>
 <span class="kd">func</span><span class="w"> </span><span class="nx">ParseMyTag</span><span class="p">(</span><span class="nx">field</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">StructField</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">tagValue</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">any</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Implementation...</span>
 <span class="p">}</span>
@@ -1801,18 +1801,18 @@
 <h2 id="registering-tag-parsers">Registering Tag Parsers<a class="headerlink" href="#registering-tag-parsers" title="Anchor link to this section">&para;</a></h2>
 <h3 id="basic-registration">Basic Registration<a class="headerlink" href="#basic-registration" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">registry</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">NewTagParserRegistry</span><span class="p">(</span>
-<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">WithTagParser</span><span class="p">(</span><span class="s">&quot;schema&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">ParseSchemaTag</span><span class="p">,</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">DefaultSchemaMetadata</span><span class="p">),</span>
-<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">WithTagParser</span><span class="p">(</span><span class="s">&quot;body&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">ParseBodyTag</span><span class="p">),</span>
-<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">WithTagParser</span><span class="p">(</span><span class="s">&quot;validate&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">ParseValidateTag</span><span class="p">),</span>
-<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">WithTagParser</span><span class="p">(</span><span class="s">&quot;cache&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">ParseCacheTag</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">WithTagParser</span><span class="p">(</span><span class="s">"schema"</span><span class="p">,</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">ParseSchemaTag</span><span class="p">,</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">DefaultSchemaMetadata</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">WithTagParser</span><span class="p">(</span><span class="s">"body"</span><span class="p">,</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">ParseBodyTag</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">WithTagParser</span><span class="p">(</span><span class="s">"validate"</span><span class="p">,</span><span class="w"> </span><span class="nx">ParseValidateTag</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">WithTagParser</span><span class="p">(</span><span class="s">"cache"</span><span class="p">,</span><span class="w"> </span><span class="nx">ParseCacheTag</span><span class="p">),</span>
 <span class="p">)</span>
 
 <span class="nx">metadata</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">NewMetadata</span><span class="p">(</span><span class="nx">registry</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="with-defaults">With Defaults<a class="headerlink" href="#with-defaults" title="Anchor link to this section">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">registry</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">NewTagParserRegistry</span><span class="p">(</span>
-<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">WithTagParser</span><span class="p">(</span><span class="s">&quot;validate&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">ParseValidateTag</span><span class="p">,</span><span class="w"> </span><span class="nx">DefaultValidateMetadata</span><span class="p">),</span>
-<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">WithTagParser</span><span class="p">(</span><span class="s">&quot;cache&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">ParseCacheTag</span><span class="p">,</span><span class="w"> </span><span class="nx">DefaultCacheMetadata</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">WithTagParser</span><span class="p">(</span><span class="s">"validate"</span><span class="p">,</span><span class="w"> </span><span class="nx">ParseValidateTag</span><span class="p">,</span><span class="w"> </span><span class="nx">DefaultValidateMetadata</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">schema</span><span class="p">.</span><span class="nx">WithTagParser</span><span class="p">(</span><span class="s">"cache"</span><span class="p">,</span><span class="w"> </span><span class="nx">ParseCacheTag</span><span class="p">,</span><span class="w"> </span><span class="nx">DefaultCacheMetadata</span><span class="p">),</span>
 <span class="p">)</span>
 </code></pre></div>
 <h3 id="dynamic-registration">Dynamic Registration<a class="headerlink" href="#dynamic-registration" title="Anchor link to this section">&para;</a></h3>
@@ -1823,8 +1823,8 @@
 <span class="nx">customRegistry</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">NewTagParserRegistry</span><span class="p">(</span>
 <span class="w">    </span><span class="nb">append</span><span class="p">(</span>
 <span class="w">        </span><span class="nx">registry</span><span class="p">.</span><span class="nx">All</span><span class="p">(),</span>
-<span class="w">        </span><span class="nx">schema</span><span class="p">.</span><span class="nx">WithTagParser</span><span class="p">(</span><span class="s">&quot;custom&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">ParseCustomTag</span><span class="p">),</span>
-<span class="w">    </span><span class="p">)</span><span class="o">...</span>
+<span class="w">        </span><span class="nx">schema</span><span class="p">.</span><span class="nx">WithTagParser</span><span class="p">(</span><span class="s">"custom"</span><span class="p">,</span><span class="w"> </span><span class="nx">ParseCustomTag</span><span class="p">),</span>
+<span class="w">    </span><span class="p">)...</span>
 <span class="p">)</span>
 </code></pre></div>
 <h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Anchor link to this section">&para;</a></h2>
@@ -1950,10 +1950,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.code.annotate", "content.code.mermaid"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.code.annotate", "content.code.mermaid"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
         <script src="../../js/timeago.min.js"></script>
       
